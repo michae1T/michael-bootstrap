@@ -37,6 +37,7 @@ git checkout v1.3.7
 /opt/ruby-1.8.7/bin/ruby setup.rb 
 
 /opt/ruby-1.8.7/bin/gem install bundler08
+/opt/ruby-1.8.7/bin/gem install thin
 
 ln -s /opt/ruby-1.8.7/bin/ruby /usr/local/bin/ruby
 

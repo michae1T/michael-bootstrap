@@ -1,0 +1,6 @@
+#!/bin/bash
+
+xrandr --newmode net   148.50  1920 2008 2052 2200  1080 1084 1089 1125 +hsync +vsync 
+xrandr --addmode DisplayPort-0 net
+xrandr --output DisplayPort-0 --mode net
+
