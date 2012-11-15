@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export C_INCLUDE_PATH=.:/opt/src/ruby/:/opt/src/ImageMagick:
+export CPP_INCLUDE_PATH=.:/opt/src/ruby/:/opt/src/ImageMagick:
+
+export PATH=/opt/ruby-1.9.3/bin:$PATH
+
+ruby --version
+
+bash
+
