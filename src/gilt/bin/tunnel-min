@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+GW_HOST='stage12'
+
+SERVICE_PORTS=[
+   8501, # config_service
+   7161, #prefs
+   2181, #zook keep
+8240, #credits
+6601, #payment
+5672, #rabbit
+#8180, #swift
+]
+
+PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|
+  ['-L', "#{port}:localhost:#{port}"]
+}
+
+exec(*[%w{ssh -a -C -N -n}, PORT_FORWARD_ARGS, GW_HOST].flatten)
+

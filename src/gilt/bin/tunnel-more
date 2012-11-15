@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+GW_HOST='stage11'
+
+SERVICE_PORTS=[
+    4911, # svc-proxy
+    6101, # auth_service
+    6201, # cart_service
+    6401, # data_service
+    6501, # user_service
+    6601, # payment_service
+    6661, # account_service
+    6701, # pagegen_service
+    6801, # waitlist_service
+   7001, # geoip_service
+   7002, # affiliate_service
+   # 7101, # product_recommendation_service
+   # 7201, # email_recommendation_service
+    7501, # product_service
+   # 7601, # email_service
+   # 7751, # shipping_service
+   # 7901, # invitation_service
+   7801, # order_service
+   # 8001, # admin_data_service
+   # 8201, # discount_service
+
+   7730, #cityaff
+   8501, # config_service
+   5432, #postgresql
+   8082, # inventory svc
+   6301, #kv store
+   7880, #order service
+   4010, #gilt_detail_page
+   8240, #credits
+   7161, #prefs
+   2181, #zook keep
+   10080, # rails
+   7301, # city extranet service
+8230, #rules
+7702, # cityseaerch
+7701, #cityservice
+6561, #guest
+]
+
+PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|
+  ['-L', "#{port}:localhost:#{port}"]
+}
+
+exec(*[%w{ssh -a -C -N -n}, PORT_FORWARD_ARGS, GW_HOST].flatten)

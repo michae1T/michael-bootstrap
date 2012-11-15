@@ -3,7 +3,10 @@
 export PATH=/opt/apache-ant-1.8.2/bin:$PATH
 export ANT_HOME=/opt/apache-ant-1.8.2
 
+export PATH=~/src/gilt/bin:~/src/gilt/tools/bin:$PATH
+
 ant -version
+sbt --version
 
 set-ruby-env-old
 

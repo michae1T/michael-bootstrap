@@ -1,0 +1,28 @@
+#!/bin/bash
+# Daemontools script to start rails thin
+
+exec 2>&1
+
+SERVICE_ROOT="/web/gilt"
+RAILS_ENV="development"
+GILT_DEFAULT_SUBSITE="us"
+SERVER_IP="$(hostname -i)"
+SERVER_PORT="3000"
+MAX_CONNS="200"
+THIN_LOG="${SERVICE_ROOT}/log/${RAILS_ENV}-${SERVER_PORT}.log"
+
+export RAILS_ENV GILT_DEFAULT_SUBSITE GILT_SERVER_TYPES SERVER_IP SERVER_PORT
+
+umask 002
+touch $THIN_LOG
+chown $USER:$GROUP $THIN_LOG
+ulimit -n 4096
+cd "${SERVICE_ROOT}"
+thin \
+		-a "${SERVER_IP}" \
+		-p "${SERVER_PORT}" \
+		-e "${RAILS_ENV}" \
+		--max-conns "${MAX_CONNS}" \
+		start \
+	>> "${SERVICE_ROOT}/log/${RAILS_ENV}-${SERVER_PORT}.log" 2>&1
+
