@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-GW_HOST='stage11'
+GW_HOST='stage12.qa.ec2.gilt.com'
 
 SERVICE_PORTS=[
     4911, # svc-proxy
@@ -26,7 +26,6 @@ SERVICE_PORTS=[
 
    7730, #cityaff
    8501, # config_service
-   5432, #postgresql
    8082, # inventory svc
    6301, #kv store
    7880, #order service
@@ -36,10 +35,15 @@ SERVICE_PORTS=[
    2181, #zook keep
    10080, # rails
    7301, # city extranet service
+
 8230, #rules
 7702, # cityseaerch
 7701, #cityservice
 6561, #guest
+7887, #session
+8765, #sku
+7895, #loyalty
+7810, #webx
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|

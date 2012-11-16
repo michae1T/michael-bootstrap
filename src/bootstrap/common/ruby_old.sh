@@ -16,12 +16,20 @@ make clean && make && make install
 cd $GEM_SRC
 $INSTALL_DIR/bin/ruby setup.rb 
 
-$INSTALL_DIR/bin/gem install bundler08
-$INSTALL_DIR/bin/gem install thin
+$INSTALL_DIR/bin/gem install bundler08 thin rdoc \
+                             net-ssh-gateway net-ssh net-sftp net-scp
+
+$INSTALL_DIR/bin/gem install rake --version 0.9.2.2
 
 cd $START_DIR && ./ruby_aes.sh
 
 cd $START_DIR && source _fix_ruby_src_owner.sh
 
+# install passenger-nginx
+
+export PATH=$INSTALL_DIR/bin:$PATH
+
+gem install passenger --version 2.2.9 --no-ri --no-rdoc
+passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx --extra-configure-flags='--with-cc-opt=-Wno-error'
 
 
