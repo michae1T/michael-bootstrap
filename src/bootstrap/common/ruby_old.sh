@@ -32,6 +32,8 @@ cd /opt/src/ruby
 
 make && make install
 
+yum -y remove ruby-devel ruby*
+
 cd /opt/src/rubygems
 git checkout v1.3.7
 /opt/ruby-1.8.7/bin/ruby setup.rb 
@@ -41,5 +43,5 @@ git checkout v1.3.7
 
 ln -s /opt/ruby-1.8.7/bin/ruby /usr/local/bin/ruby
 
-yum -y remove ruby-devel ruby*
+./ruby_aes.sh
 
