@@ -1,16 +1,15 @@
 #!/bin/bash
 
-yum y update
+yum -y update
 
 yum -y groupinstall 'Development Tools'
 
-yum install -y mongo* postgres* pgadmin* \
-               java-1.* ant-* scala* maven* \
-               puppet* rabbitmq* \
+yum -y install mongo* postgres* pgadmin* \
+               java-1.7*openjdk* ant-* scala* maven* \
                perl-JSON perl-Module-Load \
                ImageMagick-perl \
                stunnel \
-               tk* tcl* \               
+               tk* tcl* \
                wget curl lynx \
                gdbm-devel openssl* \
                compat-libstd* compat-gcc* compat-readline* \
@@ -23,20 +22,20 @@ yum install -y mongo* postgres* pgadmin* \
                avahi-tools cups*
 
 
-yum install -y libreoffice* ktorrent kvirc
+yum -y install libreoffice* ktorrent kvirc
 
 
-yum localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
 
-yum update
+yum -y update
 
-yum install -y gstreamer rhythmbox
+yum -y install gstreamer rhythmbox
 
-yum install -y gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly
+yum -y install gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly
 
-yum install -y libdvdread libdvdnav lsdvd vlc*
+yum -y install libdvdread libdvdnav lsdvd vlc*
 
-yum install -y kaffeine xine xine-lib xine-lib-extras-freeworld unrar
+yum -y install kaffeine xine xine-lib xine-lib-extras-freeworld unrar
 
 rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
