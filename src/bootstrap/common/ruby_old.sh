@@ -1,47 +1,27 @@
 #!/bin/bash
 
-yum -y install ruby-devel
+INSTALL_DIR=/opt/ruby-1.8.7
+RUBY_TAG=origin/ruby_1_8_7
+GEM_TAG=v1.3.7
+RUBY_VERSION=1.8.7
 
-rm -rf /opt/ruby-1.8.7
+source _setup_ruby.sh
 
-cd /opt
-mkdir src
-cd src
+rm -rf $INSTALL_DIR > /dev/null
 
-if [ -d /opt/src/ruby ]
-then cd /opt/src/ruby && git add . && git reset --hard && git fetch
-else git clone https://github.com/ruby/ruby.git
-fi
+cd $RUBY_SRC
+autoconf && CC=gcc34 CXX=g++34 ./configure --prefix=/opt/ruby-1.8.7
+make clean && make && make install
 
-if [ -d /opt/src/rubygems ]
-then cd /opt/src/rubygems && git add . && git reset --hard && git fetch
-else git clone https://github.com/rubygems/rubygems.git
-fi
+cd $GEM_SRC
+$INSTALL_DIR/bin/ruby setup.rb 
 
-cd /opt/src/ruby
+$INSTALL_DIR/bin/gem install bundler08
+$INSTALL_DIR/bin/gem install thin
 
-git checkout origin/ruby_1_8_7 && autoconf
-CC=gcc34 CXX=g++34 ./configure --prefix=/opt/ruby-1.8.7
+cd $START_DIR && ./ruby_aes.sh
 
-make clean && make
+cd $START_DIR && source _fix_ruby_src_owner.sh
 
-cd ext/dl
-ruby mkcallback.rb > callback.func
-ruby mkcbtable.rb > cbtable.func
-cd /opt/src/ruby
 
-make && make install
-
-yum -y remove ruby-devel ruby*
-
-cd /opt/src/rubygems
-git checkout v1.3.7
-/opt/ruby-1.8.7/bin/ruby setup.rb 
-
-/opt/ruby-1.8.7/bin/gem install bundler08
-/opt/ruby-1.8.7/bin/gem install thin
-
-ln -s /opt/ruby-1.8.7/bin/ruby /usr/local/bin/ruby
-
-./ruby_aes.sh
 

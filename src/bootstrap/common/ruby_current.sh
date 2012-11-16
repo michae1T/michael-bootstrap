@@ -1,34 +1,21 @@
 #!/bin/bash
 
-yum -y install ruby
+SCRIPTS_DIR=`dirname $0`
+INSTALL_DIR=/opt/ruby-1.9.3
+RUBY_TAG=origin/ruby_1_9_3
+GEM_TAG=origin/1.8
+RUBY_VERSION=1.9.3
 
-rm -rf /opt/ruby-1.8.7
+source _setup_ruby.sh
 
-cd /opt
-mkdir src
-cd src
+rm -rf $INSTALL_DIR > /dev/null
 
-if [ -d /opt/src/ruby ]
-then cd /opt/src/ruby && git add . && git reset --hard && git fetch
-else git clone https://github.com/ruby/ruby.git
-fi
+cd $RUBY_SRC
+autoconf && ./configure --prefix=$INSTALL_DIR && make clean && make && make install
 
-if [ -d /opt/src/rubygems ]
-then cd /opt/src/rubygems && git add . && git reset --hard && git fetch
-else git clone https://github.com/rubygems/rubygems.git
-fi
+cd $GEM_SRC
+$INSTALL_DIR/bin/ruby setup.rb 
 
-cd /opt/src/ruby
-
-git checkout origin/ruby_1_9_3 && autoconf
-./configure --prefix=/opt/ruby-1.9.3
-
-make clean && make && make install
-
-cd /opt/src/rubygems
-git checkout origin/1.8
-/opt/ruby-1.9.3/bin/ruby setup.rb 
-
-yum -y remove ruby
-
+cd $START_DIR
+source _fix_ruby_src_owner.sh
 
