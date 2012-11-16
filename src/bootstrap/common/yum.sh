@@ -6,6 +6,8 @@ yum -y groupinstall 'Development Tools'
 
 yum -y install mongo* postgres* pgadmin* \
                java-1.7*openjdk* ant-* scala* maven* \
+               ruby ruby-devel \
+               puppet* rabbitmq* \
                perl-JSON perl-Module-Load \
                ImageMagick-perl \
                stunnel \

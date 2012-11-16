@@ -16,7 +16,7 @@ sed s/\\/var\\/lib\\/pgsql/\\/home\\/postgres/ /etc/passwd.bak > /etc/passwd
 su - postgres -c "PGDATA=$PGDATA postgresql-setup initdb" \
  || su - postgres -c "PGDATA=$PGDATA initdb"
 
-./_fix_postgres_selinux.sh
+source _fix_postgres_selinux.sh
 
 sleep 10
 
