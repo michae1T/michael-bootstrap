@@ -14,6 +14,7 @@ yum -y install mongo* postgres* pgadmin* \
                tk* tcl* \
                wget curl lynx \
                gdbm-devel openssl* \
+               openssh* \
                compat-libstd* compat-gcc* compat-readline* \
                libpng* gimp* \
                snakeyaml libyaml* perl-YAML* \
