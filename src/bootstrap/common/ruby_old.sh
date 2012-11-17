@@ -44,6 +44,9 @@ if [ -d $BOST_PATCH_DIR ] ; then
   patch -p0 < $BOOST_PATCH_DIR/*
 fi;
 
+mv /opt/nginx /opt/nginx.bak > /dev/null
+rm -rf /opt/nginx > /dev/null
+
 $GEMS_DIR/passenger-2.2.9/bin/passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx --extra-configure-flags='--with-cc-opt=-Wno-error'
 
 cd $START_DIR
