@@ -1,15 +1,6 @@
 #!/bin/bash
 
-START_DIR=`pwd`
-
-cd `dirname $0`/../../..
-USER_HOME=`pwd`
-USER_STAT=`stat -c "%U:%G" $START_DIR/$0`
-RUBY_PROJECTS=$USER_HOME/src/ruby
-RUBY_SRC=$RUBY_PROJECTS/ruby
-GEM_SRC=$RUBY_PROJECTS/rubygems
-PATCH_DIR=$RUBY_PROJECTS/patches
-RUBY_PATCH_DIR=$PATCH_DIR/ruby/$RUBY_VERSION
+THIS_RUBY_PATCH_DIR=$RUBY_PATCH_DIR/ruby/$RUBY_VERSION
 
 mkdir -p $RUBY_PROJECTS > /dev/null
 
@@ -27,9 +18,9 @@ cd $GEM_SRC && git checkout $GEM_TAG
 
 # patch ruby if necessary
 cd $RUBY_SRC
-if [ -d $RUBY_PATCH_DIR ] ; then
+if [ -d $THIS_RUBY_PATCH_DIR ] ; then
   echo "patching from: $RUBY_PATCH_DIR"
-  patch -p1 < $RUBY_PATCH_DIR/*
+  patch -p1 < $THIS_RUBY_PATCH_DIR/*
 fi;
 
 cd $START_DIR
