@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../common/_environment.sh
+source `dirname $0`/../_environment.sh
 
 mkdir -p $USER_HOME/src/linux
 cd $USER_HOME/src/linux
@@ -13,9 +13,9 @@ if [ -e linux/.config ] ; then mv -f linux/.config linux/.config.bak; fi;
 if [ -e linux-next/.config ] ; then mv -f linux-next/.config linux-next/.config.bak; fi;
 if [ -e linux-stable/.config ] ; then mv -f linux-stable/.config linux-stable/.config.bak; fi;
 
-ln config/linux-main.config linux/.config
-ln config/linux-stable.config linux-stable/.config
-ln config/linux-next.config linux-next/.config
+ln config/linux-main.config linux/.config > /dev/null 2>&1
+ln config/linux-stable.config linux-stable/.config > /dev/null 2>&1
+ln config/linux-next.config linux-next/.config > /dev/null 2>&1
 
 chown -R $USER_STAT linux
 chown -R $USER_STAT linux-next

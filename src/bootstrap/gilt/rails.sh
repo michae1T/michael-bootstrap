@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ../common/_environment.sh
+source `dirname $0`/../_environment.sh
 
 INSTALL_DIR=/opt/ruby-1.8.7
 RUBY=$INSTALL_DIR/bin/ruby
@@ -18,7 +18,7 @@ $GEM install rake --version 0.9.2.2
 
 ### encyription stuff? ###
 
-source $COMMON/_ruby_aes.sh
+source $SHARED/_ruby_aes.sh
 
 ### install/patch passenger-nginx ###
 
@@ -31,8 +31,8 @@ if [ -d $BOST_PATCH_DIR ] ; then
   patch -p0 < $BOOST_PATCH_DIR/*
 fi;
 
-mv /opt/nginx /opt/nginx.bak > /dev/null
-rm -rf /opt/nginx > /dev/null
+mv /opt/nginx /opt/nginx.bak > /dev/null 2>&1
+rm -rf /opt/nginx
 
 $GEMS_DIR/passenger-2.2.9/bin/passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx --extra-configure-flags='--with-cc-opt=-Wno-error'
 
