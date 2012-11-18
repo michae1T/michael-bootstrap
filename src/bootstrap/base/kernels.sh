@@ -1,7 +1,6 @@
 #!/bin/bash
 
-USER_HOME=`dirname $0`/../../..
-USER_STAT=`stat -c "%U:%G" $0`
+source ../common/_environment.sh
 
 mkdir -p $USER_HOME/src/linux
 cd $USER_HOME/src/linux

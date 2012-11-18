@@ -1,6 +1,7 @@
 #!/bin/bash
 
 START_DIR=`pwd`
+COMMON=$START_DIR/../common
 
 cd `dirname $0`/../../..
 USER_HOME=`pwd`

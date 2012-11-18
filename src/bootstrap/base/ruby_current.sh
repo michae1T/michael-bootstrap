@@ -1,13 +1,13 @@
 #!/bin/bash
 
-source _environment.sh
+source ../common/_environment.sh
 
 INSTALL_DIR=/opt/ruby-1.9.3
 RUBY_TAG=origin/ruby_1_9_3
 GEM_TAG=origin/1.8
 RUBY_VERSION=1.9.3
 
-source _setup_ruby.sh
+source $COMMON/_setup_ruby.sh
 
 rm -rf $INSTALL_DIR > /dev/null
 
@@ -18,5 +18,5 @@ cd $GEM_SRC
 $INSTALL_DIR/bin/ruby setup.rb 
 
 cd $START_DIR
-source _fix_ruby_src_owner.sh
+source $COMMON/_fix_ruby_src_owner.sh
 

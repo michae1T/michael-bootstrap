@@ -1,37 +1,24 @@
 #!/bin/bash
 
-source _environment.sh
+source ../common/_environment.sh
 
 INSTALL_DIR=/opt/ruby-1.8.7
-RUBY_TAG=origin/ruby_1_8_7
-GEM_TAG=v1.3.7
-RUBY_VERSION=1.8.7
-
 RUBY=$INSTALL_DIR/bin/ruby
 GEM=$INSTALL_DIR/bin/gem
 GEMS_DIR=$INSTALL_DIR/lib/ruby/gems/1.8/gems
 
-source _setup_ruby.sh
-
-rm -rf $INSTALL_DIR > /dev/null
-
-cd $RUBY_SRC
-autoconf && CC=gcc34 CXX=g++34 ./configure --prefix=/opt/ruby-1.8.7
-make clean && make && make install
-
-cd $GEM_SRC
-$RUBY setup.rb 
-
 export PATH=$INSTALL_DIR/bin:$PATH
+
+### required system gems ###
 
 $GEM install bundler08 thin rdoc \
                              net-ssh-gateway net-ssh net-sftp net-scp
 
 $GEM install rake --version 0.9.2.2
 
-cd $START_DIR && ./ruby_aes.sh
+### encyription stuff? ###
 
-cd $START_DIR && source _fix_ruby_src_owner.sh
+source $COMMON/_ruby_aes.sh
 
 ### install/patch passenger-nginx ###
 
