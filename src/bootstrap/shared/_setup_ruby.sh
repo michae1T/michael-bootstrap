@@ -2,7 +2,7 @@
 
 THIS_RUBY_PATCH_DIR=$RUBY_PATCH_DIR/ruby/$RUBY_VERSION
 
-mkdir -p $RUBY_PROJECTS > /dev/null
+mkdir -p $RUBY_PROJECTS
 
 if [ -d $RUBY_SRC ]
   then cd $RUBY_SRC && git add . && git reset --hard && git fetch

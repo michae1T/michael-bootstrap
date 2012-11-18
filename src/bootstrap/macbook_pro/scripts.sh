@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cd `dirname $0`/../../..
+source `dirname $0`/../_environment.sh
 
 rm -rf /opt/scripts
 mkdir -p /opt/scripts
-cp src/scripts/macbook-pro/* /opt/scripts
+cp $USER_HOME/src/scripts/macbook-pro/* /opt/scripts
 chown root:root /opt/scripts/*
 
 echo "" >> /etc/sudoers
