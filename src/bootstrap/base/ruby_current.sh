@@ -12,7 +12,9 @@ source $SHARED/_setup_ruby.sh
 rm -rf $INSTALL_DIR 
 
 cd $RUBY_SRC
-autoconf && ./configure --prefix=$INSTALL_DIR && make clean && make && make install
+autoconf && ./configure --prefix=$INSTALL_DIR
+make clean > /dev/null 2>&1
+make && make install
 
 cd $GEM_SRC
 $INSTALL_DIR/bin/ruby setup.rb 

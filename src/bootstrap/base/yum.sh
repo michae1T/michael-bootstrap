@@ -13,6 +13,7 @@ yum -y install mongo* postgres* pgadmin* \
                stunnel \
                tk* tcl* \
                wget curl lynx \
+               ack pcre \
                gdbm-devel openssl* \
                openssh* \
                compat-libstd* compat-gcc* compat-readline* \
@@ -25,8 +26,15 @@ yum -y install mongo* postgres* pgadmin* \
                avahi-tools cups*
 
 
-yum -y install libreoffice* ktorrent kvirc
 
+yum -y install libreoffice-base libreoffice-calc libreoffice-core \
+               libreoffice-impress libreoffice-kde libreoffice-math \
+               libreoffice-writer* libreoffice-pres* libreoffice-open* \
+               libreoffice-pdf* libreoffice-xslt* \
+               libreoffice-langpack-en libreoffice-langpack-it \
+               libreoffice-langpack-fr libreoffice-langpack-es \
+               libreoffice-langpack-pt-BR libreoffice-langpack-uk \
+               ktorrent kvirc
 
 yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
 

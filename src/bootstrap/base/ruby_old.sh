@@ -15,7 +15,8 @@ rm -rf $INSTALL_DIR
 
 cd $RUBY_SRC
 autoconf && CC=gcc34 CXX=g++34 ./configure --prefix=/opt/ruby-1.8.7
-make clean && make && make install
+make clean > /dev/null 2>&1
+make && make install
 
 cd $GEM_SRC
 $RUBY setup.rb 
