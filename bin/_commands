@@ -9,6 +9,20 @@ Mercury['warehouse'].process_sequence('mercury', 'tm_efw')
 mkdir /web/gilt/share/features/disable
 touch /web/gilt/share/features/disable/use_new_mercury_staging_tables
 
+
+def email_confirm(order) 
+
+  subsite = Subsite.city
+  trigger_name = 'city_order_confirm_v5'
+  data_object = order
+  send_to_email_address = 'michaelt@giltcity.com'
+  package = order.order_items.first.unit.sku.package_option.package
+  opts = {:city_site => CitySite.giltcity, :package => package}
+
+  mta_output = Exacttarget::City::OrderConfirm.send_email(subsite, trigger_name, data_object, send_to_email_address, opts)
+
+end
+
 select oi.sku_id, o.status, count(*) from orders o join order_items oi on oi.order_id=o.id where warehouse_building_id = 16 group by o.status, oi.sku_id;
 
 update user_last_password_changes set changed_at = now() where user_id = (select id from users where lower_email_address = 'mtiraborrelli@giltcity.com');
