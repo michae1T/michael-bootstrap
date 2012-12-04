@@ -1,3 +1,21 @@
 #!/bin/bash
 
-vi -n ~/bin/_notes
+NOTES_DIR=~/bin/_notes
+
+if [ ! -d "$NOTES_DIR" ] ; 
+  then mkdir -p $NOTES_DIR
+fi;
+
+if [ -z "$1" ] ;
+  then 
+    TYPE="notes"
+    SUB=""
+  else
+    TYPE=$1
+    if [ -z "$2" ] ; 
+      then SUB=""
+      else SUB=.$2
+    fi;
+fi;
+
+vi -n $NOTES_DIR/$TYPE$SUB
