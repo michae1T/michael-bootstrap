@@ -46,7 +46,7 @@ yum -y install gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ug
 
 yum -y install libdvdread libdvdnav lsdvd vlc*
 
-yum -y install kaffeine xine xine-lib xine-lib-extras-freeworld unrar
+yum -y install kaffeine xine xine-lib xine-lib-extras-freeworld unrar ffmpeg
 
 rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
