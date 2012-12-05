@@ -31,6 +31,8 @@ update user_last_password_changes set changed_at = now() where user_id = (select
 cd /web/order_service/external && ant clean dist test publish:development
 cd /web/order_service/core && ant clean dist test publish:development 
 
+alias order_service_build_all='cd external && ant -Dtest.gilt.zookeeper.enabled=false clean test publish:development && cd ../core && ant -Dtest.gilt.zookeeper.enabled=false clean test publish:development && cd ../client && ant -Dtest.gilt.zookeeper.enabled=false clean test publish:development && cd ../server && ant -Dtest.gilt.zookeeper.enabled=false clean test dist'
+
 /opt/zeus/zxtm/conf/rules
 
 sudo nginx -c /web/tools/config/nginx/nginx-arbsc.conf

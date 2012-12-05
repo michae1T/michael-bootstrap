@@ -1,6 +1,8 @@
 #!/bin/bash
 
-NOTES_DIR=~/bin/_notes
+if [ -z $NOTES_DIR ] ;
+  then NOTES_DIR=~/bin/_notes
+fi;
 
 if [ ! -d "$NOTES_DIR" ] ; 
   then mkdir -p $NOTES_DIR
@@ -11,10 +13,25 @@ if [ -z "$1" ] ;
     TYPE="notes"
     SUB=""
   else
+    if [ "$1" == "ls" ] 
+      then cd $NOTES_DIR; ls; exit 0;
+    fi;
     TYPE=$1
-    if [ -z "$2" ] ; 
-      then SUB=""
-      else SUB=.$2
+    if [ -z "$3" ] ;
+      then 
+        if [ -z "$2" ] ;
+          then SUB=""
+          else 
+            if [ "$2" == "ls" ] ; 
+              then cd $NOTES_DIR; ls $TYPE.* | awk -F '.' '{ print $2 }'; exit 0;
+              else SUB=.$2
+            fi;
+        fi;
+      else
+        if [ "$2" == "rm" ] ;
+          then rm -f $NOTES_DIR/$TYPE.$3; exit 0;
+          else echo "invalid note"; exit 1;
+        fi;
     fi;
 fi;
 
