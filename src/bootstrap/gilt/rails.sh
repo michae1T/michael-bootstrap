@@ -11,7 +11,7 @@ export PATH=$INSTALL_DIR/bin:$PATH
 
 ### required system gems ###
 
-$GEM install bundler08 thin rdoc \
+$GEM install bundler08 thin rdoc capistrano \
                              net-ssh-gateway net-ssh net-sftp net-scp
 
 $GEM install rake --version 0.9.2.2
