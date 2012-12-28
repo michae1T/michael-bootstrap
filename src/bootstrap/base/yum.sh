@@ -35,7 +35,9 @@ yum -y install libreoffice-base libreoffice-calc libreoffice-core \
                libreoffice-langpack-fr libreoffice-langpack-es \
                libreoffice-langpack-pt-BR libreoffice-langpack-uk \
                ktorrent kvirc \
-               digikam* kipi-plugins*
+               nautilus-extensions \
+               digikam* kipi-plugins* \
+               fuse-encfs
 
 yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
 

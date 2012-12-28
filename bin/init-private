@@ -1,0 +1,14 @@
+#!/bin/bash
+
+PRIVATE_DIR=~/Private
+CRYPT_DIR=~/Dropbox/Private
+
+if [ ! -e $CRYPT_DIR/.encfs6.xml ] ; then
+  dropbox exclude add $CRYPT_DIR/.encfs6.xml
+  mkdir -p $CRYPT_DIR
+  cp ~/src/dropbox/encfs6.xml $CRYPT_DIR/.encfs6.xml; 
+  mkdir -p $PRIVATE_DIR
+fi;
+
+encfs $CRYPT_DIR $PRIVATE_DIR
+
