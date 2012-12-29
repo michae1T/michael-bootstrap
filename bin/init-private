@@ -1,7 +1,9 @@
 #!/bin/bash
 
-PRIVATE_DIR=~/Private
-CRYPT_DIR=~/Dropbox/Private
+BUCKET=bucket-$1
+
+PRIVATE_DIR=~/Private/$BUCKET
+CRYPT_DIR=~/Dropbox/Private/$BUCKET
 
 if [ ! -e $CRYPT_DIR/.encfs6.xml ] ; then
   dropbox exclude add $CRYPT_DIR/.encfs6.xml
