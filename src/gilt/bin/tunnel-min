@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 GW_HOST=ARGV[0] || 'pstage11'
-puts GWHOST
+puts GW_HOST
 
 SERVICE_PORTS=[
    8501, # config_service
