@@ -10,7 +10,6 @@ fi
 shopt -s progcomp
 
 sreplace() {
-        echo $1 $2
         perl -pi -e "s/$1/$2/g" `grep -Irs $1 * | awk -F: '{ print $1 }'`
 }
 
