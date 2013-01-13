@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -z "$1" ] ; 
+  then echo "bucket name required"; exit 1;
+fi;
+
 BUCKET=bucket-$1
 
 PRIVATE_DIR=~/Private/$BUCKET
