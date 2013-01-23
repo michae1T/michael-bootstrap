@@ -11,6 +11,7 @@ SHARED=`pwd`
 cd $OWNER_DIR/../../..
 USER_HOME=`pwd`
 USER_STAT=`stat -c "%U:%G" $OWNER_DIR`
+USER_OWNER=`stat -c "%U" $OWNER_DIR`
 
 RUBY_PROJECTS=$USER_HOME/src/ruby
 RUBY_SRC=$RUBY_PROJECTS/ruby

@@ -7,10 +7,11 @@ mkdir -p /opt/scripts/sys_sudo
 cp $USER_HOME/src/scripts/macbook-pro/* /opt/scripts/sys_sudo
 chown root:root /opt/scripts/sys_sudo/*
 
-echo "#!/bin/bash" > bin/set-gfx-slow
-echo "sudo /opt/scripts/sys_sudo/slow-gfx.sh" >> bin/set-gfx-slow
-echo "" >> bin/set-gfx-slow
-chmod +x bin/set-gfx-slow
+GFX_SCRIPT=$USER_HOME/bin/set-gfx-slow
+echo "#!/bin/bash" > $GFX_SCRIPT
+echo "sudo /opt/scripts/sys_sudo/slow-gfx.sh" >> $GFX_SCRIPT
+echo "" >> $GFX_SCRIPT
+chmod +x $GFX_SCRIPT
 
 echo "" >> /etc/sudoers
 echo "ALL ALL=(ALL) NOPASSWD: /opt/scripts/sys_sudo/*.sh" >> /etc/sudoers
