@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source `dirname $0`/../_environment.sh
+
 echo "configuring postgres"
 
 export PGHOME=/home/postgres
@@ -16,7 +18,7 @@ sed s/\\/var\\/lib\\/pgsql/\\/home\\/postgres/ /etc/passwd.bak > /etc/passwd
 su - postgres -c "PGDATA=$PGDATA postgresql-setup initdb" \
  || su - postgres -c "PGDATA=$PGDATA initdb"
 
-source _fix_postgres_selinux.sh
+source $SHARED/_fix_postgres_selinux.sh
 
 sleep 10
 
