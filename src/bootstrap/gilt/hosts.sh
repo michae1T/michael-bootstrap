@@ -15,6 +15,7 @@ cat >> /etc/hosts <<EOF
 127.0.0.1       admin-city.localhost priceless.localhost wsj.localhost mc.localhost
 
 74.119.74.13    gw1
+74.119.74.14    gw2
 
 EOF
 

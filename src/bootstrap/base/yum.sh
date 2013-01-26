@@ -8,10 +8,10 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                mongo* postgres* pgadmin* \
                java-1.7*openjdk* scala* \
                maven maven-ant-plugin ant apache-ivy \
-               ruby ruby-devel \
+               ruby \
                puppet* rabbitmq* \
                perl-JSON perl-Module-Load \
-               ImageMagick-perl \
+               ImageMagick-perl ImageMagick-devel \
                stunnel \
                tk* tcl* \
                wget curl lynx \
@@ -24,13 +24,13 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                patch readline* \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
-               libxslt* libxml2* \
+               libxslt* libxml2 libxml2-devel \
                avahi-tools cups* \
                fuse-encfs
 
 yum clean all
 
-if [ -d "$DESKTOP_BOOTSTRAP" ]; then
+if [ -n "$DESKTOP_BOOTSTRAP" ]; then
   yum -y install firefox thunderbird \
                libreoffice-base libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
