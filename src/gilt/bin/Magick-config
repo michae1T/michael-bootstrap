@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# strip out flag breaking rmagick gem buid
-
-/usr/bin/Magick-config $1 | sed s/-fopenmp//
-
