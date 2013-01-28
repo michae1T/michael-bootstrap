@@ -26,11 +26,19 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
                avahi-tools cups* \
-               fuse-encfs
+               fuse-encfs \
+               ddclient
 
 yum clean all
 
-if [ -n "$DESKTOP_BOOTSTRAP" ]; then
+if [ -n "$PPTPD_SERVER" ] ; then
+
+  rpm -Uvh http://poptop.sourceforge.net/yum/stable/fc18/pptp-release-current.noarch.rpm 
+  yum --enablerepo=poptop-stable install pptpd 
+
+fi;
+
+if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
   yum -y install firefox thunderbird \
                libreoffice-base libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
