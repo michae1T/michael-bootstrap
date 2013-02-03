@@ -19,14 +19,14 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                gdbm-devel openssl* \
                openssh* \
                compat-libstd* compat-gcc* compat-readline* \
-               libpng* \
+               libpng-* \
                snakeyaml libyaml* perl-YAML* \
                patch readline* \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
-               avahi-tools cups* \
                fuse-encfs \
+               tmux screen \
                ddclient
 
 yum clean all
@@ -52,6 +52,7 @@ if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
                digikam* kipi-plugins* \
                kde-l10n-British clearlooks-compact-gnome-theme \
                powertop pidgin* banshee* \
+               avahi-tools cups* \
                gimp* \
                --exclude=gimp-help*
 
