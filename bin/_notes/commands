@@ -1,6 +1,9 @@
-git clone ssh://gerrit.gilt.com:29418/
+git clone ssh://gerrit.gilt.com:29418/ 
 
 43752475-0667-4fab-a1ef-d9121902995d
+
+  ioncannon-utils/bin/promote.rb --project my-service --organization com.gilt --version x.y.z --from test --to production
+  TAG=x.y.z cap production service:deploy
 
 mercury
 

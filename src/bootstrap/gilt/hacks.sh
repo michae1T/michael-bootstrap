@@ -36,7 +36,7 @@ ln -s /opt/scripts/gilt/mvn-proxy.sh /usr/bin/mvn > /dev/null 2>&1
 #  redirecto to sysruby
 mkdir -p /opt/local/bin
 mv /opt/local/bin/ruby /opt/local/bin/ruby.bak > /dev/null 2>&1
-ln -s /opt/scripts/gilt/ruby-proxy.sh /opt/local/bin > /dev/null 2>&1
+ln -s /usr/bin/ruby /opt/local/bin/ruby > /dev/null 2>&1
 
 # link gem folder for passenger, hardcoded in tools
 rm  /web/gems > /dev/null 2>&1
