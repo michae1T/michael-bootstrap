@@ -51,6 +51,7 @@ if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
                nautilus-extensions \
                digikam* kipi-plugins* \
                kde-l10n-British clearlooks-compact-gnome-theme \
+               plasma-scriptengine-ruby korundum \
                powertop pidgin* banshee* \
                avahi-tools cups* \
                gimp* \
