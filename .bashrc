@@ -27,5 +27,5 @@ complete -o filenames -F _cnotes commands
 complete -o filenames -F _cnotes todo
 complete -o filenames -F _cnotes queries
 
-
+alias vi=vim
 

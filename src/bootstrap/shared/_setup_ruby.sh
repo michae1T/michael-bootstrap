@@ -16,6 +16,7 @@ cd $RUBY_PROJECTS/ruby
 autoconf && ./configure --prefix=$RUBY_INSTALL_DIR
 make clean > /dev/null 2>&1
 make && make install
+chown -R $USER_STAT .
 
 cd $RUBY_PROJECTS/rubygems
 $RUBY_INSTALL_DIR/bin/ruby setup.rb
