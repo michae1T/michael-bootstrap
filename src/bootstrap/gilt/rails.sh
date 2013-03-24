@@ -13,7 +13,11 @@ export PATH=$INSTALL_DIR/bin:$PATH
 ### required system gems ###
 
 $GEM install bundler08 thin rdoc capistrano rspec \
-                             net-ssh-gateway net-ssh net-sftp net-scp
+                             net-ssh-gateway net-ssh net-sftp net-scp \
+                             rails
+
+$GEM install sinatra --version=1.2.6
+$GEM install assette --version=0.1.7
 
 $GEM install rake --version=0.8.7
 

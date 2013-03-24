@@ -1,16 +1,15 @@
 #!/usr/bin/env ruby
 
-GW_HOST=ARGV[0] || 'pstage11'
+GW_HOST=ARGV[0] || 'pstage57'
 puts GW_HOST
 
 SERVICE_PORTS=[
    8501, # config_service
    7161, #prefs
    2181, #zook keep
-8240, #credits
-6601, #payment
-5672, #rabbit
-#8180, #swift
+   8240, #credits
+   6601, #payment
+   5672, #rabbit
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|
