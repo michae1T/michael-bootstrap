@@ -17,6 +17,10 @@ esreplace() {
         perl -pi -e "s/$1/$2/g" `egrep -Irs $1 * | awk -F: '{ print $1 }'`
 }
 
+git_update_deleted() {
+        git status | grep deleted | perl -i -pe 's/\#\s+deleted:\s+/git rm /g' | bash
+}
+
 _cnotes() {
 local cur
   cur=${COMP_WORDS[COMP_CWORD]}

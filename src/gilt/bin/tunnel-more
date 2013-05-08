@@ -36,6 +36,7 @@ SERVICE_PORTS=[
    10080, # rails
    7301, # city extranet service
 
+5672, #rabbit
 8230, #rules
 7702, # cityseaerch
 7701, #cityservice
