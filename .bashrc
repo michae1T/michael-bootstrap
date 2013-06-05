@@ -17,8 +17,15 @@ esreplace() {
         perl -pi -e "s/$1/$2/g" `egrep -Irs $1 * | awk -F: '{ print $1 }'`
 }
 
-git_update_deleted() {
+git-update-deleted() {
         git status | grep deleted | perl -i -pe 's/\#\s+deleted:\s+/git rm /g' | bash
+}
+
+gack() {
+	ack --ignore-dir=vendor --ignore-dir=log \
+            --ignore-dir=share --ignore-dir=spec \
+            --ignore-dir=target --ignore-dir=test-output \
+          $@
 }
 
 _cnotes() {
