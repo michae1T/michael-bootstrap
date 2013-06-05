@@ -3,7 +3,7 @@
 export PATH=/opt/apache-ant-1.8.2/bin:/opt/apache-maven-3.0.4/bin:$PATH
 export ANT_HOME=/opt/apache-ant-1.8.2
 
-export PATH=~/src/gilt/bin:~/src/gilt/tools/bin:$PATH
+export PATH=~/src/gilt/bin:~/src/gilt/tools/bin:~/src/gilt/play-2.0:$PATH
 
 mvn -version | grep "Apache Maven"
 ant -version

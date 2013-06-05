@@ -36,6 +36,9 @@ SERVICE_PORTS=[
    10080, # rails
    7301, # city extranet service
 
+4905, #moment
+7895, #loyal
+
 5672, #rabbit
 8230, #rules
 7702, # cityseaerch
@@ -45,6 +48,8 @@ SERVICE_PORTS=[
 8765, #sku
 7895, #loyalty
 7810, #webx
+47960, #svcdigi
+47970, #svcondem
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|

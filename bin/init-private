@@ -10,8 +10,8 @@ PRIVATE_DIR=~/Private/$BUCKET
 CRYPT_DIR=~/Dropbox/Private/$BUCKET
 
 if [ ! -e $CRYPT_DIR/.encfs6.xml ] ; then
-  dropbox exclude add $CRYPT_DIR/.encfs6.xml
   mkdir -p $CRYPT_DIR
+  dropbox exclude add $CRYPT_DIR/.encfs6.xml
   cp ~/src/dropbox/encfs6.xml $CRYPT_DIR/.encfs6.xml; 
   mkdir -p $PRIVATE_DIR
 fi;

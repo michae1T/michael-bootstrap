@@ -7,19 +7,13 @@ RUBY=$INSTALL_DIR/bin/ruby
 GEM=$INSTALL_DIR/bin/gem
 RAKE=$INSTALL_DIR/bin/rake
 GEMS_DIR=$INSTALL_DIR/lib/ruby/gems/1.8/gems
+GEM_OPTS='--no-ri --no-rdoc'
 
 export PATH=$INSTALL_DIR/bin:$PATH
 
 ### required system gems ###
 
-$GEM install bundler08 thin rdoc capistrano rspec \
-                             net-ssh-gateway net-ssh net-sftp net-scp \
-                             rails rake
-
-$GEM install sinatra --version=1.2.6
-$GEM install assette --version=0.1.7
-
-$GEM install rake --version=0.8.7
+$GEM install rake --version=0.8.7 $GEM_OPTS
 
 ### encyription stuff? ###
 
@@ -33,11 +27,11 @@ checkout_and_patch_repo "$RUBY_PROJECTS" "libxml-ruby" \
 
 cd $RUBY_PROJECTS/libxml-ruby
 $RAKE gem
-$GEM install admin/pkg/libxml-ruby-1.1.3.gem 
+$GEM install admin/pkg/libxml-ruby-1.1.3.gem $GEM_OPTS 
 
 ### install/patch passenger-nginx ###
 
-$GEM install passenger --version 2.2.9 --no-ri --no-rdoc
+$GEM install passenger --version 2.2.9 $GEM_OPTS
 
 BOOST_PATCH_DIR=$RUBY_PATCH_DIR/passenger/boost
 
@@ -50,6 +44,20 @@ mv /opt/nginx /opt/nginx.bak > /dev/null 2>&1
 rm -rf /opt/nginx
 
 $GEMS_DIR/passenger-2.2.9/bin/passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx --extra-configure-flags='--with-cc-opt=-Wno-error'
+
+### extra stuff for capistrano deploys and general undocumented development :| ###
+
+$GEM install bundler08 thin rdoc capistrano rspec \
+                             net-ssh-gateway net-ssh net-sftp net-scp \
+                             rails \
+                             $GEM_OPTS
+
+
+$GEM install sinatra --version=1.2.6 $GEM_OPTS
+$GEM install assette --version=0.1.7 $GEM_OPTS
+
+
+$GEM install rake $GEM_OPTS
 
 cd $START_DIR
 
