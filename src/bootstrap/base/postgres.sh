@@ -7,8 +7,11 @@ echo "configuring postgres"
 export PGHOME=/home/postgres
 export PGDATA=$PGHOME/data
 
-rm -rf $PGHOME
-mkdir $PGHOME
+if [ -d "$PGHOME" ] ; then 
+  echo "clearing $PGHOME and starting again..."
+  rm -rf $PGHOME
+  mkdir $PGHOME
+fi;
 
 chown postgres:postgres $PGHOME
 rm /etc/passwd.bak

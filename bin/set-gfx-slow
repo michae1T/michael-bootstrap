@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo /opt/scripts/sys_sudo/slow-gfx.sh
+

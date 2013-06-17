@@ -48,8 +48,8 @@ SERVICE_PORTS=[
 8765, #sku
 7895, #loyalty
 7810, #webx
-47960, #svcdigi
-47970, #svcondem
+20965, #svcdigi
+20966, #svcondem
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|

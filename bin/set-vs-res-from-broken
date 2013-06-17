@@ -1,0 +1,21 @@
+#!/bin/bash
+
+xrandr --newmode net   148.50  1920 2008 2052 2200  1080 1084 1089 1125 +hsync +vsync
+
+if [ -n "`xrandr | grep 'LVDS connected'`" ]; then 
+
+  xrandr --addmode DisplayPort-0 net
+  xrandr --output DisplayPort-0 --mode net
+  xrandr --output LVDS --mode 1680x1050
+  xrandr --output DisplayPort-0 --right-of LVDS
+
+else 
+
+  xrandr --addmode DisplayPort-1 net
+  xrandr --output DisplayPort-1 --mode net
+  xrandr --output LVDS-1 --mode 1680x1050
+  xrandr --output DisplayPort-1 --right-of LVDS-1
+
+fi;
+
+
