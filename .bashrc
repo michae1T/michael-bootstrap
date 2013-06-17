@@ -25,7 +25,8 @@ gack() {
 	ack --ignore-dir=vendor --ignore-dir=log \
             --ignore-dir=share --ignore-dir=spec \
             --ignore-dir=target --ignore-dir=test-output \
-          $@
+            --ignore-dir=test \
+          "$@"
 }
 
 _cnotes() {
