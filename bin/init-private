@@ -16,5 +16,8 @@ if [ ! -e $CRYPT_DIR/.encfs6.xml ] ; then
   mkdir -p $PRIVATE_DIR
 fi;
 
-encfs $CRYPT_DIR $PRIVATE_DIR
+if [ -n "$2" ] ;
+ then encfs --idle=$2 $CRYPT_DIR $PRIVATE_DIR
+ else encfs $CRYPT_DIR $PRIVATE_DIR
+fi;
 

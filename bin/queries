@@ -1,3 +1,5 @@
 #!/bin/bash
 
-~/bin/notes queries $@
+ARGS=("queries" $@)
+source $NOTES_BIN/notes
+
