@@ -1,4 +1,4 @@
 #!/bin/bash
 
-ARGS=("commands" $@)
+NOTES_USE_VAULT=1
 source $NOTES_BIN/notes 

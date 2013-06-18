@@ -1,6 +1,21 @@
 #!/bin/bash
 
-if [ -z $NOTES_DIR ] ;
+if [ -z "$ARGS" ] ;
+  then ARGS=( $@ )
+fi;
+
+if [ -n "$NOTES_USE_VAULT" ] ; then
+  if [ -z "$NOTES_VAULT_DIR" ] ; 
+    then echo 'no $NOTES_VAULT_DIR specified' ; exit 1;
+  fi;
+  NOTES_DIR=$NOTES_VAULT_DIR/bucket-$NOTES_VAULT_BUCKET
+
+  if [ -z "`mount | grep bucket-$NOTES_VAULT_BUCKET`" ] ;
+    then init-private $NOTES_VAULT_BUCKET 5
+  fi;
+fi;
+
+if [ -z "$NOTES_DIR" ] ;
   then NOTES_DIR=~/bin/_notes
 fi;
 
@@ -8,28 +23,30 @@ if [ ! -d "$NOTES_DIR" ] ;
   then mkdir -p $NOTES_DIR
 fi;
 
-if [ -z "$1" ] ;
+if [ -z "${ARGS[0]}" ] ;
   then 
     TYPE="notes"
     SUB=""
   else
-    if [ "$1" == "ls" ] 
-      then cd $NOTES_DIR; ls; exit 0;
+    if [ "${ARGS[0]}" == "ls" ] 
+      then cd $NOTES_DIR; ls ${ARGS[1]}* 2> /dev/null | sed -r 's/\w+\.\w+//g' | sed '/^$/d'  ; exit 0;
     fi;
-    TYPE=$1
-    if [ -z "$3" ] ;
+    TYPE="${ARGS[0]}"
+    if [ -z "${ARGS[2]}" ] ;
       then 
-        if [ -z "$2" ] ;
+        if [ -z "${ARGS[1]}" ] ;
           then SUB=""
           else 
-            if [ "$2" == "ls" ] ; 
-              then cd $NOTES_DIR; ls $TYPE.* | awk -F '.' '{ print $2 }'; exit 0;
-              else SUB=.$2
+            if [ "${ARGS[1]}" == "ls" ] ; 
+              then cd $NOTES_DIR; ls $TYPE.* 2> /dev/null | awk -F '.' '{ print $2 }'; exit 0;
+              else SUB=".${ARGS[1]}"
             fi;
         fi;
       else
-        if [ "$2" == "rm" ] ;
-          then rm -f $NOTES_DIR/$TYPE.$3; exit 0;
+        if [ "${ARGS[1]}" == "ls" ] ;
+           then cd $NOTES_DIR; ls $TYPE.${ARGS[2]}* 2> /dev/null | awk -F '.' '{ print $2 }'; exit 0;
+        elif [ "${ARGS[1]}" == "rm" ] ;
+          then rm -f $NOTES_DIR/$TYPE.${ARGS[2]}; exit 0;
           else echo "invalid note"; exit 1;
         fi;
     fi;
