@@ -1,0 +1,13 @@
+#!/bin/bash
+
+for E in `ls $HOME/tmp/env/* 2> /dev/null | sed -r 's/.*tmp\/env\///g'`
+do
+
+  NO_SHELL=1 source set-$E-env
+
+done;
+
+if [ -z "$NO_SHELL" ] ;
+  then bash
+fi;
+

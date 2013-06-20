@@ -60,3 +60,5 @@ complete -o filenames -F _cnotes passwords
 
 alias vi=vim
 
+NO_SHELL=1 source set-env
+
