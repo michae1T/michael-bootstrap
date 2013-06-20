@@ -1,0 +1,8 @@
+hack for pesky hardcodings of /usr/bin/ruby and /usr/bin/mvn with required version other
+than system default.
+
+never unless desperate. 
+
+back up originals.  root, read only, in top level directory... link to ruby-proxy and mvn-proxy in /usr/bin
+
+

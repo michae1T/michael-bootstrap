@@ -1,4 +1,5 @@
 #!/bin/bash
+#NO_GITHUB
 
 export PGUSER=web
 export PGDATABASE=gilt_us_development

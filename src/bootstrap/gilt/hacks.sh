@@ -17,20 +17,20 @@ backup_from_usr() {
 mkdir -p $USER_HOME/src/gilt
 ln -s $USER_HOME/src/gilt /web > /dev/null 2>&1
 
-rm -rf /opt/scripts/gilt
-mkdir -p /opt/scripts/gilt
-cp $USER_HOME/src/scripts/gilt/* /opt/scripts/gilt/
-chown root:root /opt/scripts/gilt/*
+rm -rf /opt/scripts/usr-proxy
+mkdir -p /opt/scripts/usr-proxy
+cp $USER_HOME/src/scripts/usr-proxy/* /opt/scripts/usr-proxy/
+chown root:root /opt/scripts/usr-proxy/*
 
 # build submodule hardcoded requirement at /usr/bin/ruby -> 1.8.7
 #  redirect to sys ruby
 backup_from_usr ruby
-ln -s /opt/scripts/gilt/ruby-proxy.sh /usr/bin/ruby > /dev/null 2>&1
+ln -s /opt/scripts/usr-proxy/ruby-proxy.sh /usr/bin/ruby > /dev/null 2>&1
 
 # build submodule hardcoded requirement at /usr/bin/mvn
 #  redirect to sys mvn
 backup_from_usr mvn
-ln -s /opt/scripts/gilt/mvn-proxy.sh /usr/bin/mvn > /dev/null 2>&1
+ln -s /opt/scripts/usr-proxy/mvn-proxy.sh /usr/bin/mvn > /dev/null 2>&1
 
 # link ruby exec for passenger, hardcoded in tools
 #  redirecto to sysruby
