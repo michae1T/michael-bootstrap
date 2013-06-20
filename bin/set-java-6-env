@@ -1,0 +1,17 @@
+#!/bin/bash
+
+JAVADIR=`cd $HOME/opt/jdk1.6* 2> /dev/null && pwd`
+
+if [ -n $DIR ] ;
+  then export PATH="$JAVADIR/bin:$PATH"
+  else "could not find java 6"
+fi;
+
+if [ -z "$NO_VERSION" ] ; then
+  javac -version
+fi;
+
+if [ -z "$NO_SHELL" ] ; 
+ then bash
+fi;
+

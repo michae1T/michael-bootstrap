@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -n "$1" ] ;
+  then echo "clocking out of $1..."
+  else echo "no environment!"; exit 1
+fi;
+
+mkdir -p $HOME/tmp/env
+rm $HOME/tmp/env/$1 2> /dev/null
+
