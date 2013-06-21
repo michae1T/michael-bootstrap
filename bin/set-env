@@ -3,7 +3,10 @@
 for E in `ls $HOME/tmp/env/* 2> /dev/null | sed -r 's/.*tmp\/env\///g'`
 do
 
-  NO_SHELL=1 source set-$E-env
+  if [ -z "$(eval echo \$ENV_${E}_LOADED)" ] ; then
+    export ENV_${E}_LOADED=1
+    NO_SHELL=1 source set-$E-env
+  fi;
 
 done;
 

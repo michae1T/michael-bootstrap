@@ -1,5 +1,36 @@
 #!/bin/bash
 
+if [ -n "$NOTES_LOAD_ALIASES" ] ; then
+  shopt -s progcomp
+
+  _cnotes_top() {
+    local cur
+    if [[ ! $COMP_CWORD -gt 2 ]] ; then
+      if [[ $COMP_CWORD == "2" ]] ;
+        then COMPREPLY=( $($1 ${COMP_WORDS[1]} ls ${COMP_WORDS[2]}) )
+        else COMPREPLY=( $($1 ls ${COMP_WORDS[1]}) )
+      fi;
+    fi;
+  }
+  _cnotes() {
+    local cur
+    if [[ ! $COMP_CWORD -gt 1 ]] ; then
+      cur=${COMP_WORDS[COMP_CWORD]}
+      COMPREPLY=( $($1 ls $cur) )
+    fi;
+  }
+
+  complete -o filenames -F _cnotes_top notes
+  complete -o filenames -F _cnotes_top vault
+  complete -o filenames -F _cnotes commands
+  complete -o filenames -F _cnotes todo
+  complete -o filenames -F _cnotes queries
+  complete -o filenames -F _cnotes passwords
+  complete -o filenames -F _cnotes timesheet
+
+  return
+fi;
+
 if [ -z "$ARGS" ] ;
   then ARGS=( $@ )
 fi;

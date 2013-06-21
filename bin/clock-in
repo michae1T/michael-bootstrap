@@ -1,12 +1,19 @@
 #!/bin/bash
 
-if [ -n "$1" ] ;
-  then echo "clocking into $1..."
-  else echo "no environment!"; exit 1
+ENV_FILE=$HOME/tmp/env/$1
+
+if [ -z "$1" ] ;
+  then echo "no environment!"; exit 1
 fi;
 
+if [ -e "$ENV_FILE" ] ;
+  then echo "already clocked in!"; exit;
+fi;
+
+echo "clocking into $1..."
+
 mkdir -p $HOME/tmp/env
-touch $HOME/tmp/env/$1
+date > $HOME/tmp/env/$1
 
 NO_VERSION=1 NO_SHELL=1 source set-$1-env
 bash

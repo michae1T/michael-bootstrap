@@ -1,10 +1,24 @@
 #!/bin/bash
 
-if [ -n "$1" ] ;
-  then echo "clocking out of $1..."
-  else echo "no environment!"; exit 1
+ENV_FILE=$HOME/tmp/env/$1
+
+if [ -z "$1" ] ;
+  then echo "no environment!"; exit 1
 fi;
 
-mkdir -p $HOME/tmp/env
-rm $HOME/tmp/env/$1 2> /dev/null
+if [ ! -e "$ENV_FILE" ] ;
+  then echo "not clocked in!"; exit;
+fi;
+
+echo "clocking out of $1..."
+
+TIME_IN=`cat $ENV_FILE`
+TIME_OUT=`date`
+
+echo "time in: $TIME_IN"
+echo "time out: $TIME_OUT"
+
+echo "$1,$TIME_IN,$TIME_OUT" >> $NOTES_DIR/timesheet.$1
+
+rm $ENV_FILE 2> /dev/null
 
