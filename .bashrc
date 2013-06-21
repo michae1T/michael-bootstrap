@@ -7,8 +7,6 @@ fi
 
 # User specific aliases and functions
 
-shopt -s progcomp
-
 sreplace() {
         perl -pi -e "s/$1/$2/g" `grep -Irs $1 * | awk -F: '{ print $1 }'`
 }
@@ -33,30 +31,7 @@ export NOTES_BIN=$HOME/bin
 export NOTES_DIR=$HOME/Dropbox/Michael/notes
 export NOTES_VAULT_DIR=$HOME/private
 export NOTES_VAULT_BUCKET=v
-
-_cnotes_top() {
-local cur
-  if [[ ! $COMP_CWORD -gt 2 ]] ; then
-    if [[ $COMP_CWORD == "2" ]] ; 
-      then COMPREPLY=( $($1 ${COMP_WORDS[1]} ls ${COMP_WORDS[2]}) )
-      else COMPREPLY=( $($1 ls ${COMP_WORDS[1]}) )
-    fi;
-  fi;
-}
-_cnotes() {
-local cur
-  if [[ ! $COMP_CWORD -gt 1 ]] ; then
-    cur=${COMP_WORDS[COMP_CWORD]}
-    COMPREPLY=( $($1 ls $cur) )
-  fi;
-}
-
-complete -o filenames -F _cnotes_top notes
-complete -o filenames -F _cnotes_top vault
-complete -o filenames -F _cnotes commands
-complete -o filenames -F _cnotes todo
-complete -o filenames -F _cnotes queries
-complete -o filenames -F _cnotes passwords
+NOTES_LOAD_ALIASES=1 source notes
 
 alias vi=vim
 

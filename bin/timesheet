@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ARGS=("timesheet" $@)
+source $NOTES_BIN/notes 
