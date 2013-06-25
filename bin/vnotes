@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -z "$NOTES_VAULT_BUCKET" ] ;
+  then echo 'no $NOTES_VAULT_BUCKET specified' ; exit 1;
+fi;
+NOTES_DIR=`vault where $NOTES_VAULT_BUCKET`
+if [[ "`vault stat $NOTES_VAULT_BUCKET`" != "open" ]] ;
+  then vault open $NOTES_VAULT_BUCKET --idle=5;
+fi;
+if [[ "`vault stat $NOTES_VAULT_BUCKET`" != "open" ]] ;
+  then echo "opening vault failed!"; exit 1;
+fi;
+
+source notes 
