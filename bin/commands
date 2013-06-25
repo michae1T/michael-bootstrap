@@ -1,4 +1,4 @@
 #!/bin/bash
 
 ARGS=("commands" $@)
-source $NOTES_BIN/notes 
+source notes 

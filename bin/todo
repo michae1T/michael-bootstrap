@@ -1,5 +1,5 @@
 #!/bin/bash
 
 ARGS=("todo" $@)
-source $NOTES_BIN/notes
+source notes
 

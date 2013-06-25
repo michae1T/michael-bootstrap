@@ -1,4 +1,101 @@
 #!/bin/bash
 
-NOTES_USE_VAULT=1
-source $NOTES_BIN/notes 
+if [ -n "$LOAD_COMPLETION" ] ; then
+  shopt -s progcomp
+
+  _vault_complete() {
+    local cur
+
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+
+    if [[ $COMP_CWORD -eq 1 ]] ; then
+      COMPREPLY=( $( compgen -W "open conn init disc close where stat" -- $cur ) )
+      return 0
+    fi;
+
+    if [[ $COMP_CWORD -eq 2 ]] ; then
+      COMPREPLY=( $(compgen -f $VAULT_CRYPT_DIR/$cur | sed -r 's/.+\/bucket-//g' ) )
+      return 0
+    fi;
+
+    return 0
+  }
+  complete -F _vault_complete vault
+  return
+fi;
+
+if [ -z "$2" ] ; 
+  then echo "bucket name required"; exit 1;
+fi;
+
+if [ -z "$VAULT_CRYPT_DIR" ] ;
+  then echo '$VAULT_CRYPT_DIR required'; exit 1;
+fi;
+
+if [ -z "$VAULT_OPEN_DIR" ] ;
+  then echo '$VAULT_OPEN_DIR required'; exit 1;
+fi;
+
+if [ -z "$VAULT_ENCFS_CONFIG_FILE" ] ; 
+  then echo '$VAULT_ENCFS_CONFIG_FILE must be defined'; exit 1;
+fi;
+
+if [ ! -e "$VAULT_ENCFS_CONFIG_FILE" ] ;
+  then echo '$VAULT_ENCFS_CONFIG_FILE'" [$VAULT_ENCFS_CONFIG_FILE] not found"; exit 1;
+fi;
+
+OP=$1
+BUCKET=bucket-$2
+EXT_PARAMS=$3
+PRIVATE_DIR=$VAULT_OPEN_DIR/$BUCKET
+CRYPT_DIR=$VAULT_CRYPT_DIR/$BUCKET
+
+[[ -e "$PRIVATE_DIR" && -n "`mount | grep $BUCKET`" ]] && IS_BUCKET_OPEN=1
+
+case "$OP" in
+  open)
+    ;&
+  conn)
+    ;&
+  init)
+
+     if [ -n "$IS_BUCKET_OPEN" ] ;
+       then echo "already open!"; exit 1;
+     fi;
+     mkdir -p $CRYPT_DIR
+     mkdir -p $PRIVATE_DIR
+     if [ ! -e "$CRYPT_DIR/.encfs6.xml" ] ; then
+       dropbox exclude add $CRYPT_DIR/.encfs6.xml
+       cp ~/src/dropbox/encfs6.xml $CRYPT_DIR/.encfs6.xml;
+       mkdir -p $PRIVATE_DIR
+     fi;
+
+     encfs $EXT_PARAMS $CRYPT_DIR $PRIVATE_DIR
+
+    ;;
+
+
+  disc)
+    ;&
+  close)
+
+    fusermount -u $PRIVATE_DIR
+
+    ;;
+
+  where)
+
+    echo $PRIVATE_DIR
+    ;;
+
+  stat)
+    if [ -n "$IS_BUCKET_OPEN" ] ;
+      then echo "open"
+      else echo "closed"
+    fi;
+    ;;
+
+esac;
+
+

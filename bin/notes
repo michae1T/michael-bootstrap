@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -n "$NOTES_LOAD_ALIASES" ] ; then
+if [ -n "$LOAD_COMPLETION" ] ; then
   shopt -s progcomp
 
   _cnotes_top() {
@@ -21,7 +21,7 @@ if [ -n "$NOTES_LOAD_ALIASES" ] ; then
   }
 
   complete -o filenames -F _cnotes_top notes
-  complete -o filenames -F _cnotes_top vault
+  complete -o filenames -F _cnotes_top vnotes
   complete -o filenames -F _cnotes commands
   complete -o filenames -F _cnotes todo
   complete -o filenames -F _cnotes queries
@@ -33,17 +33,6 @@ fi;
 
 if [ -z "$ARGS" ] ;
   then ARGS=( $@ )
-fi;
-
-if [ -n "$NOTES_USE_VAULT" ] ; then
-  if [ -z "$NOTES_VAULT_DIR" ] ; 
-    then echo 'no $NOTES_VAULT_DIR specified' ; exit 1;
-  fi;
-  NOTES_DIR=$NOTES_VAULT_DIR/bucket-$NOTES_VAULT_BUCKET
-
-  if [ -z "`mount | grep bucket-$NOTES_VAULT_BUCKET`" ] ;
-    then init-private $NOTES_VAULT_BUCKET 5
-  fi;
 fi;
 
 if [ -z "$NOTES_DIR" ] ;

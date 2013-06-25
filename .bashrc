@@ -27,11 +27,14 @@ gack() {
           "$@"
 }
 
-export NOTES_BIN=$HOME/bin
+export VAULT_CRYPT_DIR=$HOME/Dropbox/Private
+export VAULT_OPEN_DIR=$HOME/Private
+export VAULT_ENCFS_CONFIG_FILE=$HOME/src/dropbox/encfs6.xml
+LOAD_COMPLETION=1 source vault
+
 export NOTES_DIR=$HOME/Dropbox/Michael/notes
-export NOTES_VAULT_DIR=$HOME/private
 export NOTES_VAULT_BUCKET=v
-NOTES_LOAD_ALIASES=1 source notes
+LOAD_COMPLETION=1 source notes
 
 alias vi=vim
 
