@@ -1,0 +1,26 @@
+#!/bin/bash
+
+EXEC_PATH=/opt/scripts/sys_sudo/laptop-mode.sh
+
+if [ -n "$LOAD_COMPLETION" ] ; then
+  shopt -s progcomp
+
+  _set_laptop_mode_complete() {
+    local cur
+
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+
+    if [[ $COMP_CWORD -eq 1 ]] ; then
+      COMPREPLY=( $( compgen -W "`$EXEC_PATH modes`" -- $cur ) )
+      return 0
+    fi;
+
+    return 0
+  }
+  complete -F _set_laptop_mode_complete set-laptop-mode
+  return
+fi;
+
+sudo $EXEC_PATH "$@"
+

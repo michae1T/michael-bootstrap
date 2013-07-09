@@ -50,6 +50,8 @@ SERVICE_PORTS=[
 7810, #webx
 20965, #svcdigi
 20966, #svcondem
+7766, #offers
+9826, #admin
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|

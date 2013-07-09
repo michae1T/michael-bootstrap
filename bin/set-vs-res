@@ -1,9 +1,23 @@
 #!/bin/bash
 
-xrandr --newmode net   148.50  1920 2008 2052 2200  1080 1084 1089 1125 +hsync +vsync 
-xrandr --addmode DisplayPort-0 net
-xrandr --addmode DisplayPort-1 net
+MODE_NAME=vsnet
 
-xrandr --output DisplayPort-0 --mode net
-xrandr --output DisplayPort-0 --right-of LVDS
+if [ -z "`xrandr | grep $MODE_NAME`" ] ; 
+  then xrandr --newmode $MODE_NAME 148.50  1920 2008 2052 2200  1080 1084 1089 1125 +hsync +vsync
+fi;
+
+# find the laptop display
+DIS_MAIN=`xrandr | egrep "LVDS.*\sconnected" | awk '{ print $1 }' | grep '-'`
+
+# make sure it's the right size 
+xrandr --output $DIS_MAIN --mode 1680x1050
+
+# find the other display, set res and move it
+for DIS  in `xrandr | egrep ".+\sconnected" | awk '{ print $1 }' | grep -v 'LVDS'` ; do
+  xrandr --addmode $DIS $MODE_NAME
+  xrandr --output $DIS --mode $MODE_NAME
+  xrandr --output $DIS --right-of $DIS_MAIN
+done;
+
+
 
