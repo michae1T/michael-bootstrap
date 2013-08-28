@@ -25,6 +25,7 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
+               libpng12 pangox-compat \
                fuse-encfs kio_mtp \
                tmux screen vim-enhanced \
                ddclient \
