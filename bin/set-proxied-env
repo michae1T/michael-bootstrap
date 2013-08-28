@@ -1,0 +1,12 @@
+#!/bin/bash
+#NO_GITHUB
+
+export ANT_OPTS="-DsocksProxyHost=localhost -DsocksProxyPort=12345"
+export JAVA_OPTS="-DsocksProxyHost=localhost -DsocksProxyPort=12345"
+
+echo "ANT/JAVA proxy enabled"
+
+if [ -z "$NO_SHELL" ] ;
+  then bash
+fi;
+

@@ -52,6 +52,10 @@ SERVICE_PORTS=[
 20966, #svcondem
 7766, #offers
 9826, #admin
+9836, #payment-service
+7899, #user notif
+8235, #user set
+4685, #intnl svc
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|
