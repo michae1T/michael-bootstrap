@@ -1,8 +1,10 @@
 #!/bin/bash
 #NO_GITHUB
 
-export ANT_OPTS="-DsocksProxyHost=localhost -DsocksProxyPort=12345"
-export JAVA_OPTS="-DsocksProxyHost=localhost -DsocksProxyPort=12345"
+PROXY_CONFIG="-DsocksProxyHost=localhost -DsocksProxyPort=12345"
+export ANT_OPTS=$PROXY_CONFIG
+export JAVA_OPTS=$PROXY_CONFIG
+export SBT_OPTS=$PROXY_CONFIG
 
 echo "ANT/JAVA proxy enabled"
 

@@ -28,7 +28,7 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                libpng12 pangox-compat \
                fuse-encfs kio_mtp \
                tmux screen vim-enhanced \
-               ddclient \
+               ddclient nodejs \
                libusb-devel libusb-static systemd-devel libical-devel
 
 yum clean all
@@ -56,7 +56,7 @@ if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
                plasma-scriptengine-ruby korundum \
                powertop pidgin* banshee* \
                avahi-tools cups* \
-               gimp* \
+               gimp* inkscape* \
                --exclude=gimp-help*
 
   yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
