@@ -6,22 +6,23 @@ fi;
 
 case "$1" in
   dock)
-    rmmod b43
-    rmmod tg3
-    hciconfig hci0 down
-    hciconfig hci1 up
+    rmmod b43 2> /dev/null
+    rmmod tg3 2> /dev/null
+    hciconfig hci0 down 2> /dev/null
+    hciconfig hci1 up 2> /dev/null
+    hcitool scanning  > /dev/null &
     ;;
   free)
-    modprobe b43
-    rmmod tg3
-    hciconfig hci0 down
-    hciconfig hci1 down
+    modprobe b43 2> /dev/null
+    rmmod tg3 2> /dev/null
+    hciconfig hci0 down 2> /dev/null
+    hciconfig hci1 down 2> /dev/null
     ;;
   reset)
-    modprobe b43
-    modprobe tg3
-    hciconfig hci0 up
-    hciconfig hci1 down
+    modprobe b43 2> /dev/null
+    modprobe tg3 2> /dev/null
+    hciconfig hci0 up 2> /dev/null
+    hciconfig hci1 down 2> /dev/null
     ;;
   modes)
     echo dock free reset
