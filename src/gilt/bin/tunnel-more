@@ -57,6 +57,8 @@ SERVICE_PORTS=[
 8235, #user set
 4685, #intnl svc
 29843, #svc-purchase-limit
+4910,
+
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|

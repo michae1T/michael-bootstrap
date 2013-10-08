@@ -10,6 +10,8 @@ SERVICE_PORTS=[
    8240, #credits
    6601, #payment
    5672, #rabbit
+   8082, # inventory svc
+
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|
