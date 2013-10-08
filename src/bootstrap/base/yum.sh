@@ -33,13 +33,6 @@ yum -y install git gitk gitweb git-cvs git-daemon \
 
 yum clean all
 
-if [ -n "$PPTPD_SERVER" ] ; then
-
-  rpm -Uvh http://poptop.sourceforge.net/yum/stable/fc18/pptp-release-current.noarch.rpm 
-  yum --enablerepo=poptop-stable install pptpd 
-
-fi;
-
 if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
   yum -y install firefox thunderbird \
                libreoffice-base libreoffice-calc libreoffice-core \
@@ -57,6 +50,8 @@ if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
                powertop pidgin* banshee* \
                avahi-tools cups* \
                gimp* inkscape* \
+               paprefs pavucontrol pavumeter \
+               xmbc* \ 
                --exclude=gimp-help*
 
   yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
