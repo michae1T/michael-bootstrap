@@ -44,7 +44,9 @@ sed -i "s/^ca\s.*/ca keys\/ca.crt/" $CONFIG_PATH
 sed -i "s/^cert\s.*/cert keys\/$OPENVPN_USER.crt/" $CONFIG_PATH
 sed -i "s/^key\s.*/key keys\/$OPENVPN_USER.key/" $CONFIG_PATH
 
-restorecon -Rv $CONFIG_PATH
+chmod 600 $SERVER_PATH/keys/*
+chown root:root $SERVER_PATH/keys/*
+restorecon -Rv $SERVER_PATH
 
 ln $SYSTEMCTL_PATH/openvpn@.service $SYSTEMCTL_PATH/openvpn@$OPENVPN_USER.service
 

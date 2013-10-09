@@ -14,7 +14,7 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                ImageMagick-perl ImageMagick-devel \
                stunnel \
                tk* tcl* \
-               wget curl lynx \
+               wget curl lynx telnet nc \
                ack pcre \
                gdbm-devel openssl* \
                openssh* \
