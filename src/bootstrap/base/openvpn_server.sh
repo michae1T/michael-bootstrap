@@ -23,6 +23,8 @@ sed -i 's/^cert\s.*/cert keys\/localhost.crt/' $CONFIG_PATH
 sed -i 's/^key\s.*/key keys\/localhost.key/' $CONFIG_PATH
 sed -i 's/^dh\s.*/dh keys\/dh1024.pem/' $CONFIG_PATH
 
+chmod 600 $SERVER_PATH/keys/*
+chown root:root $SERVER_PATH/keys/*
 restorecon -Rv $SERVER_PATH
 
 ln -s /lib/systemd/system/openvpn\@.service /etc/systemd/system/multi-user.target.wants/openvpn\@server.service
