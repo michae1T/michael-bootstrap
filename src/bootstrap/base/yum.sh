@@ -29,6 +29,9 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                fuse-encfs kio_mtp \
                tmux screen vim-enhanced \
                ddclient nodejs \
+               cronie \
+               openvpn* \
+               nfs-utils system-config-nfs \
                libusb-devel libusb-static systemd-devel libical-devel
 
 yum clean all

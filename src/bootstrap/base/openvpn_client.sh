@@ -1,13 +1,20 @@
 #/bin/bash
 
+source `dirname $0`/../_environment.sh
+
 if [ -z "$OPENVPN_USER$OPENVPN_SERVER" ] ;
-  then echo "usage: SYSTEMCTL_PATH= SERVER_PATH= KEYS_PATH= OPENVPN_SERVER=localhost OPENVPN_USER=michael ./openvpn_client.sh"
+  then echo "example: SYSTEMCTL_PATH= SERVER_PATH= KEYS_PATH= OPENVPN_SERVER=localhost OPENVPN_USER=michael ./openvpn_client.sh"
   exit 1
 fi;
 
 if [ -z "$KEYS_PATH" ] ;
   then KEYS_PATH=/root/easy-rsa/keys
 fi;
+
+if [ ! -e "$KEYS_PATH/ca.crt" ] ; then
+  echo "error: $KEYS_PATH/ca.crt not found"
+  exit 1
+fi
 
 if [ -z "$SERVER_PATH" ] ;
   then SERVER_PATH=/etc/openvpn
@@ -20,8 +27,6 @@ else
 fi;
 
 CONFIG_PATH=$SERVER_PATH/$OPENVPN_USER.conf
-
-yum install openvpn
 
 mkdir -p $SERVER_PATH/keys
 
@@ -48,7 +53,9 @@ chmod 600 $SERVER_PATH/keys/*
 chown root:root $SERVER_PATH/keys/*
 restorecon -Rv $SERVER_PATH
 
-ln $SYSTEMCTL_PATH/openvpn@.service $SYSTEMCTL_PATH/openvpn@$OPENVPN_USER.service
+SERVICE_NAME=openvpn@$OPENVPN_USER.service
+
+ln $SYSTEMCTL_PATH/openvpn@.service $SYSTEMCTL_PATH/$SERVICE_NAME
 
 if [ -z "$SKIP_START" ] ; then
   systemctl enable openvpn@$OPENVPN_USER.service
@@ -57,5 +64,7 @@ if [ -z "$SKIP_START" ] ; then
   systemctl disable openvpn@$OPENVPN_USER.service
 fi;
 
+config_sys_sudo $USER_HOME/src/scripts/openvpn
 
+echo "*/1 * * * * root  TOGGLE_PATH=/opt/vpn-toggler/tmp/toggle-$OPENVPN_USER SERVICE_NAME=$SERVICE_NAME /opt/scripts/sys_sudo/vpn-controller-task.sh >> /var/log/vpn-controller-task.log" > /etc/cron.d/vpn-controller-task-$OPENVPN_USER
 
