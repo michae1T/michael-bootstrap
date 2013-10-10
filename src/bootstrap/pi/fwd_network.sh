@@ -10,7 +10,5 @@ IPADDR0=$ETH_IP
 PREFIX0=24
 EOF
 
-systemctl restart network.service
-
 source ../base/share_network.sh
 
