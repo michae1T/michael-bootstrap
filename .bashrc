@@ -27,6 +27,10 @@ gack() {
           "$@"
 }
 
+chmox() {
+  chmod +x $@
+}
+
 export PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 export VAULT_CRYPT_DIR=$HOME/Dropbox/Private

@@ -2,7 +2,7 @@
 
 
 if [ -z "$TOGGLE_PATH" ] ; then
-  echo "example: TOGGLE_PATH=/opt/vpn-toggler/tmp/toggle SERVICE_NAME=openvpn@michael.service ./vpn-controller.sh"
+  echo "example: DNS_HOME= DNS_REMOTE= TOGGLE_PATH=/opt/vpn-toggler/tmp/toggle SERVICE_NAME=openvpn@michael.service ./vpn-controller.sh"
   exit 1
 fi;
 
@@ -25,6 +25,24 @@ if [ -n "$IS_ACTIVE" ] ; then
 else 
   echo "vpn is not up..."
 fi
+RESOLV_FILE=/etc/resolv.conf
+DNS_ACTIVE=`grep nameserver $RESOLV_FILE | awk '{ print $2 }'`
+if [ -n "$IS_ACTIVE" ] ; then
+  DNS_NEXT=$DNS_REMOTE
+else 
+  DNS_NEXT=$DNS_HOME
+fi;
+
+if [ -n "$DNS_NEXT" ] ; then
+  if [[ "$DNS_NEXT" != "$DNS_ACTIVE" ]] ; then
+    echo "updating DNS from [$DNS_ACTIVE] to [$DNS_NEXT]"
+    if [ -n "$DNS_ACTIVE" ] ; then
+      sed -i "s/nameserver .*/nameserver $DNS_NEXT/" $RESOLV_FILE
+    else
+      echo "nameserver=$DNS_NEXT" >> $RESOLV_FILE
+    fi;
+  fi;
+fi;
 
 if [ -e $TOGGLE_PATH ] ; then
   echo "toggle requested"

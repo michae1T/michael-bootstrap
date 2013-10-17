@@ -3,7 +3,7 @@
 source `dirname $0`/../_environment.sh
 
 if [ -z "$OPENVPN_USER$OPENVPN_SERVER" ] ;
-  then echo "example: SYSTEMCTL_PATH= SERVER_PATH= KEYS_PATH= OPENVPN_SERVER=localhost OPENVPN_USER=michael ./openvpn_client.sh"
+  then echo "example: DNS_HOME= DNS_REMOTE= SYSTEMCTL_PATH= SERVER_PATH= KEYS_PATH= OPENVPN_SERVER=localhost OPENVPN_USER=michael ./openvpn_client.sh"
   exit 1
 fi;
 
@@ -66,5 +66,5 @@ fi;
 
 config_sys_sudo $USER_HOME/src/scripts/openvpn
 
-echo "*/1 * * * * root  TOGGLE_PATH=/opt/vpn-toggler/tmp/toggle-$OPENVPN_USER SERVICE_NAME=$SERVICE_NAME /opt/scripts/sys_sudo/vpn-controller-task.sh >> /var/log/vpn-controller-task.log" > /etc/cron.d/vpn-controller-task-$OPENVPN_USER
+echo "*/1 * * * * root  DNS_HOME=$DNS_HOME DNS_REMOTE=$DNS_REMOTE TOGGLE_PATH=/opt/vpn-toggler/tmp/toggle-$OPENVPN_USER SERVICE_NAME=$SERVICE_NAME /opt/scripts/sys_sudo/vpn-controller-task.sh >> /var/log/vpn-controller-task.log" > /etc/cron.d/vpn-controller-task-$OPENVPN_USER
 
