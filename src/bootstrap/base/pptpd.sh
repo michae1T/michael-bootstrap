@@ -1,8 +1,5 @@
 #!/bin/bash
 
-if [ -z "$PPTPD_USERNAME" ] ; then echo "PPTPD_USERNAME not set"; exit; fi;
-if [ -z "$PPTPD_PASSWORD" ] ; then  echo "PPTPD_PASSWORD not set";  exit; fi;
-
 rpm -Uvh http://poptop.sourceforge.net/yum/stable/fc18/pptp-release-current.noarch.rpm
 yum --enablerepo=poptop-stable install pptpd
 
@@ -14,8 +11,6 @@ echo "remoteip 192.168.42.3-100" >> /etc/pptpd.conf
 echo "" >> /etc/pptpd.conf
 
 echo "ms-dns 172.16.0.23" >> /etc/ppp/options.pptpd
-
-echo "$PPTPD_USERNAME pptpd $PPTPD_PASSWORD *" >> /etc/ppp/chap-secrets
 
 systemctl enable pptpd.service
 systemctl restart pptpd.service 

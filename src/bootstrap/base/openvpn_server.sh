@@ -25,11 +25,15 @@ sed -i 's/^ca\s.*/ca keys\/ca.crt/' $CONFIG_PATH
 sed -i 's/^cert\s.*/cert keys\/localhost.crt/' $CONFIG_PATH
 sed -i 's/^key\s.*/key keys\/localhost.key/' $CONFIG_PATH
 sed -i 's/^dh\s.*/dh keys\/dh1024.pem/' $CONFIG_PATH
+sed -i 's/^push "route 192.168.0.0/# push "route 192.168.0.0/' $CONFIG_PATH
+sed -i 's/^push "dhcp-option/# push "dhcp-option/g' $CONFIG_PATH
 
 echo "" >> $CONFIG_PATH
 echo 'push "redirect-gateway def1"' >> $CONFIG_PATH
-echo comp-lzo >> $CONFIG_PATH
+echo 'comp-lzo' >> $CONFIG_PATH
+echo 'client-config-dir ccd'>> $CONFIG_PATH
 
+mkdir $SERVER_PATH/ccd > /dev/null 2>&1
 
 chmod 600 $SERVER_PATH/keys/*
 chown root:root $SERVER_PATH/keys/*
@@ -45,3 +49,4 @@ firewall-cmd --direct --passthrough ipv4 -A INPUT -i tun+ -j ACCEPT
 firewall-cmd --direct --passthrough ipv4 -A FORWARD -i tun+ -j ACCEPT
 firewall-cmd --direct --passthrough ipv4 -A FORWARD -i eth+ -o tun+ -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 iptables-save
+

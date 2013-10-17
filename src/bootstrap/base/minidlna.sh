@@ -2,6 +2,11 @@
 
 source `dirname $0`/../_environment.sh
 
+CONFIG_PATH=/etc/minidlna.conf
+DB_DIR=/var/cache/minidlna
+RUN_FILE=/usr/lib/systemd/system/minidlna.service
+RUN_DIR=/var/run/minidlna
+
 if [ -z "$SHARE_NAME" ] ; then
   echo "example: SHARE_NAME= SHARE_DEV= ./minidlna.sh"
   exit 1
@@ -14,19 +19,25 @@ checkout_repo "$USER_HOME/src" "minidlna-git" \
               "master"
 
 cd $USER_HOME/src/minidlna-git
-./autogen.sh && ./configure && make && make install
 
-CONFIG_PATH=/etc/minidlna.conf
+build() {
+  ./autogen.sh && ./configure && make && make install && echo "### success ###" 
+}
+
+SUCCESS=build | grep "###"
+if [ -z "$SUCCESS"] ; 
+  then "build failed..."; exit 1;
+fi;
+
 cp minidlna.conf $CONFIG_PATH
 chmod 644 $CONFIG_PATH
 chown root:root $CONFIG_PATH
-sed -i "s/^#network_interface=.*/network_interface=$SHARE_DEV/" $CONFIG_PATH
-sed -i "s/^media_dir=.*/media_dir=\/srv\/$SHARE_NAME/" $CONFIG_PATH
-sed -i "s/^notify_interval=.*/notify_interval=60/" $CONFIG_PATH
-sed -i "s/^#friendly_name=[^\n]*/friendly_name=Linux DLNA/" $CONFIG_PATH
+sed -i "s/^#?network_interface=.*/network_interface=$SHARE_DEV/" $CONFIG_PATH
+sed -i "s/^#?media_dir=.*/media_dir=\/srv\/$SHARE_NAME/" $CONFIG_PATH
+sed -i "s/^#?notify_interval=.*/notify_interval=60/" $CONFIG_PATH
+sed -i "s/^#?friendly_name=[^\n]*/friendly_name=Linux DLNA/" $CONFIG_PATH
+sed -i "s/^#?minissdpdsocket=.*/minissdpdsocket=$RUN_DIR/minissdpd.sock\/srv\/$SHARE_NAME/" $CONFIG_PATH
 
-RUN_FILE=/usr/lib/systemd/system/minidlna.service
-RUN_DIR=/var/run/minidlna
 cat > $RUN_FILE << EOF
 [Unit]
 Description=MiniDLNA is a DLNA/UPnP-AV server software
@@ -43,13 +54,17 @@ ExecStart=/usr/local/sbin/minidlnad -f /etc/minidlna.conf -P /var/run/minidlna/m
 WantedBy=multi-user.target
 EOF
 
-rm -rf $RUN_DIR
-mkdir $RUN_DIR
-chown nobody:nobody $RUN_DIR
-chmod 644 $RUN_FILE
+echo "D $RUN_DIR 0755 nobody nobody -" > /etc/tmpfiles.d/minidlna.conf
+
+rm -rf $DB_DIR
+mkdir -p $DB_DIR
+chown nobody:nobody $DB_DIR
+
 chown root:root $RUN_FILE
+chmod 644 $RUN_FILE
 
 systemctl daemon-reload 
+systemctl restart systemd-tmpfiles-setup.service
 systemctl enable minidlna.service
 systemctl restart minidlna.service
 
