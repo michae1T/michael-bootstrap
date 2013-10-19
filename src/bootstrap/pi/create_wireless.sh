@@ -1,5 +1,5 @@
 if [ -z "$W_NAME" ] ; 
-  then echo example: W_INSTALL_PATH=. W_SECURITY=wpa W_DEFAULT=1 W_NAME=heyhey W_PASSWORD=you ./create-wireless.sh
+  then echo example: W_INSTALL_PATH=. W_SECURITY=wpa W_DEFAULT=1 W_NAME=heyhey W_PASSWORD=you ./create_wireless.sh
 fi;
 
 if [ -z "$W_INSTALL_PATH" ] ; 
@@ -15,7 +15,7 @@ else
 fi;
 
 if [ -n "$W_DEFAULT" ] ; then
-  DEF="DEFROUTE=yes\nONBOOT=no"
+  DEF="DEFROUTE=yes\nONBOOT=yes"
 fi;
 
 cat > $W_INSTALL_PATH/ifcfg-$W_NAME <<EOF
