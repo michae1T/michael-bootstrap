@@ -1,12 +1,18 @@
 #!/bin/bash
 
+source `dirname $0`/../_environment.sh
+
+# so yum doesnt match files in the directory
+mkdir /tmp/run-yum > /dev/null 2&>1
+cd /tmp/run-yum
+
 yum -y update
 
 yum -y groupinstall 'Development Tools'
 
-yum -y install git gitk gitweb git-cvs git-daemon \
-               mongo* postgres* pgadmin* \
-               java-1.7*openjdk* scala* \
+yum -y install git git-daemon \
+               mongo* postgresql postgresql-server \
+               java-1.7*openjdk* scala \
                maven maven-ant-plugin ant apache-ivy \
                ruby \
                puppet* rabbitmq* \
@@ -19,25 +25,25 @@ yum -y install git gitk gitweb git-cvs git-daemon \
                gdbm-devel openssl* \
                openssh* \
                compat-libstd* compat-gcc* compat-readline* \
-               libpng-* \
                snakeyaml libyaml* perl-YAML* \
                patch readline* \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
-               libpng12 pangox-compat \
-               fuse-encfs kio_mtp \
+               libpng-* libpng12 pangox-compat \
+               fuse-encfs \
                tmux screen vim-enhanced \
                ddclient nodejs \
                cronie \
                openvpn* \
-               nfs-utils system-config-nfs \
+               nfs-utils \
                libusb-devel libusb-static systemd-devel libical-devel
 
 yum clean all
 
 if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
   yum -y install firefox thunderbird \
+               gitk pgadmin* \
                libreoffice-base libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
                libreoffice-writer* libreoffice-pres* libreoffice-open* \
@@ -54,7 +60,7 @@ if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
                avahi-tools cups* \
                gimp* inkscape* \
                paprefs pavucontrol pavumeter \
-               xmbc* \ 
+               xbmc* \ 
                --exclude=gimp-help*
 
   yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
@@ -73,5 +79,5 @@ if [ -n "$DESKTOP_BOOTSTRAP" ] ; then
   yum clean all
 fi;
 
-
+cd $START_DIR
 
