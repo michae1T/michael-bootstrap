@@ -15,6 +15,7 @@ else
 
 192.168.2.13    samantha
 192.168.2.3     fermina
+192.168.2.7     raspi
 192.168.2.1     palomas
 192.168.2.42    palomas-ext
 

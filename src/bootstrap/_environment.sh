@@ -82,3 +82,11 @@ config_sys_sudo() {
   fi;
 }
 
+yum-safe() {
+  ORIG_DIR=`pwd`
+  mkdir /tmp/yum-run > /dev/null 2>&1
+  cd /tmp/yum-run
+  yum $@
+  cd $ORIG_DIR
+}
+

@@ -17,6 +17,5 @@ systemctl restart pptpd.service
 
 firewall-cmd --permanent --add-masquerade
 firewall-cmd --permanent --add-port=1723/tcp
-
-systemctl restart firewalld.service
+firewall-cmd --reload
 

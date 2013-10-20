@@ -24,7 +24,7 @@ build() {
   ./autogen.sh && ./configure && make && make install && echo "### success ###" 
 }
 
-SUCCESS=build | grep "###"
+SUCCESS=`build | grep "###"`
 if [ -z "$SUCCESS"] ; 
   then "build failed..."; exit 1;
 fi;
@@ -70,4 +70,5 @@ systemctl restart minidlna.service
 
 firewall-cmd --permanent --add-port=8200/tcp
 firewall-cmd --permanent --add-port=1900/udp
+firewall-cmd --reload
 
