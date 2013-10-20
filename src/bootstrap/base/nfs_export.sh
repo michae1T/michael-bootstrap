@@ -52,5 +52,6 @@ firewall-cmd --permanent --add-port=$LOCKD/tcp
 firewall-cmd --permanent --add-port=$LOCKD/udp
 firewall-cmd --permanent --add-port=$MOUNTD/tcp
 firewall-cmd --permanent --add-port=$MOUNTD/udp
+firewall-cmd --reload
 
 

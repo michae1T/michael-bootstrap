@@ -44,6 +44,7 @@ systemctl -f enable openvpn@server.service
 systemctl start openvpn@server.service
 
 firewall-cmd --permanent --add-port=1194/udp
+firewall-cmd --reload
 
 firewall-cmd --direct --passthrough ipv4 -A INPUT -i tun+ -j ACCEPT
 firewall-cmd --direct --passthrough ipv4 -A FORWARD -i tun+ -j ACCEPT
