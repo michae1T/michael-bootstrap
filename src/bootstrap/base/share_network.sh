@@ -11,7 +11,7 @@ echo "dhcp-range=$LEASE_CONF" >> /etc/dnsmasq.conf
 systemctl enable dnsmasq.service
 systemctl restart dnsmasq.service
 
-echo 'net.ipv4.ip_forward=1' > > /etc/sysctl.d/dnsmasq.conf
+echo 'net.ipv4.ip_forward=1' >> /etc/sysctl.d/dnsmasq.conf
 sysctl -p
 
 firewall-cmd --permanent --add-port=53/udp

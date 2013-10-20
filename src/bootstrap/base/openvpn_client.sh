@@ -31,8 +31,16 @@ CONFIG_PATH=$SERVER_PATH/$OPENVPN_USER.conf
 mkdir -p $SERVER_PATH/keys
 
 cp -af $KEYS_PATH/$OPENVPN_USER.key $KEYS_PATH/$OPENVPN_USER.crt $KEYS_PATH/ca.crt $SERVER_PATH/keys
-fixfixfix
-cp -af /usr/share/doc/openvpn-*/sample/sample-config-files/client.conf $CONFIG_PATH
+
+DOC_DIR=`cd /usr/share/doc/openvpn-* 2> /dev/null && pwd`
+if [ -e "$DOC_DIR/sample/sample-config-files/client.conf" ] ; then
+  SAMPLE_CONF=$DOC_DIR/sample/sample-config-files/client.conf
+else
+  SAMPLE_CONF=$DOC_DIR/sample-config-files/client.conf
+fi;
+
+
+cp -af $SAMPLE_CONF $CONFIG_PATH
 
 # disable optional options
 sed -i 's/^;/\#/' $CONFIG_PATH
