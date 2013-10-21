@@ -52,4 +52,5 @@ systemctl enable toggle-server.service
 systemctl restart toggle-server.service
 
 firewall-cmd --permanent --add-port=6060/tcp
+firewall-cmd --reload
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LAN="eth0"
-LEASE_CONF="192.168.3.3,192.168.3.100,72h"
+LEASE_CONF="192.168.3.42,192.168.3.100,72h"
 
 yum -y install dnsmasq
 

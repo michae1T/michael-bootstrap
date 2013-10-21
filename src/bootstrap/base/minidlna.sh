@@ -26,7 +26,7 @@ build() {
 }
 
 SUCCESS=`build | grep "###"`
-if [ -z "$SUCCESS"] ; 
+if [ -z "$SUCCESS" ] ; 
   then "build failed..."; exit 1;
 fi;
 
@@ -34,17 +34,17 @@ cp minidlna.conf $CONFIG_PATH
 chmod 644 $CONFIG_PATH
 chown root:root $CONFIG_PATH
 
-sed -i "s/^network_interface=.*/network_interface=$SHARE_DEV/" $CONFIG_PATH
-sed -i "s/^media_dir=.*/media_dir=\/srv\/$SHARE_NAME/" $CONFIG_PATH
-sed -i "s/^notify_interval=.*/notify_interval=60/" $CONFIG_PATH
-sed -i "s/^friendly_name=[^\n]*/friendly_name=Linux DLNA/" $CONFIG_PATH
-sed -i "s/^minissdpdsocket=.*/minissdpdsocket=$RUN_DIR_REG\/minissdpd.sock/" $CONFIG_PATH
-
 sed -i "s/^#network_interface=/network_interface=/" $CONFIG_PATH
 sed -i "s/^#media_dir=/media_dir=/" $CONFIG_PATH
 sed -i "s/^#notify_interval=/notify_interval=/" $CONFIG_PATH
 sed -i "s/^#friendly_name=/friendly_name=/" $CONFIG_PATH
 sed -i "s/^#minissdpdsocket=/minissdpdsocket=/" $CONFIG_PATH
+
+sed -i "s/^network_interface=.*/network_interface=$SHARE_DEV/" $CONFIG_PATH
+sed -i "s/^media_dir=.*/media_dir=\/srv\/$SHARE_NAME/" $CONFIG_PATH
+sed -i "s/^notify_interval=.*/notify_interval=60/" $CONFIG_PATH
+sed -i "s/^friendly_name=[^\n]*/friendly_name=Linux DLNA/" $CONFIG_PATH
+sed -i "s/^minissdpdsocket=.*/minissdpdsocket=$RUN_DIR_REG\/minissdpd.sock/" $CONFIG_PATH
 
 cat > $RUN_FILE << EOF
 [Unit]
