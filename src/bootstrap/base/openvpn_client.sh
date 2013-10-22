@@ -76,3 +76,6 @@ config_sys_sudo $USER_HOME/src/scripts/openvpn
 
 echo "*/1 * * * * root  DNS_HOME=$DNS_HOME DNS_REMOTE=$DNS_REMOTE TOGGLE_PATH=/tmp/toggles/vpn-$OPENVPN_USER SERVICE_NAME=$SERVICE_NAME /opt/scripts/sys_sudo/vpn-controller-task.sh >> /var/log/vpn-controller-task.log" > /etc/cron.d/vpn-controller-task-$OPENVPN_USER
 
+systemctl enable crond.service
+systemctl start crond.service
+
