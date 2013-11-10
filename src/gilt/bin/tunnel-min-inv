@@ -7,6 +7,7 @@ SERVICE_PORTS=[
    8501, # config_service
    7161, #prefs
    2181, #zook keep
+   6401, #data
    8240, #credits
    6601, #payment
    5672, #rabbit

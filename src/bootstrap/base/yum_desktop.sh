@@ -2,7 +2,7 @@
 
 source `dirname $0`/../_environment.sh
 
-yum-safe -y install firefox thunderbird \
+yum_safe -y install firefox thunderbird \
                gitk pgadmin* \
                libreoffice-base libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
@@ -27,7 +27,7 @@ yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmf
 
 yum -y update
 
-yum-safe -y install gstreamer rhythmbox \
+yum_safe -y install gstreamer rhythmbox \
                gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly \
                libdvdread libdvdnav lsdvd vlc* \
                kaffeine xine xine-lib xine-lib-extras-freeworld unrar ffmpeg

@@ -8,11 +8,11 @@ fi
 # User specific aliases and functions
 
 sreplace() {
-        perl -pi -e "s/$1/$2/g" `grep -Irs $1 * | awk -F: '{ print $1 }'`
+        perl -pi -e "s/$1/$2/g" `grep -Irs $1 * | awk -F: '{ print $1 }' | sort -r -u`
 }
 
 esreplace() {
-        perl -pi -e "s/$1/$2/g" `egrep -Irs $1 * | awk -F: '{ print $1 }'`
+        perl -pi -e "s/$1/$2/g" `egrep -Irs $1 * | awk -F: '{ print $1 }' | sort -r -u`
 }
 
 git-update-deleted() {
@@ -25,6 +25,10 @@ gack() {
             --ignore-dir=target --ignore-dir=test-output \
             --ignore-dir=test --ignore-dir=classes \
           "$@"
+}
+
+fix-ws() {
+  sed -i 's/[[:space:]]*$//' $@
 }
 
 chmox() {

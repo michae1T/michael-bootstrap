@@ -10,7 +10,7 @@ echo `date`
 echo "service name: $SERVICE_NAME"
 echo "toggle path: $TOGGLE_PATH"
 
-if [[ `systemctl is-active $SERVICE_NAME` = 'active' ]];
+if [[ `systemctl is-active $SERVICE_NAME 2>&1` == 'active' ]];
   then IS_ACTIVE=1
 fi;
 

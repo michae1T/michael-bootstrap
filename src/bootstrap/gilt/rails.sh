@@ -29,21 +29,6 @@ cd $RUBY_PROJECTS/libxml-ruby
 $RAKE gem
 $GEM install admin/pkg/libxml-ruby-1.1.3.gem $GEM_OPTS 
 
-### install/patch passenger-nginx ###
-
-$GEM install passenger --version 2.2.9 $GEM_OPTS
-
-BOOST_PATCH_DIR=$RUBY_PATCH_DIR/passenger/boost
-
-if [ -d "$BOOST_PATCH_DIR" ] ; then
-  cd $GEMS_DIR/passenger-2.2.9/ext
-  cat $BOOST_PATCH_DIR/*.patch | patch -p0
-fi;
-
-mv /opt/nginx /opt/nginx.bak > /dev/null 2>&1
-rm -rf /opt/nginx
-
-$GEMS_DIR/passenger-2.2.9/bin/passenger-install-nginx-module --auto --auto-download --prefix=/opt/nginx --extra-configure-flags='--with-cc-opt=-Wno-error'
 
 ### extra stuff for capistrano deploys and general undocumented development :| ###
 

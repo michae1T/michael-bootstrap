@@ -1,4 +1,4 @@
-#/bin/bash
+#/bin/bash`
 
 source `dirname $0`/../_environment.sh
 
@@ -39,23 +39,25 @@ else
   SAMPLE_CONF=$DOC_DIR/sample-config-files/client.conf
 fi;
 
-
 cp -af $SAMPLE_CONF $CONFIG_PATH
+
+# get rid of secondary server
+sed -i 's/;remote.*//' $CONFIG_PATH
 
 # disable optional options
 sed -i 's/^;/\#/' $CONFIG_PATH
 
 # set server path
-sed -i "s/my-server-1/$OPENVPN_SERVER/" $CONFIG_PATH
+update_config "remote" "$OPENVPN_SERVER" $CONFIG_PATH
 
 # downgrade to nobody
-sed -i 's/^\#user/user/' $CONFIG_PATH
-sed -i 's/^\#group/group/' $CONFIG_PATH
+update_config "user" "nobody" $CONFIG_PATH
+update_config "group" "nobody" $CONFIG_PATH
 
 # set keys
-sed -i "s/^ca\s.*/ca keys\/ca.crt/" $CONFIG_PATH
-sed -i "s/^cert\s.*/cert keys\/$OPENVPN_USER.crt/" $CONFIG_PATH
-sed -i "s/^key\s.*/key keys\/$OPENVPN_USER.key/" $CONFIG_PATH
+update_config "ca" 'keys\/ca.crt' $CONFIG_PATH
+update_config "cert" `regex_path keys/$OPENVPN_USER.crt` $CONFIG_PATH
+update_config "key" `regex_path keys/$OPENVPN_USER.key` $CONFIG_PATH
 
 chmod 600 $SERVER_PATH/keys/*
 chown root:root $SERVER_PATH/keys/*

@@ -57,10 +57,9 @@ make_sys_sudo_redirect() {
 
   if [ ! -e "$SOURCE_PATH" ] ; then echo "$SOURCE_PATH does not exist"; exit 1; fi;
 
-cat > $SCRIPT_PATH <<EOF
-#!/bin/bash
-sudo /opt/scripts/sys_sudo/$1.sh
-
+  cat > $SCRIPT_PATH <<EOF
+    #!/bin/bash
+    sudo /opt/scripts/sys_sudo/$1.sh 
 EOF
 
   chmod +x $SCRIPT_PATH
@@ -82,11 +81,60 @@ config_sys_sudo() {
   fi;
 }
 
-yum-safe() {
+yum_safe() {
   ORIG_DIR=`pwd`
   mkdir /tmp/yum-run > /dev/null 2>&1
   cd /tmp/yum-run
   yum $@
   cd $ORIG_DIR
+}
+
+error() {
+  echo "error: $1"
+  if [ -z "$2" ] ;
+    then exit 1
+    else exit $2
+  fi;
+}
+
+path_regex() {
+  echo "$@" | sed 's/\//\\\//g'
+}
+
+update_config() {
+  PROP_NAME=$1
+  VALUE=$2
+  FILE_NAME=$3
+  DIVIDER=$4
+
+  if [ -z "$DIVIDER" ] ;
+    then DIVIDER=" "
+  fi;
+
+  LINE_TO_INSERT="$PROP_NAME$DIVIDER$VALUE"
+  LINE_TO_INSERT_R=`path_regex $LINE_TO_INSERT`
+
+  PROP_INFO=`egrep -n "^(#[[:space:]]*)?$PROP_NAME$DIVIDER" $FILE_NAME`
+
+  if [ -n "$PROP_INFO" ] ; then
+    MATCHES=$(echo $PROP_INFO | sed -r "s/[0-9]+:/\\n/g" | wc --lines)
+    if [[ "$MATCHES" != "2" ]] ; then
+      error "multiple matches for $PROP_NAME in $FILE_NAME"
+    fi;
+
+    LINE_NUM=`echo $PROP_INFO | awk -F: '{ print $1 }'`
+    LINE_TO_REPLACE=`echo $PROP_INFO | awk -F: '{ print $2 }'`
+    
+    if [[ "$LINE_TO_REPLACE" == "$LINE_TO_INSERT" ]] ; then
+      echo "no need to update [$LINE_TO_REPLACE] at [$FILE_NAME:$LINE_NUM]"
+    else
+      sed -i "${LINE_NUM}s/.*/$LINE_TO_INSERT_R/" $FILE_NAME
+      echo "updated [$LINE_TO_REPLACE] to [$LINE_TO_INSERT] at [$FILE_NAME:$LINE_NUM]"
+    fi;
+  else
+    echo $LINE_TO_INSERT >> $FILE_NAME
+    echo "added [$LINE_TO_INSERT] to [$FILE_NAME]"
+  fi;
+
 }
 

@@ -58,11 +58,12 @@ SERVICE_PORTS=[
 4685, #intnl svc
 29843, #svc-purchase-limit
 4910,
-
+7889, #social
+9805, #taxonomy
 ]
 
 PORT_FORWARD_ARGS=SERVICE_PORTS.map { |port|
   ['-L', "#{port}:localhost:#{port}"]
 }
 
-exec(*[%w{ssh -a -C -N -n}, PORT_FORWARD_ARGS, GW_HOST].flatten)
+exec(*[%w{ssh -a -C -N -n}, PORT_FORWARD_ARGS, '-L 5433:localhost:5432', GW_HOST].flatten)
