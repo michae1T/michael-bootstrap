@@ -4,7 +4,7 @@
 
 source `dirname $0`/../_environment.sh
 
-yum-safe -y install lzma* gmp*
+yum_safe -y install lzma* gmp*
 
 VER=1.9.3
 
