@@ -35,7 +35,15 @@ chmox() {
   chmod +x $@
 }
 
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+chome() {
+  HOME_DIR=`pwd | grep -o '\/home/[^\/]*'`
+  if [ -z "$HOME_DIR" ] ; then echo "error: could not find user"; return; fi;
+  
+  USER_STAT=`stat -c "%U:%G" $HOME_DIR`
+  chown $USER_STAT $@
+}
+
+export PATH=$HOME/bin:/opt/bin:$HOME/.local/bin:$PATH
 
 export VAULT_CRYPT_DIR=$HOME/Dropbox/Private
 export VAULT_OPEN_DIR=$HOME/Private

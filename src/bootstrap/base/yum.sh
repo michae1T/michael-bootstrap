@@ -8,7 +8,7 @@ yum -y groupinstall 'Development Tools'
 
 yum_safe -y install git git-daemon \
                mongodb* postgresql postgresql-server \
-               java-1.7*openjdk* scala \
+               java-1.7*openjdk* scala maven \
                maven maven-ant-plugin ant apache-ivy \
                ruby \
                puppet* rabbitmq* \

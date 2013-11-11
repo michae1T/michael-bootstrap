@@ -8,13 +8,16 @@ OWNER_DIR=`pwd`
 cd $OWNER_DIR/../shared
 SHARED=`pwd`
 
-cd $OWNER_DIR/../../..
-USER_HOME=`pwd`
+USER_HOME=`pwd | grep -o '\/home/[^\/]*'`
 USER_STAT=`stat -c "%U:%G" $OWNER_DIR`
 USER_OWNER=`stat -c "%U" $OWNER_DIR`
 
 RUBY_PROJECTS=$USER_HOME/src/ruby
 RUBY_PATCH_DIR=$RUBY_PROJECTS/patches
+
+cd $OWNER_DIR/../..
+REPO_DIR=`pwd`
+SCRIPTS_DIR=$REPO_DIR/scripts
 
 SYS_SUDO_DIR=/opt/scripts/sys_sudo
 
@@ -52,14 +55,14 @@ checkout_repo() {
 }
 
 make_sys_sudo_redirect() {
-  SCRIPT_PATH=$USER_HOME/bin/set-$1
+  SCRIPT_PATH=`script_path $1`
   SOURCE_PATH=$SYS_SUDO_DIR/$1.sh
 
   if [ ! -e "$SOURCE_PATH" ] ; then echo "$SOURCE_PATH does not exist"; exit 1; fi;
 
-  cat > $SCRIPT_PATH <<EOF
-    #!/bin/bash
-    sudo /opt/scripts/sys_sudo/$1.sh 
+  cat > $SCRIPT_PATH <<- EOF
+#!/bin/bash
+sudo /opt/scripts/sys_sudo/$1.sh 
 EOF
 
   chmod +x $SCRIPT_PATH
@@ -79,6 +82,32 @@ config_sys_sudo() {
     echo "ALL ALL=(ALL) NOPASSWD: $SYS_SUDO_DIR/*.sh" >> /etc/sudoers
     echo "" >> /etc/sudoers
   fi;
+}
+
+script_path() {
+  echo $USER_HOME/bin/set-$1
+}
+
+write_env_script() {
+  SCRIPT_PATH=`script_path $1-env`
+  BODY=`echo -e $2`
+  SCPT=`echo -e $3 | sed 's/^/  /'`
+
+  cat > $SCRIPT_PATH <<- EOF
+#!/bin/bash
+
+$BODY
+
+if [ -z "\$NO_VERSION" ] ; then
+$SCPT
+fi;
+
+if [ -z "\$NO_SHELL" ] ;
+  then bash
+fi;
+EOF
+  chown $USER_STAT $SCRIPT_PATH
+  chmod +x $SCRIPT_PATH
 }
 
 yum_safe() {
