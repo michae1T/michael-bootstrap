@@ -21,5 +21,9 @@ chown -R $USER_STAT .
 cd $RUBY_PROJECTS/rubygems
 $RUBY_INSTALL_DIR/bin/ruby setup.rb
 
+write_env_script "$ENV_NAME" \
+  "export PATH=$RUBY_INSTALL_DIR/bin:\$PATH" \
+  "ruby -v\necho 'rubygems' \`gem -v\`"
+
 cd $START_DIR
 
