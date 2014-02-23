@@ -13,7 +13,7 @@ import java.util.Locale
 class ToggleHandler {
 
   val togglePath = new File("/tmp/toggles")
-  val chars = "0123456789abcdefghijzlmnopqrstuvwxyz".toSet
+  val chars = "0123456789abcdefghijzlmnopqrstuvwxyz-_".toSet
   
   @GET
   def toggle(@QueryParam("type") toggleType : String) = {

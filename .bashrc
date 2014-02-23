@@ -8,11 +8,7 @@ fi
 # User specific aliases and functions
 
 sreplace() {
-        perl -pi -e "s/$1/$2/g" `grep -Irs $1 * | awk -F: '{ print $1 }' | sort -r -u`
-}
-
-esreplace() {
-        perl -pi -e "s/$1/$2/g" `egrep -Irs $1 * | awk -F: '{ print $1 }' | sort -r -u`
+        perl -pi -e "s/$1/$2/g" `egrep -Irsl $1 *`
 }
 
 git-update-deleted() {
