@@ -19,7 +19,7 @@ SERVICE_PORTS=[
     7501, # product_service
    # 7601, # email_service
    # 7751, # shipping_service
-   # 7901, # invitation_service
+    7901, # invitation_service
    7801, # order_service
    # 8001, # admin_data_service
    # 8201, # discount_service

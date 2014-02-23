@@ -20,11 +20,11 @@ $GEM install rake --version=0.8.7 $GEM_OPTS
 
 ### ruby aes ###
 
-#wget http://aescrypt.sourceforge.net/aes-rb-0.1.0.tar.gz
-#tar -xvf aes-rb-0.1.0.tar.gz
-#cd aes-rb-0.1.0
-#/opt/ruby-1.8.7/bin/ruby extconf.rb && make && make install
-#cd .. && rm -rf aes-rb-0.1.0*
+wget http://aescrypt.sourceforge.net/aes-rb-0.1.0.tar.gz
+tar -xvf aes-rb-0.1.0.tar.gz
+cd aes-rb-0.1.0
+/opt/ruby-1.8.7/bin/ruby extconf.rb && make && make install
+cd .. && rm -rf aes-rb-0.1.0*
 
 ### libxml-ruby 1.1.3 needs to be patched for new versions of libxml2 ###
 

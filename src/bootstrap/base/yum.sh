@@ -17,7 +17,7 @@ yum_safe -y install git git-daemon \
                stunnel \
                tk* tcl* \
                wget curl lynx telnet nc bind-utils \
-               ack pcre \
+               ack fdupes pcre \
                gdbm-devel openssl* \
                openssh* \
                compat-libstd* compat-gcc* compat-readline* \
