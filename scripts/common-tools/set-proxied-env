@@ -1,0 +1,24 @@
+#!/bin/bash
+#NO_GITHUB
+
+PROXY_CONFIG="-DsocksProxyHost=localhost -DsocksProxyPort=12345"
+
+export HTTP_PROXY='http://localhost:8123'
+export http_proxy=$HTTP_PROXY
+export HTTPS_PROXY=$HTTP_PROXY
+export https_proxy=$HTTP_PROXY
+export NPM_CONFIG_STRICT_SSL=false 
+export NO_PROXY="127.0.0.1, localhost"
+export no_proxy="127.0.0.1, localhost"
+
+export ANT_OPTS=$PROXY_CONFIG
+export JAVA_OPTS=$PROXY_CONFIG
+export SBT_OPTS=$PROXY_CONFIG
+export SBT_JVM_ARGS=$PROXY_CONFIG
+
+echo "ANT/JAVA/shell proxy enabled"
+
+if [ -z "$NO_SHELL" ] ;
+  then bash
+fi;
+

@@ -1,0 +1,80 @@
+#/bin/bash
+
+# init
+
+LOAD_COMPLETION=1 source vault
+LOAD_COMPLETION=1 source notes
+LOAD_COMPLETION=1 source set-laptop-mode
+
+NO_SHELL=1 source set-env
+
+# functions
+
+sreplace() {
+        perl -pi -e "s/$1/$2/g" `egrep -Irsl $1 *`
+}
+export -f sreplace
+
+git-update-deleted() {
+        git status | grep deleted | perl -pe 's/\#\s+deleted:\s+/git rm /g' | bash
+}
+
+gack() {
+        ack --ignore-dir=vendor --ignore-dir=log \
+            --ignore-dir=share --ignore-dir=spec \
+            --ignore-dir=target --ignore-dir=test-output \
+            --ignore-dir=test --ignore-dir=classes \
+          "$@"
+}
+export -f gack
+
+fix-ws() {
+  sed -i 's/[[:space:]]*$//' $@
+}
+export -f fix-ws
+
+path-regex() {
+  echo "$@" | sed 's/\//\\\//g'
+}
+export -f path-regex
+
+chmox() {
+  chmod +x "$@"
+}
+export -f chmox
+
+chome() {
+  HOME_DIR=`pwd | grep -o '\/home/[^\/]*'`
+  if [ -z "$HOME_DIR" ] ; then echo "error: could not find user"; return; fi;
+
+  USER_STAT=`stat -c "%U:%G" $HOME_DIR`
+  chown $USER_STAT "$@"
+}
+export -f chome
+
+function compare-files() {
+  UNIQUE_LINES=`md5sum $@ | awk '{ print $1 }' | uniq | wc -l`
+  if [ "$UNIQUE_LINES" = "1" ] ; then echo "same"; else echo "diff"; fi;
+}
+export -f compare-files
+
+function create-script() {
+  if [ -e "$1" ] ; then echo "already exists"; return; fi;
+
+  echo "#!/bin/bash" > $1
+  chmox $1
+  echo "done!"
+}
+export -f create-script
+
+git() {
+  if [ "`whoami`" = "root" ] ; then echo "error: stop using git as root"; return; fi;
+  /usr/bin/git "$@"
+}
+export -f git
+
+# aliases
+
+alias vi=vim
+alias vu=vi
+

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+BASHDIR_REL_PATH=scripts/bash-defaults
+
+ORIGINAL_PATH=###ORIGINALPATH###
+COPIED_PATH=/opt/$BASHDIR_REL_PATH
+
+SHARED_BASH_REDIRECT=$COPIED_PATH/$1
+
+if [ "$1" = "link"  ] ; then
+  do_link() {
+    TYPE=$1
+    LOADER=$2
+
+    DOT_FILE="$HOME/.$TYPE"
+    INDICATOR="### $TYPE redirect ###"
+
+    if grep -q "$INDICATOR" $DOT_FILE ; then
+      echo "$DOT_FILE already linked"
+    else
+      echo "linking $DOT_FILE"
+      echo "" >> $DOT_FILE
+      echo "$INDICATOR" >> $DOT_FILE
+      echo "source $LOADER $TYPE" >> $DOT_FILE
+    fi;
+  }
+
+  for i in `ls $COPIED_PATH`  ; do
+    if [ -f "$COPIED_PATH/$i" ] ; then
+      do_link bashrc $0
+    fi;
+  done;
+
+  exit 0
+fi;
+
+if [ ! -e "$SHARED_BASH_REDIRECT" ] ; then
+  echo "note: $SHARED_BASH_REDIRECT not found, bootstrap bash_defaults"
+else
+  # if we can, see if any of the scripts need updating
+  if [ -r "$ORIGINAL_PATH" ] ; then
+    for i in `ls $ORIGINAL_PATH` ; do
+      if [ -f "$ORIGINAL_PATH/$i" ] ; then
+        if [ "`md5sum $ORIGINAL_PATH/$i $COPIED_PATH/$i  | awk '{ print $1 }' | uniq | wc -l`" != "1" ] ; then
+          echo "note: update to $i required, bootstrap bash_defaults"
+        fi;
+      fi;
+    done;
+  fi;
+
+  source $SHARED_BASH_REDIRECT
+fi;
+
+
