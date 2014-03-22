@@ -7,10 +7,10 @@ yum -y update
 yum -y groupinstall 'Development Tools'
 
 yum_safe -y install git git-daemon \
-               mongodb* postgresql postgresql-server \
+               mongodb* postgresql postgresql-server postgresql-contrib \
                java-1.7*openjdk* scala maven \
                maven maven-ant-plugin ant apache-ivy \
-               ruby \
+               ruby nginx thttpd \
                puppet* rabbitmq* \
                perl-JSON perl-Module-Load \
                ImageMagick-perl ImageMagick-devel \
@@ -34,6 +34,7 @@ yum_safe -y install git git-daemon \
                openvpn* \
                nfs-utils \
                ntfs-3g ntfsprogs \
+               kernel-devel* \
                libusb-devel libusb-static systemd-devel libical-devel
 
 yum clean all

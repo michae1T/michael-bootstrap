@@ -4,6 +4,8 @@ START_DIR=`pwd`
 
 cd `dirname $0`
 OWNER_DIR=`pwd`
+cd $OWNER_DIR/../..
+REPO_DIR=`pwd`
 
 cd $OWNER_DIR/../shared
 SHARED=`pwd`
@@ -13,13 +15,13 @@ USER_STAT=`stat -c "%U:%G" $OWNER_DIR`
 USER_OWNER=`stat -c "%U" $OWNER_DIR`
 
 RUBY_PROJECTS=$USER_HOME/src/ruby
-RUBY_PATCH_DIR=$RUBY_PROJECTS/patches
+RUBY_PATCH_DIR=$REPO_DIR/ruby/patches
 
-cd $OWNER_DIR/../..
-REPO_DIR=`pwd`
 SCRIPTS_DIR=$REPO_DIR/scripts
 
 SYS_SUDO_DIR=/opt/scripts/sys_sudo
+
+unset -f git
 
 cd $START_DIR
 
@@ -123,6 +125,12 @@ error() {
   if [ -z "$2" ] ;
     then exit 1
     else exit $2
+  fi;
+}
+
+require_root() {
+  if [ `id -u` != "0" ] ;
+    then error "root required!"
   fi;
 }
 

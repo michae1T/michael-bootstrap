@@ -2,13 +2,15 @@
 
 source `dirname $0`/../_environment.sh
 
+yum_safe -y install install selinux-policy-devel
+
 echo "configuring postgres"
 
 export PGHOME=/home/postgres
 export PGDATA=$PGHOME/data
 PGHOME_R=`path_regex $PGHOME`
 PGDATA_R=`path_regex $PGDATA`
-PHGHOME_ORIGINAL_R=`path_regex /var/lib/pgsql`
+PGHOME_ORIGINAL_R=`path_regex /var/lib/pgsql`
 
 if [ -d "$PGHOME" ] ; then
   systemctl stop postgresql.service

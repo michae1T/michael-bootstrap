@@ -13,7 +13,7 @@ if [ -z "$SHARE_NAME" ] ; then
   exit 1
 fi;
 
-yum -y install ffmpeg* libvorbis* libogg* libid3tag* libexif* flac*
+yum_safe -y install ffmpeg* libvorbis* libogg* libid3tag* libexif* flac*
 
 checkout_repo "$USER_HOME/src" "minidlna-git" \
               "git://git.code.sf.net/p/minidlna/git minidlna-git" \

@@ -2,8 +2,9 @@
 
 source `dirname $0`/../_environment.sh
 
-if [ -z "$PREFIX" ] ;
-  then PREFIX=/opt/bin
+if [ -z "$PREFIX" ] ; then
+  require_root
+  PREFIX=/opt/bin
 fi;
 
 rm -rf $PREFIX

@@ -14,6 +14,7 @@ export no_proxy="127.0.0.1, localhost"
 export ANT_OPTS=$PROXY_CONFIG
 export JAVA_OPTS=$PROXY_CONFIG
 export SBT_OPTS=$PROXY_CONFIG
+export SBT_JVM_ARGS=$PROXY_CONFIG
 
 echo "ANT/JAVA/shell proxy enabled"
 

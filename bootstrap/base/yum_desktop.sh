@@ -20,7 +20,7 @@ yum_safe -y install firefox thunderbird \
                avahi-tools cups* \
                gimp* inkscape* \
                paprefs pavucontrol pavumeter \
-               xbmc* \ 
+               xbmc* \
                --exclude=gimp-help*
 
 yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
@@ -29,6 +29,7 @@ yum -y update
 
 yum_safe -y install gstreamer rhythmbox \
                gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly \
+               gstreamer1-plugins-ugly gstreamer1-plugins-good \
                libdvdread libdvdnav lsdvd vlc* \
                kaffeine xine xine-lib xine-lib-extras-freeworld unrar ffmpeg
 
