@@ -2,11 +2,11 @@
 
 # init
 
-LOAD_COMPLETION=1 source vault
-LOAD_COMPLETION=1 source notes
-LOAD_COMPLETION=1 source set-laptop-mode
+LOAD_COMPLETION=1 source /opt/bin/vault
+LOAD_COMPLETION=1 source /opt/bin/notes
+LOAD_COMPLETION=1 source /opt/bin/set-laptop-mode
 
-NO_SHELL=1 source set-env
+NO_SHELL=1 source /opt/bin/set-env
 
 # functions
 
