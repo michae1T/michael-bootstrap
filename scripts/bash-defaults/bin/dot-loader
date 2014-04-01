@@ -2,6 +2,8 @@
 
 BASHDIR_REL_PATH=scripts/bash-defaults
 
+export REPO_PATH=###REPOPATH###
+
 ORIGINAL_PATH=###ORIGINALPATH###
 COPIED_PATH=/opt/$BASHDIR_REL_PATH
 

@@ -10,17 +10,27 @@ NO_SHELL=1 source /opt/bin/set-env
 
 # functions
 
+f() {
+  find -name "$@"
+}
+export -f f
+
+bootstrap() {
+  cd $REPO_PATH/bootstrap
+}
+export -f bootstrap
+
 sreplace() {
-        perl -pi -e "s/$1/$2/g" `egrep -Irsl $1 *`
+  perl -pi -e "s/$1/$2/g" `egrep -Irsl $1 *`
 }
 export -f sreplace
 
 git-update-deleted() {
-        git status | grep deleted | perl -pe 's/\#\s+deleted:\s+/git rm /g' | bash
+  git status | grep deleted | perl -pe 's/\#\s+deleted:\s+/git rm /g' | bash
 }
 
 gack() {
-        ack --ignore-dir=vendor --ignore-dir=log \
+     ack    --ignore-dir=vendor --ignore-dir=log \
             --ignore-dir=share --ignore-dir=spec \
             --ignore-dir=target --ignore-dir=test-output \
             --ignore-dir=test --ignore-dir=classes \
