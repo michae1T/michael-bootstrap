@@ -15,6 +15,9 @@ cp -r $OWNER_BASH_DIR $SHARED_BASH_DIR
 OWNER_SUB="`path_regex $OWNER_BASH_DIR` # written `date`"
 sed -i "s/###ORIGINALPATH###/$OWNER_SUB/" $SHARED_LOADER
 
+REPO_SUB="`path_regex $REPO_DIR` # written `date`"
+sed -i "s/###REPOPATH###/$REPO_SUB/" $SHARED_LOADER
+
 su - $USER_OWNER -c "$SHARED_LOADER link"
 
 

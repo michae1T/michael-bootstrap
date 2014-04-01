@@ -1,0 +1,21 @@
+<kpartgui version="1" name="konsole">
+  <ActionProperties>
+    <Action shortcut="Ctrl+Shift+W; Meta+W" name="close-session"/>
+    <Action shortcut="Ctrl+Shift+C; Meta+C" name="edit_copy"/>
+    <Action shortcut="Ctrl+Shift+V; Meta+V" name="edit_paste"/>
+    <Action shortcut="Ctrl+Shift+Ins" name="paste-selection"/>
+    <Action shortcut="Ctrl+Shift+P" name="file_print"/>
+    <Action shortcut="Ctrl+Shift+K; Meta+K" name="clear-history-and-reset"/>
+    <Action shortcut="Ctrl+Shift+F" name="edit_find"/>
+    <Action shortcut="F3" name="edit_find_next"/>
+    <Action shortcut="Shift+F3" name="edit_find_prev"/>
+    <Action shortcut="Ctrl+Alt+S" name="rename-session"/>
+    <Action shortcut="Ctrl+Shift+." name="copy-input-to-selected-tabs"/>
+    <Action shortcut="Ctrl+Shift+/" name="copy-input-to-none"/>
+    <Action shortcut="Ctrl+Alt+U" name="zmodem-upload"/>
+    <Action shortcut="Ctrl+Shift+A" name="monitor-activity"/>
+    <Action shortcut="Ctrl+Shift+I" name="monitor-silence"/>
+    <Action shortcut="Ctrl++; Ctrl+=" name="enlarge-font"/>
+    <Action shortcut="Ctrl+-" name="shrink-font"/>
+  </ActionProperties>
+</kpartgui>

@@ -29,7 +29,7 @@ yum_safe -y install git git-daemon \
                libpng-* libpng12 pangox-compat \
                fuse-encfs \
                tmux screen vim-enhanced \
-               ddclient nodejs \
+               ddclient nodejs npm \
                cronie \
                openvpn* \
                nfs-utils \
