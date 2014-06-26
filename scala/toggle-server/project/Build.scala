@@ -5,9 +5,9 @@ import AssemblyKeys._
 
 object ToggleServer extends Build { 
   lazy val buildSettings = Seq(
-    version := "0.1-SNAPSHOT",
+    version := "0.2",
     organization := "com.michaelt",
-    scalaVersion := "2.10.3"
+    scalaVersion := "2.11.1"
   )
 
   val app = (project in file("service")).

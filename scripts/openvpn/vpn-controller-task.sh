@@ -11,7 +11,8 @@ echo "service name: $SERVICE_NAME"
 echo "toggle path: $TOGGLE_PATH"
 
 if [[ `systemctl is-active $SERVICE_NAME 2>&1` == 'active' ]];
-  then IS_ACTIVE=1
+  then IS_ACTIVE=1; CUR_STATE=1;
+  else CUR_STATE=0;
 fi;
 
 if [ -n "$IS_ACTIVE" ] ; then
@@ -44,9 +45,15 @@ if [ -n "$DNS_NEXT" ] ; then
   fi;
 fi;
 
-if [ -e $TOGGLE_PATH ] ; then
+# if the toggle hasn't been set assume we want the vpn on
+if [ ! -e "$TOGGLE_PATH" ] || [[ "`cat $TOGGLE_PATH`" == "on" ]];  
+  then DESIRED_STATE=1 
+  else DESIRED_STATE=0
+fi;
+
+
+if [[ "$CUR_STATE" != "$DESIRED_STATE" ]] ; then
   echo "toggle requested"
-  rm $TOGGLE_PATH
   if [ -z "$IS_ACTIVE" ] ; 
     then systemctl restart $SERVICE_NAME; echo "...vpn started";
     else systemctl stop $SERVICE_NAME; echo "...vpn stopped";
