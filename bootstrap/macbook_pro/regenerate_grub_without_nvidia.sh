@@ -1,6 +1,7 @@
 #!/bin/bash
 
 LINUX_GRUB_CONFIG=/etc/grub.d/10_linux
+BAK_LINUX_GRUB_CONFIG=/etc/grub.d/11_linux
 GRUB_IMPORT_CONFIG=/etc/default/grub
 
 OUT_B='[[[outb 0x728 1]]][[[outb 0x710 2]]][[[outb 0x740 2]]][[[outb 0x750 0]]]'
@@ -11,6 +12,12 @@ CUSTOM_PARAMS_CHECK='radeon.modeset=0'
 
 GRUB_IMPORT='GRUB_PRELOAD_MODULES="iorw"'
 GRUB_IMPORT_CHECK=iorw
+
+if [ -n "$BAK_LINUX_GRUB_CONFIG" ] ; then
+  echo "creating backup config"
+  cp $LINUX_GRUB_CONFIG $BAK_LINUX_GRUB_CONFIG
+  sed -i 's/with Linux/with backup Linux/g' $BAK_LINUX_GRUB_CONFIG
+fi;
 
 if [ -z "`ls /boot/efi/EFI/fedora/x86_64-efi 2>&1 | grep iorw`" ] ; then
   echo "updating boot modules"

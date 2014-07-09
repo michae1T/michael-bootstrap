@@ -2,8 +2,8 @@
 
 source `dirname $0`/../_environment.sh
 
-SBT_VER=0.13.0
-SCALA_VER=2.10.3
+SBT_VER=0.13.5
+SCALA_VER=2.11.1
 
 wget "http://repo.scala-sbt.org/scalasbt/sbt-native-packages/org/scala-sbt/sbt/$SBT_VER/sbt.zip"
 unzip -o sbt.zip

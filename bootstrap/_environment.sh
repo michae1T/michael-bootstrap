@@ -16,6 +16,7 @@ USER_OWNER=`stat -c "%U" $OWNER_DIR`
 
 RUBY_PROJECTS=$USER_HOME/src/ruby
 RUBY_PATCH_DIR=$REPO_DIR/ruby/patches
+DEFAULT_CONFIG_DIR=$USER_HOME/src/$USER_OWNER-configs
 
 SCRIPTS_DIR=$REPO_DIR/scripts
 
@@ -128,6 +129,11 @@ error() {
   fi;
 }
 
+example() {
+  echo "example: $1"
+  exit 1
+}
+
 require_root() {
   if [ `id -u` != "0" ] ;
     then error "root required!"
@@ -136,6 +142,27 @@ require_root() {
 
 path_regex() {
   echo "$@" | sed 's/\//\\\//g'
+}
+
+add_to_hosts() {
+  HOSTS=$1
+  NEW_HOST=$2
+  if [ -z "$NEW_HOST" ] ; then 
+    HOSTS=/etc/hosts
+    NEW_HOST=$1
+  fi;
+  HOST_NAME=`echo "$NEW_HOST" | awk '{print $2}'`
+
+  if [ -z "$HOST_NAME"] ; then
+    echo "" >> $HOSTS
+  else
+    if grep -q $HOST_NAME $HOSTS ; then
+      echo "ignoring $HOST_NAME for hosts"
+    else
+      echo "inserting $HOST_NAME into hosts"
+      echo $NEW_HOST >> $HOSTS
+    fi;
+  fi;
 }
 
 update_config() {

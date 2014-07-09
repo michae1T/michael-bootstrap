@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ETH_IP=192.168.3.7
+ETH_IP=192.168.33.1
 
 cat > /etc/sysconfig/network-scripts/ifcfg-eth0 <<EOF
 TYPE=Ethernet

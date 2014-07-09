@@ -27,8 +27,8 @@ function setState(toggle, data) {
   $.ajax({'url':'/toggle/'+toggle, 'data' : data, 'type' : 'PUT'});
 }
 
-function updateState($contents, $toggle) {
-  getState("vpn", function (data) {
+function updateState(toggle, $contents, $toggle) {
+  getState(toggle, function (data) {
     $contents.text(data)
     if (data == 'on') {
       $toggle.text('off');
@@ -73,12 +73,13 @@ $(document).ready(function () {
   var $contents = $('#vpn-contents');
   var $toggle = $('#vpn-toggle');
   var $ip = $('#ip-addr');
+  var toggle = 'vpn-pi'
 
-  updateState($contents, $toggle);
+  updateState(toggle, $contents, $toggle);
 
   $toggle.click(function (d) {
-    setState("vpn", $toggle.text());
-    updateState($contents, $toggle);
+    setState(toggle, $toggle.text());
+    updateState(toggle, $contents, $toggle);
   });
 
   window.setInterval(function () {

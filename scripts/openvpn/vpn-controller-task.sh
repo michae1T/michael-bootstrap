@@ -17,7 +17,7 @@ fi;
 
 if [ -n "$IS_ACTIVE" ] ; then
   echo "vpn is up, checking if we need to restart..."
-  if [ -z "`nc -w 500ms -i 500ms 10.8.0.1 22 2>&1 | grep SSH`" ] ; then
+  if [ -z "`nc -w 5000ms -i 5000ms 10.8.0.1 22 2>&1 | grep SSH`" ] ; then
     systemctl restart $SERVICE_NAME
     echo "...restarted"
   else 
