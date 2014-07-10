@@ -144,23 +144,37 @@ path_regex() {
   echo "$@" | sed 's/\//\\\//g'
 }
 
+add_all_to_hosts() {
+  HOSTS=$1
+  NEW_HOST_FILE=$2
+  if [ -z "$NEW_HOST" ] ; then 
+    HOSTS="/etc/hosts"
+    NEW_HOST_FILE=$1
+  fi;
+
+  while read ENTRY
+  do
+    add_to_hosts "$HOSTS" "$ENTRY"
+  done < $NEW_HOST_FILE
+}
+
 add_to_hosts() {
   HOSTS=$1
   NEW_HOST=$2
   if [ -z "$NEW_HOST" ] ; then 
-    HOSTS=/etc/hosts
+    HOSTS="/etc/hosts"
     NEW_HOST=$1
   fi;
   HOST_NAME=`echo "$NEW_HOST" | awk '{print $2}'`
 
-  if [ -z "$HOST_NAME"] ; then
+  if [ -z "$HOST_NAME" ] ; then
     echo "" >> $HOSTS
   else
     if grep -q $HOST_NAME $HOSTS ; then
       echo "ignoring $HOST_NAME for hosts"
     else
       echo "inserting $HOST_NAME into hosts"
-      echo $NEW_HOST >> $HOSTS
+      echo "$NEW_HOST" >> $HOSTS
     fi;
   fi;
 }

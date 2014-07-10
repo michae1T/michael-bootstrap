@@ -24,12 +24,16 @@ rm -rf /etc/dnsmasq.d.bak
 mv -Tf /etc/dnsmasq.d /etc/dnsmasq.d.bak
 mkdir -p /etc/dnsmasq.d
 
+add_all_to_hosts $SERVER_CONFIG_SOURCE_DIR/hosts
+
 POSSIBLE_CONFIG_OVERRIDES=$SERVER_CONFIG_SOURCE_DIR/dnsmasq.d/$SERVER_CONFIG_NAME.conf
 if [ -e "$POSSIBLE_CONFIG_OVERRIDES" ] ; then
     cp $POSSIBLE_CONFIG_OVERRIDES /etc/dnsmasq.d/
   else
     echo "warning: could not find $POSSIBLE_CONFIG_OVERRIDES"
 fi;
+
+
 
 systemctl enable dnsmasq.service
 systemctl restart dnsmasq.service
