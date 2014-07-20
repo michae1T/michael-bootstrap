@@ -32,7 +32,7 @@ mkdir -p $SERVER_PATH/keys
 
 cp -af $KEYS_PATH/$OPENVPN_USER.key $KEYS_PATH/$OPENVPN_USER.crt $KEYS_PATH/ca.crt $SERVER_PATH/keys
 
-DOC_DIR=`cd /usr/share/doc/openvpn-* 2> /dev/null && pwd`
+DOC_DIR=`cd /usr/share/doc/openvpn 2> /dev/null && pwd`
 if [ -e "$DOC_DIR/sample/sample-config-files/client.conf" ] ; then
   SAMPLE_CONF=$DOC_DIR/sample/sample-config-files/client.conf
 else
@@ -55,9 +55,10 @@ update_config "user" "nobody" $CONFIG_PATH
 update_config "group" "nobody" $CONFIG_PATH
 
 # set keys
-update_config "ca" 'keys\/ca.crt' $CONFIG_PATH
-update_config "cert" `regex_path keys/$OPENVPN_USER.crt` $CONFIG_PATH
-update_config "key" `regex_path keys/$OPENVPN_USER.key` $CONFIG_PATH
+update_config "ca" 'keys/ca.crt' $CONFIG_PATH
+
+update_config "cert" "keys/$OPENVPN_USER.crt" $CONFIG_PATH
+update_config "key" "keys/$OPENVPN_USER.key" $CONFIG_PATH
 
 chmod 600 $SERVER_PATH/keys/*
 chown root:root $SERVER_PATH/keys/*
