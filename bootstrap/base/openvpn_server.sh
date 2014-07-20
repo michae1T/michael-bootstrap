@@ -24,7 +24,7 @@ cp -a /usr/share/doc/openvpn/sample/sample-config-files/roadwarrior-server.conf 
 sed -i 's/^ca\s.*/ca keys\/ca.crt/' $CONFIG_PATH
 sed -i 's/^cert\s.*/cert keys\/localhost.crt/' $CONFIG_PATH
 sed -i 's/^key\s.*/key keys\/localhost.key/' $CONFIG_PATH
-sed -i 's/^dh\s.*/dh keys\/dh1024.pem/' $CONFIG_PATH
+sed -i 's/^dh\s.*/dh keys\/dh2048.pem/' $CONFIG_PATH
 sed -i 's/^push "route 192.168.0.0/# push "route 192.168.0.0/' $CONFIG_PATH
 sed -i 's/^push "dhcp-option/# push "dhcp-option/g' $CONFIG_PATH
 
