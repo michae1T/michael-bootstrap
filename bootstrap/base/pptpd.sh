@@ -10,7 +10,7 @@ echo "localip 192.168.42.1" >> /etc/pptpd.conf
 echo "remoteip 192.168.42.3-100" >> /etc/pptpd.conf
 echo "" >> /etc/pptpd.conf
 
-echo "ms-dns 172.16.0.23" >> /etc/ppp/options.pptpd
+echo "ms-dns 8.8.8.8" >> /etc/ppp/options.pptpd
 
 systemctl enable pptpd.service
 systemctl restart pptpd.service 
