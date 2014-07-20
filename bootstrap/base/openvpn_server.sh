@@ -19,7 +19,7 @@ CONFIG_PATH=$SERVER_PATH/server.conf
 
 mkdir -p $SERVER_PATH/keys/
 cp -a $KEYS_PATH/$SERVER_NAME.{crt,key} $KEYS_PATH/ca.crt $KEYS_PATH/dh*.pem $SERVER_PATH/keys/
-cp -a /usr/share/doc/openvpn-*/sample/sample-config-files/roadwarrior-server.conf $CONFIG_PATH
+cp -a /usr/share/doc/openvpn/sample/sample-config-files/roadwarrior-server.conf $CONFIG_PATH
 
 sed -i 's/^ca\s.*/ca keys\/ca.crt/' $CONFIG_PATH
 sed -i 's/^cert\s.*/cert keys\/localhost.crt/' $CONFIG_PATH
