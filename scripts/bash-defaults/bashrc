@@ -25,10 +25,6 @@ sreplace() {
 }
 export -f sreplace
 
-git-update-deleted() {
-  git status | grep deleted | perl -pe 's/\#\s+deleted:\s+/git rm /g' | bash
-}
-
 gack() {
      ack    --ignore-dir=vendor --ignore-dir=log \
             --ignore-dir=share --ignore-dir=spec \
@@ -38,15 +34,15 @@ gack() {
 }
 export -f gack
 
-fix-ws() {
+fixws() {
   sed -i 's/[[:space:]]*$//' $@
 }
-export -f fix-ws
+export -f fixws
 
-path-regex() {
+path_regex() {
   echo "$@" | sed 's/\//\\\//g'
 }
-export -f path-regex
+export -f path_regex
 
 chmox() {
   chmod +x "$@"
@@ -62,20 +58,20 @@ chome() {
 }
 export -f chome
 
-function compare-files() {
+function compare_files() {
   UNIQUE_LINES=`md5sum $@ | awk '{ print $1 }' | uniq | wc -l`
   if [ "$UNIQUE_LINES" = "1" ] ; then echo "same"; else echo "diff"; fi;
 }
-export -f compare-files
+export -f compare_files
 
-function create-script() {
+function create_script() {
   if [ -e "$1" ] ; then echo "already exists"; return; fi;
 
   echo "#!/bin/bash" > $1
   chmox $1
   echo "done!"
 }
-export -f create-script
+export -f create_script
 
 git() {
   if [ "`whoami`" = "root" ] ; then echo "error: stop using git as root"; return; fi;

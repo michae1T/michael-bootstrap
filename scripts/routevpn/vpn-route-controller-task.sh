@@ -5,21 +5,24 @@ if [ -z "$TOGGLE_PATH" ] ; then
   exit 1
 fi;
 
+ROUTE=/usr/sbin/route
+
 do-start() {
-  route del -net default dev $DEVICE
-  route add -net default gw $VPN_GATEWAY_IP dev $DEVICE
+  $ROUTE del -net default dev $DEVICE
+  sleep 5
+  $ROUTE add -net default gw $VPN_GATEWAY_IP dev $DEVICE
 }
 
 do-stop() {
-  route del -net default dev $DEVICE
-  route add -net default gw $REG_GATEWAY_IP dev $DEVICE
+  $ROUTE del -net default dev $DEVICE
+  sleep 5
+  $ROUTE add -net default gw $REG_GATEWAY_IP dev $DEVICE
 }
 
 echo `date`
-echo "service name: $SERVICE_NAME"
 echo "toggle path: $TOGGLE_PATH"
 
-if [ -n "`route | grep 'default' | grep $VPN_GATEWAY_IP`" ]
+if [ -n "`$ROUTE -n | grep '0.0.0.0' | grep $VPN_GATEWAY_IP`" ] ;
   then IS_ACTIVE=1; CUR_STATE=1;
   else CUR_STATE=0;
 fi;
