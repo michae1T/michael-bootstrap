@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# http://stackoverflow.com/questions/277546/can-i-use-git-to-search-for-matching-filenames-in-a-repository
+
+# I'm using a fixed string here, not a regular expression, but you can easily
+# use a regular expression by altering the call to grep below.
+name="$1"
+
+# Verify usage.
+if [[ -z "$name" ]]
+then
+    echo "Usage: $(basename "$0") <file name>" 1>&2
+    exit 100
+fi  
+
+# Search all revisions; get unique results.
+while IFS= read rev
+do
+    # Find $name in $rev's tree and only use its path.
+    grep -F -- "$name" \
+        <(git ls-tree --full-tree -r "$rev" | awk '{ print $4 }')
+done < \
+    <(git rev-list --all) \
+    | sort -u
+
