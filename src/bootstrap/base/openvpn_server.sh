@@ -1,6 +1,6 @@
 #/bin/bash
 
-SERVER_NAME=`hostname | cut -d. -f1a`
+SERVER_NAME=localhost
 
 if [ -z "$KEYS_PATH" ] ;
   then KEYS_PATH=/root/easy-rsa/keys
@@ -12,8 +12,9 @@ fi;
 
 CONFIG_PATH=$SERVER_PATH/server.conf
 
-yum install openvpn easy-rsa
+yum install openvpn 
 
+mkdir -p $SERVER_PATH/keys/
 cp -a $KEYS_PATH/$SERVER_NAME.{crt,key} $KEYS_PATH/ca.crt $KEYS_PATH/dh*.pem $SERVER_PATH/keys/
 cp -a /usr/share/doc/openvpn-*/sample/sample-config-files/roadwarrior-server.conf $CONFIG_PATH
 
