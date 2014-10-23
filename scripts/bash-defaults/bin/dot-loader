@@ -29,7 +29,7 @@ if [ "$1" = "link"  ] ; then
 
   for i in `ls $COPIED_PATH`  ; do
     if [ -f "$COPIED_PATH/$i" ] ; then
-      do_link bashrc $0
+      do_link $i $0
     fi;
   done;
 
