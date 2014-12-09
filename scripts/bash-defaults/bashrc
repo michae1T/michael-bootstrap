@@ -83,4 +83,5 @@ export -f git
 
 alias vi=vim
 alias vu=vi
+alias scala='scala -Dscala.color'
 
