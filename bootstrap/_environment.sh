@@ -4,15 +4,21 @@ START_DIR=`pwd`
 
 cd `dirname $0`
 OWNER_DIR=`pwd`
-cd $OWNER_DIR/../..
-REPO_DIR=`pwd`
 
-cd $OWNER_DIR/../shared
-SHARED=`pwd`
+if [ -z "$REPO_PATH" ] ; then
+  cd $OWNER_DIR/../..
+  REPO_DIR=`pwd`
+  cd $OWNER_DIR/../shared
+  SHARED=`pwd`
+else
+  REPO_DIR=$REPO_PATH
+  SHARED=$REPO_PATH/bootstrap/shared
+fi;
+
 
 USER_HOME=`pwd | grep -o '\/home/[^\/]*'`
-USER_STAT=`stat -c "%U:%G" $OWNER_DIR`
-USER_OWNER=`stat -c "%U" $OWNER_DIR`
+USER_STAT=`stat -c "%U:%G" $REPO_DIR`
+USER_OWNER=`stat -c "%U" $REPO_DIR`
 
 RUBY_PROJECTS=$USER_HOME/src/ruby
 RUBY_PATCH_DIR=$REPO_DIR/patches/ruby

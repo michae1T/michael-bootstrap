@@ -15,7 +15,6 @@ yum_safe -y install git git-daemon \
                perl-JSON perl-Module-Load \
                ImageMagick-perl ImageMagick-devel \
                stunnel \
-               tk* tcl* \
                wget curl lynx telnet nc bind-utils \
                ack fdupes pcre \
                gdbm-devel openssl* \
@@ -23,6 +22,7 @@ yum_safe -y install git git-daemon \
                compat-libstd* compat-gcc* compat-readline* \
                snakeyaml libyaml* perl-YAML* \
                patch readline* \
+               autoconf byacc \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
