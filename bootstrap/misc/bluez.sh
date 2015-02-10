@@ -19,7 +19,7 @@ autoreconf --install
             --enable-hidd \
             --enable-pand \
             --enable-tools \
-            --enable-wiimote
+            --disable-wiimote
 
 make && make install
 chown -R $USER_STAT .

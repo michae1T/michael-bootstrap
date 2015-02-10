@@ -1,0 +1,4 @@
+#!/bin/bash
+
+VER_TO_USE=1.8 source `dirname $0`/set-java-env
+

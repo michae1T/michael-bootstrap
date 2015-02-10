@@ -8,7 +8,7 @@ yum -y groupinstall 'Development Tools'
 
 yum_safe -y install git git-daemon \
                mongodb* postgresql postgresql-server postgresql-contrib \
-               java-1.7*openjdk* scala maven \
+               java-1.8*openjdk* scala maven \
                maven maven-ant-plugin ant apache-ivy \
                ruby nginx thttpd \
                puppet* rabbitmq* \
@@ -22,7 +22,7 @@ yum_safe -y install git git-daemon \
                compat-libstd* compat-gcc* compat-readline* \
                snakeyaml libyaml* perl-YAML* \
                patch readline* \
-               autoconf byacc \
+               autoconf byacc bison \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
@@ -37,6 +37,6 @@ yum_safe -y install git git-daemon \
                kernel-devel* \
                libusb-devel libusb-static systemd-devel libical-devel
 
-yum clean all
+yum_safe clean all
 
 

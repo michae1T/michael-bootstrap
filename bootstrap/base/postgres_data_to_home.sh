@@ -35,8 +35,8 @@ sed -i "s/^Environment=PGDATA=.*/Environment=PGDATA=$PGDATA_R/" /usr/lib/systemd
 systemctl --system daemon-reload
 
 if [ -z "$EXISTING_DB" ] ; then
-  su - postgres -c "PGDATA=$PGDATA postgresql-setup initdb" \
-   || su - postgres -c "PGDATA=$PGDATA initdb"
+  PGDATA=$PGDATA postgresql-setup initdb \
+   || PGDATA=$PGDATA initdb
 fi;
 
 ######### SELINUX ###########

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -n "$1" ] ; then VER_TO_FIND=$1; fi;
+
+JAVADIR=`(cd $HOME/opt/jdk$VER_TO_FIND* 2> /dev/null && pwd) || (cd /opt/jdk$VER_TO_FIND* 2> /dev/null && pwd)`
+
+if [ -n "$JAVADIR" ] ; then
+  export JAVA_HOME="$JAVADIR"
+  export PATH="$JAVADIR/bin:$PATH"    
+else
+  echo "could not find java $VER_TO_FIND"; exit 1;
+fi;
+
+if [ -z "$NO_VERSION" ] ; then
+  VER=`javac -version 2>&1 | sed 's/\n//g'`
+  echo "$VER at $JAVADIR"
+fi;
+
+if [ -z "$NO_SHELL" ] ; 
+ then bash
+fi;
+

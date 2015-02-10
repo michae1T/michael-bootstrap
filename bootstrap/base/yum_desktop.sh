@@ -3,7 +3,8 @@
 source `dirname $0`/../_environment.sh
 
 yum_safe -y install firefox thunderbird \
-               gitk pgadmin* \
+               gitk  \
+               okular \
                libreoffice-base libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
                libreoffice-writer* libreoffice-pres* libreoffice-open* \
@@ -23,9 +24,9 @@ yum_safe -y install firefox thunderbird \
                xbmc* \
                --exclude=gimp-help*
 
-yum -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
+yum_safe -y localinstall --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
 
-yum -y update
+yum_safe -y update
 
 yum_safe -y install gstreamer rhythmbox \
                gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly \
@@ -35,7 +36,7 @@ yum_safe -y install gstreamer rhythmbox \
 
 rpm -ivh 'http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm'
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
-yum install flash-plugin
+yum_safe -y install flash-plugin
 
-yum clean all
+yum_safe clean all
 

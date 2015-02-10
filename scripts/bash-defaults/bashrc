@@ -30,6 +30,7 @@ gack() {
             --ignore-dir=share --ignore-dir=spec \
             --ignore-dir=target --ignore-dir=test-output \
             --ignore-dir=test --ignore-dir=classes \
+            --ignore-file=is:.cache --ignore-file=is:.project \
           "$@"
 }
 export -f gack
@@ -38,6 +39,19 @@ fixws() {
   sed -i 's/[[:space:]]*$//' $@
 }
 export -f fixws
+
+fixwsgit() {
+  if [ -n "$2" ] ; then
+    EXTS=$2
+  else
+    EXTS='scala|java|sh|c|cpp|h|hpp|sbt'
+  fi;
+
+  for GITFILE in $(git show --name-only --format=oneline $1 | tail -n+2 | egrep ".*\.($EXTS)") ; do
+    fixws $GITFILE
+  done;
+}
+export -f fixwsgit
 
 path_regex() {
   echo "$@" | sed 's/\//\\\//g'
