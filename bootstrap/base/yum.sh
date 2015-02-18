@@ -21,7 +21,7 @@ yum_safe -y install git git-daemon \
                openssh* \
                compat-libstd* compat-gcc* compat-readline* \
                snakeyaml libyaml* perl-YAML* \
-               patch readline* \
+               patch readline* jq \
                autoconf byacc bison \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \

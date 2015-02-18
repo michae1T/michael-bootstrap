@@ -1,4 +1,3 @@
 #!/bin/bash
 
 firefox -P proxy -new-instance &
-ssh -N -D localhost:12345 $1
