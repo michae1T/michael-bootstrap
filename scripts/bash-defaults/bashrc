@@ -48,7 +48,7 @@ fixwsgit() {
   fi;
 
   for GITFILE in $(git show --name-only --format=oneline $1 | tail -n+2 | egrep ".*\.($EXTS)") ; do
-    fixws $GITFILE
+    if [ -e "$GITFILE" ] ; then fixws $GITFILE; fi;
   done;
 }
 export -f fixwsgit
@@ -92,6 +92,16 @@ git() {
   /usr/bin/git "$@"
 }
 export -f git
+
+untagged_images() {
+  docker images | tail -n +2 | awk '$1 == "<none>" {print $3}';
+}
+export -f untagged_images
+
+rm_untagged_images() {
+  untagged_images | xargs --no-run-if-empty docker rmi $@
+}
+export -f rm_untagged_images
 
 # aliases
 

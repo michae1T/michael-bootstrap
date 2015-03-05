@@ -2,21 +2,23 @@
 
 source `dirname $0`/../_environment.sh
 
-yum -y update
+yum_safe update
 
-yum -y groupinstall 'Development Tools'
+yum_safe groupinstall 'Development Tools'
 
-yum_safe -y install git git-daemon \
+yum_safe install git git-daemon \
                mongodb* postgresql postgresql-server postgresql-contrib \
                java-1.8*openjdk* scala maven \
                maven maven-ant-plugin ant apache-ivy \
+               docker-io docker-io-vim docker-io-devel \
                ruby nginx thttpd \
-               puppet* rabbitmq* \
                perl-JSON perl-Module-Load \
                ImageMagick-perl ImageMagick-devel \
+               python3 python3-pip \
                stunnel \
                wget curl lynx telnet nc bind-utils \
                ack fdupes pcre \
+               tar gzip zip unzip \
                gdbm-devel openssl* \
                openssh* \
                compat-libstd* compat-gcc* compat-readline* \
@@ -29,7 +31,7 @@ yum_safe -y install git git-daemon \
                libpng-* libpng12 pangox-compat \
                fuse-encfs \
                tmux screen vim-enhanced \
-               ddclient nodejs npm \
+               nodejs npm \
                cronie \
                openvpn* \
                nfs-utils \

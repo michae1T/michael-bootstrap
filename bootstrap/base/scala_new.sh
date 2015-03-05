@@ -5,9 +5,9 @@ source `dirname $0`/../_environment.sh
 SBT_VER=0.13.7
 SCALA_VER=2.11.5
 
-wget "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VER/sbt-$SBT_VER.zip"
-unzip -o sbt-$SBT_VER.zip
-rm sbt-$SBT_VER.zip
+curl 'https://dl.bintray.com/sbt/native-packages/sbt/0.13.7/sbt-0.13.7.zip' -L > sbt-${SBT_VER}.zip
+unzip -o sbt-${SBT_VER}.zip
+rm sbt-${SBT_VER}.zip
 rm -rf /opt/sbt-$SBT_VER
 mv sbt /opt/sbt-$SBT_VER
 

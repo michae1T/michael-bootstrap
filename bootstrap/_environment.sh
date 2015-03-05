@@ -15,8 +15,19 @@ else
   SHARED=$REPO_PATH/bootstrap/shared
 fi;
 
+if [ -n "`pwd | egrep '^/root(/|$)'`" ] ; then
+  USER_HOME="/root"
+else
+  USER_HOME=`pwd | egrep -o '/(home|Users)/[^/]*'`
+fi;
 
-USER_HOME=`pwd | grep -o '\/home/[^\/]*'`
+if [ -z "$USER_HOME" ] ; then
+  echo "error: owner directory could not be established"
+  if [ -z "`echo $0 | egrep '/bin/bash|bin/sh'`" ] ; then
+    exit 1
+  fi;
+fi;
+
 USER_STAT=`stat -c "%U:%G" $REPO_DIR`
 USER_OWNER=`stat -c "%U" $REPO_DIR`
 
@@ -74,8 +85,7 @@ make_sys_sudo_redirect() {
 sudo /opt/scripts/sys_sudo/$1.sh 
 EOF
 
-  chmod +x $SCRIPT_PATH
-  chown $USER_STAT $SCRIPT_PATH
+  ensure_path_exists $SCRIPT_PATH
 }
 
 config_sys_sudo() {
@@ -97,10 +107,21 @@ script_path() {
   echo $USER_HOME/bin/set-$1
 }
 
+ensure_path_exists() {
+  DIR_PATH=`dirname $1`
+  if [ ! -e "$DIR_PATH" ] ; then
+    mkdir -p $DIR_PATH
+    chown $USER_STAT $DIR_PATH
+    chmod +x $DIR_PATH
+  fi;
+}
+
 write_env_script() {
   SCRIPT_PATH=`script_path $1-env`
   BODY=`echo -e $2`
   SCPT=`echo -e $3 | sed 's/^/  /'`
+
+  ensure_path_exists $SCRIPT_PATH
 
   cat > $SCRIPT_PATH <<- EOF
 #!/bin/bash
@@ -123,7 +144,7 @@ yum_safe() {
   ORIG_DIR=`pwd`
   mkdir /tmp/yum-run > /dev/null 2>&1
   cd /tmp/yum-run
-  yum $@
+  yum -y "$@"
   cd $ORIG_DIR
 }
 

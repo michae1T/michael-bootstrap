@@ -13,8 +13,14 @@ if [ "$1" = "link"  ] ; then
   do_link() {
     TYPE=$1
     LOADER=$2
+    INTO_OVERRIDE=$3
 
-    DOT_FILE="$HOME/.$TYPE"
+    if [ -n "$INTO_OVERRIDE" ] ; then
+      DOT_FILE="$HOME/.$INTO_OVERRIDE"
+    else
+      DOT_FILE="$HOME/.$TYPE"
+    fi;
+
     INDICATOR="### $TYPE redirect ###"
 
     if grep -q "$INDICATOR" $DOT_FILE ; then
@@ -32,6 +38,11 @@ if [ "$1" = "link"  ] ; then
       do_link $i $0
     fi;
   done;
+
+  # never a chance to load this in docker
+  if [ -n "$DOCKER_IMAGE_NAME" ] ; then
+    do_link bash_profile $0 bashrc
+  fi;
 
   exit 0
 fi;
