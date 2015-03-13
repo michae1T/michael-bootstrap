@@ -1,0 +1,36 @@
+#!/bin/bash
+
+docker_untagged_images() {
+  docker images | tail -n +2 | awk '$1 == "<none>" {print $3}'
+}
+export -f docker_untagged_images
+
+docker_rm_untagged_images() {
+  docker_untagged_images | xargs --no-run-if-empty docker rmi $@
+}
+export -f docker_rm_untagged_images
+
+docker_exited_containers() {
+  docker ps -a --filter "status=exited" --filter "dangling=true" | tail -n +2 |  awk '{print $1}'
+}
+export -f docker_exited_containers
+
+docker_rm_exited_containers() {
+  docker_exited_containers | xargs --no-run-if-empty docker rm $@
+}
+export -f docker_rm_exited_containers
+
+docker_i() {
+  if [[ "$1" == "run" ]] ; then
+    shift
+    docker run --rm -i -t -e HOME=/root "$@"
+  else
+    docker "$@"
+  fi;
+}
+export -f docker_i
+
+if [ -z "$NO_SHELL" ] ;
+ then bash
+fi;
+

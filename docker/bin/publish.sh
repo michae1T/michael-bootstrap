@@ -1,8 +1,10 @@
 #!/bin/bash
 
-IMAGE=`echo $1 | sed 's/\([^\/]*\)\(\/\)*/\1/'`
+. `dirname $0`/_shared.sh
 
-`dirname $0`/build.sh $IMAGE
+`dirname $0`/build.sh $IMAGE_NAME $TAG
+
 sleep 3
-docker push "michae1t/$IMAGE:latest"
+
+docker push "$IMAGE_URI"
 

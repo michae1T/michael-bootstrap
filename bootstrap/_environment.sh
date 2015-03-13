@@ -145,6 +145,11 @@ yum_safe() {
   mkdir /tmp/yum-run > /dev/null 2>&1
   cd /tmp/yum-run
   yum -y "$@"
+
+  if [ -n "$DOCKER_IMAGE_NAME" ] ;
+    then yum clean all
+  fi
+
   cd $ORIG_DIR
 }
 

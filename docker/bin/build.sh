@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE=`echo $1 | sed 's/\([^\/]*\)\(\/\)*/\1/'`
-docker build -t "michae1t/$IMAGE:latest" $IMAGE
+. `dirname $0`/_shared.sh
 
+docker build -t "$IMAGE_URI" $CONEXT_PATH
 

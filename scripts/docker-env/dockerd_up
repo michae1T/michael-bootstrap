@@ -1,0 +1,4 @@
+#!/bin/bash
+
+docker -d > /var/log/docker 2>&1 &
+

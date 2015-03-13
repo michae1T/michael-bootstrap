@@ -6,6 +6,15 @@ LOAD_COMPLETION=1 source /opt/bin/vault
 LOAD_COMPLETION=1 source /opt/bin/notes
 LOAD_COMPLETION=1 source /opt/bin/set-laptop-mode
 
+if type -t _completion_loader | grep -q '^function$' ; then
+  _completion_loader docker
+fi;
+
+if type -t _docker | grep -q '^function$' ; then
+  shopt -s progcomp
+  complete -F _docker docker_i
+fi;
+
 NO_SHELL=1 source /opt/bin/set-env
 
 # functions
@@ -92,16 +101,6 @@ git() {
   /usr/bin/git "$@"
 }
 export -f git
-
-untagged_images() {
-  docker images | tail -n +2 | awk '$1 == "<none>" {print $3}';
-}
-export -f untagged_images
-
-rm_untagged_images() {
-  untagged_images | xargs --no-run-if-empty docker rmi $@
-}
-export -f rm_untagged_images
 
 # aliases
 

@@ -9,8 +9,4 @@ fi;
 
 mkdir -p $PREFIX
 
-curl http://beyondgrep.com/ack-2.14-single-file > $PREFIX/ack
-chmod +x $PREFIX/ack
-
-cp $SCRIPTS_DIR/common-tools/* $PREFIX
-
+cp $SCRIPTS_DIR/docker-env/* $PREFIX
