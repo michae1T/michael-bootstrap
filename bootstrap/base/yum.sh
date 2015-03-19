@@ -17,7 +17,9 @@ yum_safe install git git-daemon \
                python3 python3-pip \
                wget curl lynx telnet nc bind-utils \
                ack fdupes pcre \
+               sysstat strace \
                tar gzip zip unzip \
+               bash-completion \
                gdbm-devel openssl* openssh* \
                compat-libstd* compat-gcc* compat-readline* \
                snakeyaml libyaml* \
@@ -29,7 +31,7 @@ yum_safe install git git-daemon \
                libpng-* libpng12 pangox-compat \
                fuse-encfs \
                tmux screen vim-enhanced \
-               nodejs npm jq \
+               nodejs npm jq yajl \
                cronie \
                nfs-utils \
                ntfs-3g ntfsprogs \

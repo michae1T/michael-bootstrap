@@ -23,7 +23,11 @@ export -f docker_rm_exited_containers
 docker_i() {
   if [[ "$1" == "run" ]] ; then
     shift
-    docker run --rm -i -t -e HOME=/root "$@"
+    if [[ "$1" == "--pwds" ]] ; then
+      shift
+      EXTRA="-v `pwd`:`pwd` -w `pwd`"
+    fi;
+    docker run --rm -i -t $EXTRA "$@"
   else
     docker "$@"
   fi;

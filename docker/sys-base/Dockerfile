@@ -4,7 +4,8 @@ MAINTAINER michae1T@live.ca
 
 ENV DOCKER_IMAGE_NAME michaelt/sys
 
-ENV SRC_DIR /root/src
+ENV HOME /root
+ENV SRC_DIR $HOME/src
 ENV CONFIG_REPO $SRC_DIR/michael-system-config
 ENV BOOTSTRAP_DIR $CONFIG_REPO/bootstrap
 
@@ -26,7 +27,7 @@ RUN cd $BOOTSTRAP_DIR && base/user.sh
 RUN cd $BOOTSTRAP_DIR && base/scala_new.sh
 
 RUN cd $BOOTSTRAP_DIR && base/ruby_old.sh \
-                      && base/ruby_current.sh \
+                      && PATH=/opt/ruby-1.8.7/bin:$PATH base/ruby_current.sh \
                       && rm -rf /root/src/ruby
 
 RUN pip3 install awscli

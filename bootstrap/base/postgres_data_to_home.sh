@@ -2,7 +2,7 @@
 
 source `dirname $0`/../_environment.sh
 
-yum_safe -y install install selinux-policy-devel
+yum_safe selinux-policy-devel
 
 echo "configuring postgres"
 
