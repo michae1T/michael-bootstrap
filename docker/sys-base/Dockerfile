@@ -2,7 +2,7 @@ FROM fedora
 
 MAINTAINER michae1T@live.ca
 
-ENV DOCKER_IMAGE_NAME michaelt/sys
+ENV DOCKER_IMAGE_NAME michae1t/sys
 
 ENV HOME /root
 ENV SRC_DIR $HOME/src

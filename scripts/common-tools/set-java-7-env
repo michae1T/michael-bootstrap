@@ -1,0 +1,4 @@
+#!/bin/bash
+
+VER_TO_FIND=1.7 source set-java-env
+

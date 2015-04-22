@@ -1,4 +1,4 @@
 #!/bin/bash
 
-VER_TO_USE=1.6 source set-java-env
+VER_TO_FIND=1.6 source set-java-env
 

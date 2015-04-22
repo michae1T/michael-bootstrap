@@ -1,0 +1,14 @@
+#!/bin/bash
+
+route del -net default
+route add -net default gw 192.168.66.1
+
+iptables -t nat -A INPUT -i tun+ -j ACCEPT
+iptables -t nat -A FORWARD -i tun+ -j ACCEPT
+iptables -t nat -A FORWARD -i eth+ -o tun+ -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables-save > /etc/iptables.ipv4.nat
+
+echo "nameserver 192.168.66.1" > /etc/resolv.conf
+
+exec tor
+
