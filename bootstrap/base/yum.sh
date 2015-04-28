@@ -15,7 +15,8 @@ yum_safe install git git-daemon \
                perl perl-CPAN perl-Module-Load \
                ImageMagick-perl ImageMagick-devel \
                python3 python3-pip \
-               wget curl lynx telnet nc bind-utils iputils iproute net-tools traceroute \
+               wget curl lynx nmap \
+               telnet nc bind-utils iputils iproute net-tools traceroute \
                ack fdupes pcre \
                sysstat strace \
                tar gzip zip unzip \

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh -N \
+ssh -X -C -c blowfish-cbc -N \
     -D 12345 \
     -D 12346 \
     -D 12347 $1 \

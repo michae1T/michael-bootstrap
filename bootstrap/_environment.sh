@@ -144,10 +144,10 @@ yum_safe() {
   ORIG_DIR=`pwd`
   mkdir /tmp/yum-run > /dev/null 2>&1
   cd /tmp/yum-run
-  yum -y "$@"
+  dnf -y "$@"
 
   if [ -n "$DOCKER_IMAGE_NAME" ] ;
-    then yum clean all
+    then dnf clean all
   fi
 
   cd $ORIG_DIR

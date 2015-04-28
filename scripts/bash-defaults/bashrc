@@ -81,6 +81,15 @@ chome() {
 }
 export -f chome
 
+SCREEN_EXCHANGE=/tmp/screen-exchange
+screenex_i() {
+  cat > $SCREEN_EXCHANGE
+}
+screenex_o() {
+  cat $SCREEN_EXCHANGE
+}
+
+
 function compare_files() {
   UNIQUE_LINES=`md5sum $@ | awk '{ print $1 }' | uniq | wc -l`
   if [ "$UNIQUE_LINES" = "1" ] ; then echo "same"; else echo "diff"; fi;

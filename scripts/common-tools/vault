@@ -67,7 +67,7 @@ case "$OP" in
      mkdir -p $PRIVATE_DIR
      if [ ! -e "$CRYPT_DIR/.encfs6.xml" ] ; then
        dropbox exclude add $CRYPT_DIR/.encfs6.xml
-       cp ~/src/dropbox/encfs6.xml $CRYPT_DIR/.encfs6.xml;
+       cp $VAULT_ENCFS_CONFIG_FILE $CRYPT_DIR/.encfs6.xml;
        mkdir -p $PRIVATE_DIR
      fi;
 
