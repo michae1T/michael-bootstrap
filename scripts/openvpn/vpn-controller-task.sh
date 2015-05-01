@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 if [ -z "$TOGGLE_PATH" ] ; then
   echo "example: DNS_HOME= DNS_REMOTE= TOGGLE_PATH=/opt/vpn-toggler/tmp/toggle SERVICE_NAME=openvpn@michael.service ./vpn-controller.sh"
   exit 1
@@ -9,6 +8,11 @@ fi;
 echo `date`
 echo "service name: $SERVICE_NAME"
 echo "toggle path: $TOGGLE_PATH"
+
+if [ ! -e "/dev/net/tun" ] ; then
+   mkdir /dev/net
+   mknod /dev/net/tun c 10 200
+fi;
 
 if [[ `systemctl is-active $SERVICE_NAME 2>&1` == 'active' ]];
   then IS_ACTIVE=1; CUR_STATE=1;
