@@ -1,10 +1,12 @@
 #/bin/bash
 
+CMNTLS=/opt/scripts/common_tools
+
 # init
 
-LOAD_COMPLETION=1 source /opt/bin/vault
-LOAD_COMPLETION=1 source /opt/bin/notes
-LOAD_COMPLETION=1 source /opt/bin/set-laptop-mode
+LOAD_COMPLETION=1 source $CMNTLS/vault
+LOAD_COMPLETION=1 source $CMNTLS/notes
+LOAD_COMPLETION=1 source $CMNTLS/set-laptop-mode
 
 if type -t _completion_loader | grep -q '^function$' ; then
   _completion_loader docker
@@ -15,7 +17,7 @@ if type -t _docker | grep -q '^function$' ; then
   complete -F _docker docker_i
 fi;
 
-NO_SHELL=1 source /opt/bin/set-env
+NO_SHELL=1 source  $CMNTLS/set-env
 
 # functions
 
@@ -111,9 +113,15 @@ git() {
 }
 export -f git
 
+
+unalias vi
+vi() {
+  /usr/bin/env vim "$@"
+}
+export -f vi
+
 # aliases
 
-alias vi=vim
 alias vu=vi
 alias scala='scala -Dscala.color'
 
