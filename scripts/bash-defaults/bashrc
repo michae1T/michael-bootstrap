@@ -1,12 +1,6 @@
 #/bin/bash
 
-CMNTLS=/opt/scripts/common_tools
-
 # init
-
-LOAD_COMPLETION=1 source $CMNTLS/vault
-LOAD_COMPLETION=1 source $CMNTLS/notes
-LOAD_COMPLETION=1 source $CMNTLS/set-laptop-mode
 
 if type -t _completion_loader | grep -q '^function$' ; then
   _completion_loader docker
@@ -17,7 +11,9 @@ if type -t _docker | grep -q '^function$' ; then
   complete -F _docker docker_i
 fi;
 
-NO_SHELL=1 source  $CMNTLS/set-env
+if [ -f /opt/scripts/common_tools/set-env ] ;
+  then NO_SHELL=1 source /opt/scripts/common_tools/set-env
+fi;
 
 # functions
 

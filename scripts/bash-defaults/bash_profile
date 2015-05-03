@@ -5,12 +5,4 @@ export PATH=$HOME/bin:/opt/bin:/opt/scripts/common_tools:$HOME/.local/bin:$PATH
 # while using root
 export MYHOME=$HOME
 
-# vault
-export VAULT_CRYPT_DIR=$HOME/Dropbox/Private
-export VAULT_OPEN_DIR=$HOME/Private
-export VAULT_ENCFS_CONFIG_FILE=$VAULT_OPEN_DIR/encfs.xml
-
-# notes
-export NOTES_DIR=$HOME/Dropbox/Michael/notes
-export NOTES_VAULT_BUCKET=v
 
