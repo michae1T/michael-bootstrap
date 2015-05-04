@@ -224,14 +224,21 @@ update_config() {
   LINE_TO_INSERT="$PROP_NAME$DIVIDER$VALUE"
   LINE_TO_INSERT_R=`path_regex $LINE_TO_INSERT`
 
-  PROP_INFO=`egrep -n "^(#[[:space:]]*)?$PROP_NAME$DIVIDER" $FILE_NAME`
+  PROP_REGEX=$PROP_NAME$DIVIDER
+  PROP_INFO_ACTIVE=`egrep -n "^[[:space:]]*$PROP_REGEX" $FILE_NAME`
+  PROP_INFO_WITH_COMMENTED=`egrep -n "^([[:space:]]*#[[:space:]]*)?$PROP_REGEX" $FILE_NAME`
 
-  if [ -n "$PROP_INFO" ] ; then
-    MATCHES=$(echo $PROP_INFO | sed -r "s/[0-9]+:/\\n/g" | wc --lines)
+  if [ -n "$PROP_INFO_ACTIVE" ] ; then
+    MATCHES=$(echo $PROP_INFO_ACTIVE | sed -r "s/[0-9]+:/\\n/g" | wc --lines)
     if [[ "$MATCHES" != "2" ]] ; then
       error "multiple matches for $PROP_NAME in $FILE_NAME"
     fi;
+    PROP_INFO=$PROP_INFO_ACTIVE
+  elif [ -n "$PROP_INFO_WITH_COMMENTED" ] ; then
+    PROP_INFO=$PROP_INFO_WITH_COMMENTED
+  fi;
 
+  if [ -n "PROP_INFO" ] ; then
     LINE_NUM=`echo $PROP_INFO | awk -F: '{ print $1 }'`
     LINE_TO_REPLACE=`echo $PROP_INFO | awk -F: '{ print $2 }'`
     
