@@ -11,6 +11,6 @@ ENV_NAME=ruby-old
 export CC=gcc34
 export CXX=g++34
 
-source $SHARED/_setup_ruby.sh
+source develop/_setup_ruby.sh
 
 

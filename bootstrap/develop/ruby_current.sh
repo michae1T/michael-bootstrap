@@ -8,5 +8,5 @@ GEM_TAG=origin/1.8
 RUBY_VERSION=2.2.0
 ENV_NAME=ruby-new
 
-source $SHARED/_setup_ruby.sh
+source develop/_setup_ruby.sh
 
