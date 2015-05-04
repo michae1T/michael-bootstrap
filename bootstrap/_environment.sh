@@ -120,7 +120,7 @@ write_env_script() {
   SCRIPT_PATH=`script_path $1-env`
   BODY=`echo -e $2 | sed -r 's/^\s+//'`
   SCPT=`echo -e $3 | sed 's/^/  /'`
-echo $BODY
+
   ensure_path_exists $SCRIPT_PATH
 
   cat > $SCRIPT_PATH <<- EOF
