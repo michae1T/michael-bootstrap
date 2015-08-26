@@ -2,7 +2,7 @@
 
 source `dirname $0`/../_environment.sh
 
-yum_safe install libusb-devel libusb-static systemd-devel libical-devel
+yum_safe install libusb-devel libusb-* systemd-devel libical-devel
 
 LINUX_PROJECT_DIR=$USER_HOME/src/linux
 
@@ -21,6 +21,8 @@ autoreconf --install
             --enable-hidd \
             --enable-pand \
             --enable-tools \
+            --enable-library \
+            --enable-experimental \
             --disable-wiimote
 
 make && make install

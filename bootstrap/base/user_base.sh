@@ -2,6 +2,8 @@
 
 source `dirname $0`/../_environment.sh
 
+checkout_repo src/console vim-file-line git@github.com:bogado/file-line.git origin/master
+
 CMDS='
   # full featured vim mode including colours
   git config --global core.editor vim
@@ -12,6 +14,8 @@ CMDS='
   for d in ftdetect indent syntax ; do 
     wget --no-check-certificate -O ~/.vim/$d/scala.vim https://raw.githubusercontent.com/rosstimson/scala-vim-support/master/$d/scala.vim; 
   done;
+
+  ln ~/src/console/vim-file-line/plugin/file_line.vim ~/.vim/plugin/
 '
  
 if [ -d "$DEFAULT_CONFIG_DIR" ] ; then

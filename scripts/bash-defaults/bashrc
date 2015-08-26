@@ -38,6 +38,7 @@ gack() {
             --ignore-dir=target --ignore-dir=test-output \
             --ignore-dir=test --ignore-dir=classes \
             --ignore-file=is:.cache --ignore-file=is:.project \
+            --ignore-file=is:dump.txt --ignore-dir=build \
           "$@"
 }
 export -f gack
@@ -87,7 +88,6 @@ screenex_o() {
   cat $SCREEN_EXCHANGE
 }
 
-
 function compare_files() {
   UNIQUE_LINES=`md5sum $@ | awk '{ print $1 }' | uniq | wc -l`
   if [ "$UNIQUE_LINES" = "1" ] ; then echo "same"; else echo "diff"; fi;
@@ -109,12 +109,16 @@ git() {
 }
 export -f git
 
-
 unalias vi
 vi() {
   /usr/bin/env vim "$@"
 }
 export -f vi
+
+calc() {
+  awk "BEGIN { print $* }"  
+}
+export -f calc
 
 # aliases
 
