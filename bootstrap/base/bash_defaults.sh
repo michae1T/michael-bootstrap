@@ -18,5 +18,7 @@ sed -i "s/###ORIGINALPATH###/$OWNER_SUB/" $SHARED_LOADER
 REPO_SUB="`path_regex $REPO_DIR` # written `date`"
 sed -i "s/###REPOPATH###/$REPO_SUB/" $SHARED_LOADER
 
+sed -i "s/###DOCKERIMAGENAME###/`path_regex $DOCKER_IMAGE_NAME`/" $SHARED_LOADER
+
 su - $USER_OWNER -c "DOCKER_IMAGE_NAME=$DOCKER_IMAGE_NAME $SHARED_LOADER link"
 

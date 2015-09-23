@@ -8,11 +8,8 @@ OWNER_DIR=`pwd`
 if [ -z "$REPO_PATH" ] ; then
   cd $OWNER_DIR/../..
   REPO_DIR=`pwd`
-  cd $OWNER_DIR/../shared
-  SHARED=`pwd`
 else
   REPO_DIR=$REPO_PATH
-  SHARED=$REPO_PATH/bootstrap/shared
 fi;
 
 if [ -n "`pwd | egrep '^/root(/|$)'`" ] ; then

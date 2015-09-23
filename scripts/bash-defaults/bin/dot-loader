@@ -2,6 +2,8 @@
 
 BASHDIR_REL_PATH=scripts/bash-defaults
 
+export DOCKER_IMAGE_NAME=###DOCKERIMAGENAME###
+
 export REPO_PATH=###REPOPATH###
 
 ORIGINAL_PATH=###ORIGINALPATH###
