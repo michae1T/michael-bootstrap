@@ -19,7 +19,8 @@ checkout_repo "$CONSOLE_SRC" "screen" \
               "master"
 
 cd $CONSOLE_SRC/screen/src
-./autogen.sh && ./configure --prefix=$PREFIX && make && make install
+./autogen.sh && ./configure --prefix=$PREFIX && make && make install \
+             && chown root:screen /opt/bin/screen && chmod g+s /opt/bin/screen
 
 checkout_repo "$CONSOLE_SRC" "vim" \
               "https://github.com/vim/vim.git" \

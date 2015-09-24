@@ -16,15 +16,15 @@ CMDS='
   done;
 
   mkdir -p ~/.vim/plugin
-  ln ~/src/console/vim-plugins/file-line/plugin/file_line.vim ~/.vim/plugin/
+  ln -sf ~/src/console/vim-plugins/file-line/plugin/file_line.vim ~/.vim/plugin/
 '
  
 if [ -d "$DEFAULT_CONFIG_DIR" ] ; then
 
   CMDS2="
-    [ ! -f "~/.vimrc"    ] && ln -s $DEFAULT_CONFIG_DIR/public/vim/vimrc ~/.vimrc ;
-    [ ! -f "~/.screenrc" ] && ln -s $DEFAULT_CONFIG_DIR/public/screen/screenrc ~/.screenrc ;
-    [ ! -f "~/.tmux"     ] && ln -s $DEFAULT_CONFIG_DIR/public/tmux/tmux ~/.tmux ;
+    ln -sf $DEFAULT_CONFIG_DIR/public/vim/vimrc ~/.vimrc ;
+    ln -sf $DEFAULT_CONFIG_DIR/public/screen/screenrc ~/.screenrc ;
+    ln -sf $DEFAULT_CONFIG_DIR/public/tmux/tmux ~/.tmux ;
   "
 
   CMDS="$CMDS $CMDS2"
