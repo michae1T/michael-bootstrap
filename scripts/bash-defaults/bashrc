@@ -11,6 +11,8 @@ if type -t _docker | grep -q '^function$' ; then
   complete -F _docker docker_i
 fi;
 
+complete -C aws_completer aws
+
 if [ -f /opt/scripts/common_tools/set-env ] ;
   then NO_SHELL=1 source /opt/scripts/common_tools/set-env
 fi;
@@ -37,6 +39,8 @@ gack() {
             --ignore-dir=share --ignore-dir=spec \
             --ignore-dir=target --ignore-dir=test-output \
             --ignore-dir=test --ignore-dir=classes \
+            --ignore-dir=logs \
+            --ignore-file=is:.cache-main \
             --ignore-file=is:.cache --ignore-file=is:.project \
             --ignore-file=is:dump.txt --ignore-dir=build \
           "$@"

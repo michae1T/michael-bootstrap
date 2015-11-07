@@ -4,6 +4,8 @@ source `dirname $0`/../_environment.sh
 
 SBT_VER=0.13.9
 SCALA_VER=2.11.7
+PLAY_VER=1.3.6
+
 curl "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VER/sbt-$SBT_VER.zip" -L > sbt-${SBT_VER}.zip
 unzip -o sbt-${SBT_VER}.zip
 rm sbt-${SBT_VER}.zip
@@ -16,10 +18,17 @@ rm scala-$SCALA_VER.tgz
 rm -rf /opt/scala-$SCALA_VER
 mv scala-$SCALA_VER /opt
 
+wget "https://downloads.typesafe.com/typesafe-activator/$PLAY_VER/typesafe-activator-$PLAY_VER-minimal.zip"
+unzip -o typesafe-activator-$PLAY_VER-minimal.zip
+rm typesafe-activator-$PLAY_VER-minimal.zip
+rm -rf /opt/play-$PLAY_VER
+mv activator-$PLAY_VER-minimal /opt/play-$PLAY_VER
+chmod o+x /opt/play-$PLAY_VER/activator
+
 # predownload sbt runtimes
-su - $USER_OWNER -c "/opt/sbt-0.13.9/bin/sbt sbtVersion"
+#su - $USER_OWNER -c "/opt/sbt-0.13.9/bin/sbt sbtVersion"
 
 write_env_script 'scala-new' \
-  "export PATH=/opt/scala-$SCALA_VER/bin:/opt/sbt-$SBT_VER/bin:\$PATH" \
+  "export PATH=/opt/scala-$SCALA_VER/bin:/opt/sbt-$SBT_VER/bin:/opt/play-$PLAY_VER:\$PATH" \
   "scala -version\nwhich sbt"
 
