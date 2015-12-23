@@ -81,7 +81,7 @@ make_sys_sudo_redirect() {
 #!/bin/bash
 sudo /opt/scripts/sys_sudo/$1.sh 
 EOF
-
+  chmod +x $SCRIPT_PATH
   ensure_path_exists $SCRIPT_PATH
 }
 

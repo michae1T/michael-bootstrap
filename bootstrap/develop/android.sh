@@ -2,6 +2,8 @@
 
 source `dirname $0`/../_environment.sh
 
+yum_safe install qt5-qttools-* libusb*
+
 ANDROID_SRC=$USER_HOME/src/android
 ANDROID_DIR=$USER_HOME/opt/android
 

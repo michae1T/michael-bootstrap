@@ -17,3 +17,5 @@ update_config "PasswordAuthentication" "no" /etc/ssh/sshd_config
 systemctl enable sshd.service
 systemctl restart sshd.service
 
+firewall-cmd --permanent --add-port=22/tcp
+firewall-cmd --reload

@@ -6,7 +6,7 @@ yum_safe install firefox thunderbird \
                xsel \
                gitk  \
                okular \
-               libreoffice-base libreoffice-calc libreoffice-core \
+               libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
                libreoffice-writer \
                libreoffice-opensymbol-fonts \
@@ -21,12 +21,11 @@ yum_safe install firefox thunderbird \
                powertop pidgin* banshee* \
                avahi-tools cups* \
                gimp* inkscape* \
+               ImageMagick-perl ImageMagick-devel \
                paprefs pavucontrol pavumeter \
-               --exclude=gimp-help*
+               -x gimp-help*
 
-yum_safe install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-stable.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-stable.noarch.rpm
-
-yum_safe update
+yum_safe install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-23.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-23.noarch.rpm
 
 yum_safe install gstreamer rhythmbox \
                gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly \
@@ -34,8 +33,7 @@ yum_safe install gstreamer rhythmbox \
                libdvdread libdvdnav lsdvd vlc* \
                kaffeine xine xine-lib xine-lib-extras-freeworld unrar ffmpeg
 
-rpm -ivh 'http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm'
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux
-yum_safe install flash-plugin
+# dnf install 'http://linuxdownload.adobe.com/adobe-release/adobe-release-x86_64-1.0-1.noarch.rpm'
+# yum_safe install flash-plugin
 
 
