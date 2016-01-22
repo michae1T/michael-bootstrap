@@ -25,7 +25,7 @@ yum_safe install git git-daemon \
                compat-libstd* compat-gcc* compat-readline* \
                snakeyaml libyaml* \
                cmake automake libtool rpm-build \
-               patch readline* \
+               patch readline* gettext* intltool \
                autoconf byacc bison \
                zlib zlib-devel libffi-devel \
                bzip2 sqlite sqlite-devel \
