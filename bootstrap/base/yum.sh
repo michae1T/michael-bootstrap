@@ -6,12 +6,11 @@ yum_safe update
 
 yum_safe groupinstall 'Development Tools'
 
-yum_safe install git git-daemon \
-               mongodb* postgresql postgresql-server postgresql-contrib \
+yum_safe install git \
                java-1.8*openjdk*headless \
                maven maven-ant-plugin ant apache-ivy \
                docker-io docker-io-vim \
-               nginx thttpd stunnel \
+               nginx \
                irssi \
                perl perl-CPAN perl-Module-Load \
                python3 python3-pip \
@@ -36,6 +35,4 @@ yum_safe install git git-daemon \
                nfs-utils \
                ntfs-3g ntfsprogs \
                kernel-devel*
-
-
 

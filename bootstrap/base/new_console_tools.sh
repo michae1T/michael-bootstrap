@@ -9,9 +9,6 @@ fi;
 
 mkdir -p $PREFIX/bin
 
-curl 'http://beyondgrep.com/ack-2.14-single-file' > $PREFIX/bin/ack
-chmod +x $PREFIX/bin/ack
-
 CONSOLE_SRC=$USER_HOME/src/console
 
 /usr/sbin/groupadd -g 84 -r -f screen

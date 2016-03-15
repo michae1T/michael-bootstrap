@@ -20,6 +20,13 @@ docker_rm_exited_containers() {
 }
 export -f docker_rm_exited_containers
 
+docker_rmi() {
+  GREP=$1
+  shift
+  docker images | grep "$GREP" | awk '{print $3}' | xargs docker rmi
+}
+export -f docker_rmi
+
 docker_i() {
   if [[ "$1" == "run" ]] ; then
     shift

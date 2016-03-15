@@ -26,6 +26,8 @@ yum_safe install firefox thunderbird \
                bluez-* fuse-encfs \
                -x gimp-help*
 
+yum_safe remove amarok
+
 yum_safe install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-23.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-23.noarch.rpm
 
 yum_safe install gstreamer rhythmbox \
