@@ -3,6 +3,7 @@
 source `dirname $0`/../_environment.sh
 
 yum_safe install firefox thunderbird \
+               fuse-exfat ntfs-3g ntfsprogs \
                xsel \
                gitk  \
                okular \
@@ -21,9 +22,9 @@ yum_safe install firefox thunderbird \
                powertop pidgin* banshee* \
                avahi-tools cups* \
                gimp* inkscape* \
-               ImageMagick-perl ImageMagick-devel \
                paprefs pavucontrol pavumeter \
                bluez-* fuse-encfs \
+               hdparm \
                -x gimp-help*
 
 yum_safe remove amarok

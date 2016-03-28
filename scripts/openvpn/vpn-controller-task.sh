@@ -19,9 +19,13 @@ if [[ `systemctl is-active $SERVICE_NAME 2>&1` == 'active' ]];
   else CUR_STATE=0;
 fi;
 
+has_conn() {
+  curl -s -v 10.8.0.1 2>&1 | grep '200 OK'
+}
+
 if [ -n "$IS_ACTIVE" ] ; then
   echo "vpn is up, checking if we need to restart..."
-  if [ -z "`nc -w 5000ms -i 5000ms 10.8.0.1 22 2>&1 | grep SSH`" ] ; then
+  if [ -z "`has_conn;has_conn;has_conn;has_conn`" ] ; then
     systemctl restart $SERVICE_NAME
     echo "...restarted"
   else 

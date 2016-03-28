@@ -33,6 +33,5 @@ yum_safe install git \
                nodejs npm jq yajl \
                cronie \
                nfs-utils \
-               ntfs-3g ntfsprogs \
                kernel-devel*
 
