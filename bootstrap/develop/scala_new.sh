@@ -26,7 +26,7 @@ mv activator-$PLAY_VER-minimal /opt/play-$PLAY_VER
 chmod o+x /opt/play-$PLAY_VER/activator
 
 # predownload sbt runtimes
-su - $USER_OWNER -c "/opt/sbt-0.13.9/bin/sbt sbtVersion"
+su - $USER_OWNER -c "/opt/sbt-$SBT_VER/bin/sbt sbtVersion"
 
 write_env_script 'scala-new' \
   "export PATH=/opt/scala-$SCALA_VER/bin:/opt/sbt-$SBT_VER/bin:/opt/play-$PLAY_VER:\$PATH" \
