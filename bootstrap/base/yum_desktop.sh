@@ -3,7 +3,7 @@
 source `dirname $0`/../_environment.sh
 
 yum_safe install firefox thunderbird \
-               fuse-exfat ntfs-3g ntfsprogs \
+               ntfs-3g ntfsprogs \
                xsel \
                gitk  \
                okular \
@@ -27,9 +27,9 @@ yum_safe install firefox thunderbird \
                hdparm \
                -x gimp-help*
 
-yum_safe remove amarok
+yum_safe remove amarok calligra*
 
-yum_safe install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-23.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-23.noarch.rpm
+yum_safe install http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-24.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-24.noarch.rpm
 
 yum_safe install gstreamer rhythmbox \
                gstreamer-plugins-good gstreamer-plugins-bad gstreamer-plugins-ugly \

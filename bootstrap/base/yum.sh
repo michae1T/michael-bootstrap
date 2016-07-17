@@ -30,7 +30,7 @@ yum_safe install git \
                bzip2 sqlite sqlite-devel \
                libxslt* libxml2 libxml2-devel \
                libpng-* libpng12 pangox-compat \
-               nodejs npm jq yajl \
+               nodejs jq yajl \
                cronie \
                nfs-utils \
                kernel-devel*

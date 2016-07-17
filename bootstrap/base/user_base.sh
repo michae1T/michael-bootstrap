@@ -3,7 +3,7 @@
 source `dirname $0`/../_environment.sh
 
 checkout_repo $USER_HOME/src/console/vim-plugins file-line https://github.com/bogado/file-line.git origin/master
-checkout_repo $USER_HOME/src/console/vim-plugins scala-vim-support https://github.com/rosstimson/scala-vim-support.git
+checkout_repo $USER_HOME/src/console/vim-plugins scala-vim-support https://github.com/rosstimson/scala-vim-support.git 89ccea89f35ad7d0274167810469eb7092ecc1d5
 
 CMDS='
   # full featured vim mode including colours
@@ -11,11 +11,16 @@ CMDS='
   git config --global color.ui auto; 
   git config --global push.default matching;
 
+  cd ~/src/console/vim-plugins/scala-vim-support
+
   if [ -n "`git show HEAD | grep 89ccea89f35ad7d0274167810469eb7092ecc1d5`" ] ; then
     mkdir -p ~/.vim/{ftdetect,indent,syntax};
     for d in ftdetect indent syntax ; do 
       ln -sf ~/src/console/vim-plugins/scala-vim-support/$d/scala.vim ~/.vim/$d/scala.vim 
     done;
+  else
+    echo "error: could not find good vim-plugins"
+    exit 1
   fi;
 
   mkdir -p ~/.vim/plugin
