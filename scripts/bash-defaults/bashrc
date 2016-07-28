@@ -84,13 +84,15 @@ chome() {
 }
 export -f chome
 
-SCREEN_EXCHANGE=/tmp/screen-exchange
 screenex_i() {
   cat > $SCREEN_EXCHANGE
 }
+export -f screenex_i
+
 screenex_o() {
   cat $SCREEN_EXCHANGE
 }
+export -f screenex_o
 
 function compare_files() {
   UNIQUE_LINES=`md5sum $@ | awk '{ print $1 }' | uniq | wc -l`
