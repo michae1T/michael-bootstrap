@@ -22,7 +22,7 @@ do-stop() {
 echo `date`
 echo "toggle path: $TOGGLE_PATH"
 
-if [ -n "`$ROUTE -n | grep '0.0.0.0' | grep $VPN_GATEWAY_IP`" ] ;
+if [ -n "`/usr/sbin/route -n | awk '{print $1,$2}' | grep '^0.0.0.0' | grep 192.168.22.7`" ] ;
   then IS_ACTIVE=1; CUR_STATE=1;
   else CUR_STATE=0;
 fi;

@@ -34,11 +34,26 @@ if [ -n "$IS_ACTIVE" ] ; then
 else 
   echo "vpn is not up..."
 fi
+
+# open vpn route to remote gw
+IP=/usr/sbin/ip
+
+REM_GW_IP=`/usr/sbin/route -n | grep ^52 | awk '{print $1}'`
+if [ -n "$REM_GW_IP" ] ; then
+  $IP route add table 11 to 52.3.89.213/32 via 10.8.0.5 dev tun0
+  $IP rule add from 192.168.22.0/24 dev eth0 table 11 priority 11
+else
+  $IP route flush 11
+  $IP route del table 11 to 52.3.89.213/32 via 10.8.0.5 dev tun0
+  $IP rule del from 192.168.22.0/24 dev eth0 table 11 priority 11
+fi;
+
 RESOLV_FILE=/etc/resolv.conf
 DNS_ACTIVE=`grep nameserver $RESOLV_FILE | awk '{ print $2 }'`
+
 if [ -n "$IS_ACTIVE" ] ; then
   DNS_NEXT=$DNS_REMOTE
-else 
+else
   DNS_NEXT=$DNS_HOME
 fi;
 
