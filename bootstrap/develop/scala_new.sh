@@ -2,9 +2,9 @@
 
 source `dirname $0`/../_environment.sh
 
-SBT_VER=0.13.11
-SCALA_VER=2.11.8
-PLAY_VER=1.3.7
+SBT_VER=0.13.13
+SCALA_VER=2.12.1
+PLAY_VER=1.3.12
 
 curl "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VER/sbt-$SBT_VER.zip" -L > sbt-${SBT_VER}.zip
 unzip -o sbt-${SBT_VER}.zip

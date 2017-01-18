@@ -11,7 +11,7 @@ docker_rm_untagged_images() {
 export -f docker_rm_untagged_images
 
 docker_exited_containers() {
-  docker ps -a --filter "status=exited" --filter "dangling=true" | tail -n +2 |  awk '{print $1}'
+  docker ps -a --filter "status=exited" | tail -n +2 |  awk '{print $1}'
 }
 export -f docker_exited_containers
 
