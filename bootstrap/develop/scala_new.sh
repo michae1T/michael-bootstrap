@@ -10,7 +10,7 @@ curl "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VER/sbt-$SBT_VER.zip" 
 unzip -o sbt-${SBT_VER}.zip
 rm sbt-${SBT_VER}.zip
 rm -rf /opt/sbt-$SBT_VER
-mv sbt /opt/sbt-$SBT_VER
+mv sbt-launcher-packaging-$SBT_VER /opt/sbt-$SBT_VER
 
 wget "http://www.scala-lang.org/files/archive/scala-$SCALA_VER.tgz"
 tar -xzf scala-$SCALA_VER.tgz
