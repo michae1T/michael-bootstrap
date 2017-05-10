@@ -3,7 +3,7 @@
 source `dirname $0`/../_environment.sh
 
 SBT_VER=0.13.15
-SCALA_VER=2.12.1
+SCALA_VER=2.12.2
 PLAY_VER=1.3.12
 
 curl "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VER/sbt-$SBT_VER.zip" -L > sbt-${SBT_VER}.zip

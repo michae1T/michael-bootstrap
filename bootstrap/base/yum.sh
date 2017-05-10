@@ -19,6 +19,7 @@ yum_safe install git \
                ack fdupes pcre \
                sysstat strace \
                tar gzip zip unzip \
+               uuid \
                bash-completion \
                gdbm-devel openssl* openssh* \
                compat-libstd* compat-gcc* compat-readline* \

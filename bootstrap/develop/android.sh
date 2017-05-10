@@ -25,8 +25,8 @@ cp -f bin/* $HEIMDALL_INSTALL
 
 write_env_script 'android' \
   "  export ANDROID_HOME=\$HOME/opt/android/android-sdk-linux\n
-     export ANDROID_BUILD_VERSION=22.0.1\n
-     export PATH=\$ANDROID_HOME/tools:\$ANDROID_HOME/platform-tools:\$ANDROID_HOME/build-tools/\$ANDROID_BUILD_VERSION:$PATH\n
+     export ANDROID_BUILD_VERSION=25.0.0\n
+     export PATH=\$ANDROID_HOME/tools:\$ANDROID_HOME/platform-tools:\$ANDROID_HOME/build-tools/\$ANDROID_BUILD_VERSION:\$PATH\n
      export PATH=$ANDROID_DIR/genymotion:$HEIMDALL_INSTALL:\$PATH\n
   " \
   "adb version"
