@@ -2,5 +2,5 @@
 
 NO_SHELL=1 source set-scala-new-env
 
-scala -Dscala.color
+scala -Dscala.color=true
 
