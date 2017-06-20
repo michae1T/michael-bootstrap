@@ -48,6 +48,7 @@ gack() {
             --ignore-file=is:.cache-main --ignore-file=is:.cache-tests \
             --ignore-file=is:.cache --ignore-file=is:.project \
             --ignore-file=is:dump.txt --ignore-dir=build \
+            --ignore-file=is:.classpath \
           "$@"
 }
 export -f gack

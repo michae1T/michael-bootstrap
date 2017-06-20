@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "$2" ] ;
+  then IN="/dev/stdin"
+  else IN="$2"
+fi;
+
+cat $IN | jq "$1" | sort | uniq -c | sed -E 's/^\s+//' | sed 's/"//g' | grep -ve "^1 " | sort
+

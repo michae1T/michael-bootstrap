@@ -12,3 +12,9 @@ mkdir -p $PREFIX
 
 cp $SCRIPTS_DIR/common-tools/* $PREFIX
 
+checkout_repo "$USER_HOME/src" "michael-scripts" \
+              "https://github.com/michae1T/michael-scripts.git" \
+              "master"
+
+cp $USER_HOME/src/michael-scripts/vif $PREFIX
+
