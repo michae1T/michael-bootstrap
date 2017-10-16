@@ -1,0 +1,14 @@
+#!/bin/bash
+
+case "$1" in
+  out|o)
+      xsel -bi <$SCREEN_EXCHANGE && echo -e "\e^wrote to clipboard\e\\"
+      ;;
+  in|i)
+      xsel -bo >$SCREEN_EXCHANGE && echo -e "\e^slurped from clipboard\e\\";
+      ;;
+  *)
+      echo "usage: $0 {out|o|in|i}"
+      exit 1
+esac
+

@@ -34,12 +34,8 @@ if [ -z "$HAPROXY_CONFIG" ];
   then HAPROXY_CONFIG=/etc/haproxy/haproxy.cfg
 fi;
 
-yum_safe install polipo haproxy
-
-systemctl disable polipo
-systemctl stop polipo
-rm -rf /usr/lib/systemd/system/polipo.service
-systemctl daemon-reload
+yum_safe install polipo || echo warning: polipo not found in yum repos
+yum_safe install haproxy
 
 mkdir -p /etc/polipo/config.d
 
@@ -125,8 +121,9 @@ defaults
     timeout http-keep-alive 10s
     timeout check           10s
     maxconn                 8000
-frontend  main *:8120
-    default_backend             app
+frontend  main
+    bind                    *:8120
+    default_backend         app
 backend app
     mode tcp
     balance leastconn

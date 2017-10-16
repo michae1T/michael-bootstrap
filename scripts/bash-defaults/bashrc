@@ -100,6 +100,12 @@ screenex_o() {
 }
 export -f screenex_o
 
+screen_msg() { 
+  echo -e "\e^$1\e\\";
+}
+export -f screen_msg
+
+
 function compare_files() {
   UNIQUE_LINES=`md5sum $@ | awk '{ print $1 }' | uniq | wc -l`
   if [ "$UNIQUE_LINES" = "1" ] ; then echo "same"; else echo "diff"; fi;
