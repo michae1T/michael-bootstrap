@@ -5,7 +5,6 @@ source `dirname $0`/../_environment.sh
 yum_safe install firefox thunderbird \
                ntfs-3g ntfsprogs \
                xsel \
-               gitk  \
                okular \
                libreoffice-calc libreoffice-core \
                libreoffice-impress libreoffice-kde libreoffice-math \
@@ -19,7 +18,7 @@ yum_safe install firefox thunderbird \
                nautilus-extensions \
                digikam* kipi-plugins* \
                kde-l10n-British clearlooks-compact-gnome-theme \
-               powertop pidgin* banshee* \
+               powertop \
                avahi-tools cups* \
                gimp* inkscape* \
                paprefs pavucontrol pavumeter \

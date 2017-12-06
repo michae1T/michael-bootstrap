@@ -10,6 +10,7 @@ CMDS='
   git config --global core.editor vim
   git config --global color.ui auto; 
   git config --global push.default matching;
+  git config --global core.excludesfile ~/.gitignore
 
   cd ~/src/console/vim-plugins/scala-vim-support
 
@@ -26,7 +27,7 @@ CMDS='
   mkdir -p ~/.vim/plugin
 
   LINE_PLUGIN=~/src/console/vim-plugins/file-line/plugin/file_line.vim
-  if [ -n "`sha256sum $LINE_PLUGIN | grep 9cd8216622b283c3d262dbb7286e3de48ad0244e50bf8a67861bdbf82d5b8d29`" ] ;
+  if [ -n "`sha256sum $LINE_PLUGIN | grep 3885e660f0a3d0ba7313788b5480bdb7544723fa4f34fc0db0ddafb190375df5`" ] ;
     then ln -sf $LINE_PLUGIN ~/.vim/plugin/
   fi;
 '
@@ -37,6 +38,7 @@ if [ -d "$DEFAULT_CONFIG_DIR" ] ; then
     ln -sf $DEFAULT_CONFIG_DIR/public/vim/vimrc ~/.vimrc ;
     ln -sf $DEFAULT_CONFIG_DIR/public/screen/screenrc ~/.screenrc ;
     ln -sf $DEFAULT_CONFIG_DIR/public/tmux/tmux ~/.tmux ;
+    ln -sf $DEFAULT_CONFIG_DIR/public/git/gitignore ~/.gitignore ;
   "
 
   CMDS="$CMDS $CMDS2"

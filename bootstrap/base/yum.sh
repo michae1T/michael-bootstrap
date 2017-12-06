@@ -22,7 +22,7 @@ yum_safe install git \
                uuid \
                bash-completion \
                gdbm-devel openssl* openssh* \
-               compat-libstd* compat-gcc* compat-readline* \
+               compat-libstd* compat-readline* \
                snakeyaml libyaml* \
                cmake automake libtool rpm-build \
                patch readline* gettext* intltool \
