@@ -18,3 +18,5 @@ checkout_repo "$USER_HOME/src" "michael-scripts" \
 
 cp $USER_HOME/src/michael-scripts/vif $PREFIX
 
+curl -L https://raw.githubusercontent.com/gilt/kms-s3/master/install | /bin/bash
+
