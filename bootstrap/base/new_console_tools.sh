@@ -17,6 +17,8 @@ checkout_repo "$CONSOLE_SRC" "screen" \
               "git://git.savannah.gnu.org/screen.git" \
               "e05e49c"
 
+yum_safe install -y pam-devel
+
 cd $CONSOLE_SRC/screen/src
 ./autogen.sh && ./configure --prefix=$PREFIX && make && make install \
              && chown root:screen /opt/bin/screen && chmod g+s /opt/bin/screen
@@ -28,9 +30,12 @@ yum_safe install -y libXpm-devel libSM-devel libICE-devel
 
 checkout_repo "$CONSOLE_SRC" "vim" \
               "https://github.com/vim/vim.git" \
-              "master"
+              "4d6cd291cec668b991f2b43d76c6feab8b2e7d98"
 
 cd $CONSOLE_SRC/vim
-./configure --prefix=$PREFIX && make && make install
+./configure --with-features=small --with-x=no \
+            --enable-multibyte --enable-selinux \
+            --disable-netbean --disable-pythoninterp --disable-perlinterp --disable-tclinterp \
+	    --with-tlib=ncurses --enable-gui=no --disable-gpm --prefix=$PREFIX && make && make install
 
 
