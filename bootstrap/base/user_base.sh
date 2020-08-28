@@ -39,6 +39,8 @@ if [ -d "$DEFAULT_CONFIG_DIR" ] ; then
     ln -sf $DEFAULT_CONFIG_DIR/public/screen/screenrc ~/.screenrc ;
     ln -sf $DEFAULT_CONFIG_DIR/public/tmux/tmux ~/.tmux ;
     ln -sf $DEFAULT_CONFIG_DIR/public/git/gitignore ~/.gitignore ;
+    ln -sf $DEFAULT_CONFIG_DIR/public/sway ~/.config/sway ;
+    ln -sf $DEFAULT_CONFIG_DIR/public/waybar ~/.config/waybay ;
   "
 
   CMDS="$CMDS $CMDS2"
