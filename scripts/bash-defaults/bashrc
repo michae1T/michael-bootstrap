@@ -62,7 +62,7 @@ fixwsgit() {
   if [ -n "$2" ] ; then
     EXTS=$2
   else
-    EXTS='scala|java|sh|c|cpp|h|hpp|sbt'
+    EXTS='scala|java|sh|c|cpp|h|hpp|sbt|hs|py|rb|md'
   fi;
 
   for GITFILE in $(git show --name-only --format=oneline $1 | tail -n+2 | egrep ".*\.($EXTS)") ; do
