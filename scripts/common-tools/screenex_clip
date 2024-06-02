@@ -1,11 +1,25 @@
 #!/bin/bash
 
+notify_out() {
+  echo -e "\e^wrote to clipboard\e\\"
+}
+
+notify_in() {
+  echo -e "\e^slurped from clipboard\e\\"
+}
+
 case "$1" in
   out|o)
-      xsel -bi <$SCREEN_EXCHANGE && echo -e "\e^wrote to clipboard\e\\"
+      if [ -e "$WAYLAND_DISPLAY" ] ;
+        then wl-copy <$SCREEN_EXCHANGE && notify_out
+        else xsel -bi <$SCREEN_EXCHANGE && notify_out
+        fi;
       ;;
   in|i)
-      xsel -bo >$SCREEN_EXCHANGE && echo -e "\e^slurped from clipboard\e\\";
+      if [ -e "$WAYLAND_DISPLAY" ] ;
+        then  wl-paste >$SCREEN_EXCHANGE && notify_in
+        else xsel -bo >$SCREEN_EXCHANGE && notify_in
+      fi;
       ;;
   *)
       echo "usage: $0 {out|o|in|i}"
