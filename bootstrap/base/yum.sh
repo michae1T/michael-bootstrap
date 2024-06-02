@@ -9,7 +9,6 @@ yum_safe groupinstall 'Development Tools'
 yum_safe install git \
                java-1.8*openjdk*headless \
                maven maven-ant-plugin ant apache-ivy \
-               docker-io docker-io-vim \
                nginx \
                irssi \
                perl perl-CPAN perl-Module-Load \
@@ -22,7 +21,7 @@ yum_safe install git \
                uuid \
                bash-completion \
                gdbm-devel openssl* openssh* \
-               compat-libstd* compat-readline* \
+               compat-readline* \
                snakeyaml libyaml* \
                cmake automake libtool rpm-build \
                patch readline* gettext* intltool \
