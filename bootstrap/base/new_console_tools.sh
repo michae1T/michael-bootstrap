@@ -13,11 +13,11 @@ CONSOLE_SRC=$USER_HOME/src/console
 
 /usr/sbin/groupadd -g 84 -r -f screen
 
+yum_safe install -y pam-devel ncurses-devel
+
 checkout_repo "$CONSOLE_SRC" "screen" \
               "git://git.savannah.gnu.org/screen.git" \
-              "e05e49c"
-
-yum_safe install -y pam-devel
+              "master"
 
 cd $CONSOLE_SRC/screen/src
 ./autogen.sh && ./configure --prefix=$PREFIX && make && make install \
@@ -25,17 +25,5 @@ cd $CONSOLE_SRC/screen/src
 
 echo "D /var/run/screen 0775 nobody screen -" > /etc/tmpfiles.d/screen.conf
 systemd-tmpfiles --create screen.conf
-
-yum_safe install -y libXpm-devel libSM-devel libICE-devel
-
-checkout_repo "$CONSOLE_SRC" "vim" \
-              "https://github.com/vim/vim.git" \
-              "4d6cd291cec668b991f2b43d76c6feab8b2e7d98"
-
-cd $CONSOLE_SRC/vim
-./configure --with-features=small --with-x=no \
-            --enable-multibyte --enable-selinux \
-            --disable-netbean --disable-pythoninterp --disable-perlinterp --disable-tclinterp \
-	    --with-tlib=ncurses --enable-gui=no --disable-gpm --prefix=$PREFIX && make && make install
 
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z $1 ] ; then
+  exec /usr/bin/foot screen
+else 
+  exec /usr/bin/foot $@
+fi
+

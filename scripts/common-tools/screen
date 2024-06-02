@@ -1,4 +1,8 @@
 #!/bin/bash
 
-exec /opt/bin/screen -d -RR
+if [ -z $1 ] ; then
+  exec /opt/bin/screen -d -RR
+else 
+  exec /opt/bin/screen $@
+fi
 
