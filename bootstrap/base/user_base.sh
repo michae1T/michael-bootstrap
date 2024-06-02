@@ -42,6 +42,7 @@ if [ -d "$DEFAULT_CONFIG_DIR" ] ; then
     ln -sf $DEFAULT_CONFIG_DIR/public/sway ~/.config/sway ;
     ln -sf $DEFAULT_CONFIG_DIR/public/waybar ~/.config/waybay ;
     ln -sf $DEFAULT_CONFIG_DIR/public/xkb ~/.xkb
+    ln -sf $DEFAULT_CONFIG_DIR/public/foot/footrc ~/.config/ ;
   "
 
   CMDS="$CMDS $CMDS2"
