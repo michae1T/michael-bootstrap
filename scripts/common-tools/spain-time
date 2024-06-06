@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ $1 == "clock" ]] ;
+  then TZ=CET date +'%H:%M'
+  else TZ=CET date +'%r'
+fi
+  

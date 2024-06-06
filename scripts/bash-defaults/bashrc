@@ -2,6 +2,26 @@
 
 # init
 
+# Show the current directory AND running command in the screen window title
+# inspired from http://www.davidpashley.com/articles/xterm-titles-with-bash.html
+if [ "$TERM" = "screen-256color" ]; then
+    export PROMPT_COMMAND='true'
+    set_screen_window() {
+      HPWD=${PWD/\/home\/michael/\~}
+      if [ ${#HPWD} -ge 32 ]; then HPWD='..'${HPWD:${#HPWD}-30:${#HPWD}}; fi
+      case "$BASH_COMMAND" in
+        *\033]0*);;
+        "true")
+            printf '\ek%s\e\\' "$HPWD"
+            ;;
+        *)
+            printf '\ek%s\e\\' "`basename "$HPWD"`:${BASH_COMMAND:0:20}"
+            ;;
+      esac
+    }
+    trap set_screen_window DEBUG
+fi
+
 if type -t _completion_loader | grep -q '^function$' ; then
   _completion_loader docker
 fi;
