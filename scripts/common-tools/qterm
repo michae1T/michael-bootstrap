@@ -1,3 +1,5 @@
 #!/bin/bash
 
-qterminal -e 'screen'
+# Launch qterminal running byobu. byobu auto-attaches to an existing session
+# if one exists, otherwise creates a new one -- no session-matching needed.
+qterminal -e byobu
